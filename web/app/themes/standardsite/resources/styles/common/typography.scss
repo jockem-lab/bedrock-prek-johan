@@ -1,0 +1,78 @@
+body {
+  font-size: 16px;
+}
+
+.pt-sans {
+  font-family: 'PT Sans', sans-serif;
+}
+
+.open-sans {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4 {
+  margin-bottom: 1rem;
+}
+
+.pt-sans {
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  b, strong, .font-bold {
+    font-weight: 700;
+  }
+}
+
+.open-sans {
+  h1, .h1,
+  h2, .h2,
+  h3, .h3,
+  h4, .h4,
+  b, strong, .font-bold {
+    font-weight: 600;
+  }
+}
+
+h1, .h1 {
+  font-size: 2.2rem;
+  @screen sm {
+    font-size: 3rem;
+  }
+}
+
+h2, .h2 {
+  font-size: 2rem;
+  @screen sm {
+    font-size: 2.8rem;
+  }
+}
+
+h3, .h3 {
+  font-size: 1.8rem;
+  @screen sm {
+    font-size: 2.2rem;
+  }
+}
+
+//h4, .h4 {
+//  font-size: 1.4rem;
+//  @screen sm {
+//    font-size: 1.8rem;
+//  }
+//}
+
+.wysiwyg {
+  p {
+    @apply my-4;
+  }
+  ul {
+    list-style: disc;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+  }
+}

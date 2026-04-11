@@ -1,0 +1,67 @@
+input,
+textarea{
+  width: 100%;
+  border: 1px solid #cfcfcf;
+  color: #000;
+  outline: none;
+  padding: 20px;
+  @apply mb-3;
+  transition: border .5s;
+  &[type="submit"] {
+    border: none;
+  }
+}
+
+select {
+  width: 100%;
+  border: 1px solid #cfcfcf;
+  outline: none;
+  transition: border .5s;
+  padding: 0 5px;
+}
+
+input[type="checkbox"] {
+  height: 15px;
+  margin: 0.3rem 0 0 0;
+  position: absolute;
+  width: 15px;
+  z-index: -1;
+
+  ~ .checkmark {
+    position: absolute;
+    margin: 0.3rem 0 0 0;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    &:after {
+      align-items: center;
+      border: 1px solid #000;
+      color: #000;
+      content: "";
+      display: flex;
+      font-size: 13px;
+      height: 15px;
+      justify-content: center;
+      text-align: center;
+      width: 15px;
+    }
+    ~ span {
+      margin-left: 18px;
+    }
+  }
+
+  &:checked {
+    ~ .checkmark:after {
+      content: "✓";
+    }
+  }
+}
+.hf-message,
+.fasad-response{
+  h3{
+    text-align: center;
+    text-transform: uppercase;
+    @apply font-bold;
+    @apply text-base;
+  }
+}

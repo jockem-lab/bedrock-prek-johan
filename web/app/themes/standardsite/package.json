@@ -1,0 +1,35 @@
+{
+  "name": "sage",
+  "private": true,
+  "browserslist": [
+    "extends @roots/browserslist-config"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "bud dev",
+    "build": "bud build",
+    "build:production": "bud build",
+    "translate": "yarn translate:pot && yarn translate:update",
+    "translate:pot": "wp i18n make-pot . ./resources/lang/sage.pot --include=\"app,resources\"",
+    "translate:update": "for filename in ./resources/lang/*.po; do msgmerge -U $filename ./resources/lang/sage.pot; done; rm -f ./resources/lang/*.po~",
+    "translate:compile": "yarn translate:mo && yarn translate:js",
+    "translate:js": "wp i18n make-json ./resources/lang --pretty-print",
+    "translate:mo": "wp i18n make-mo ./resources/lang ./resources/lang"
+  },
+  "devDependencies": {
+    "@roots/bud": "^6.8.0",
+    "@roots/bud-prettier": "^6.8.0",
+    "@roots/bud-sass": "^6.8.0",
+    "@roots/bud-tailwindcss": "^6.8.0",
+    "@roots/bud-vue": "^6.8.0",
+    "@roots/sage": "6.8.0"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.4",
+    "lodash": "^4.17.21",
+    "yarn": "^1.22.19"
+  }
+}

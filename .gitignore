@@ -1,0 +1,151 @@
+# Application
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+!web/app/plugins/fasadsite-rest.php
+web/app/mu-plugins/*/
+!web/app/mu-plugins/.gitkeep
+web/app/upgrade
+web/app/uploads/*
+!web/app/uploads/.gitkeep
+
+# WordPress
+web/wp
+
+# WP-CLI
+db-sync
+sql-dump-*.sql
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Vendor (e.g. Composer)
+vendor/*
+!vendor/.gitkeep
+
+# Node Package Manager
+node_modules
+
+# Vagrant
+bin
+.vagrant
+
+### PhpStorm ###
+# Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and Webstorm
+# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+.idea
+
+# User-specific stuff:
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+
+# Sensitive or high-churn files:
+.idea/dataSources.ids
+.idea/dataSources.xml
+.idea/dataSources.local.xml
+.idea/sqlDataSources.xml
+.idea/dynamic.xml
+.idea/uiDesigner.xml
+
+# Gradle:
+.idea/gradle.xml
+.idea/libraries
+
+# Mongo Explorer plugin:
+.idea/mongoSettings.xml
+
+## File-based project format:
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+### PhpStorm Patch ###
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+
+# Exclude vendor and yarn and dist and ... all!
+web/app/themes/standardsite/vendor
+web/app/themes/standardsite/node_modules
+web/app/themes/standardsite/dist
+# Tema - byggda assets (genereras av npm run build)
+web/app/themes/standardsite/public/
+
+# Känsliga vendor-filer i plugins
+web/app/plugins/*/vendor/
+
+# Docker
+docker-compose.override.yml
+
+# macOS
+.DS_Store
+
+# SQL-dumpar
+*.sql
+
+# Acorn cache
+web/app/cache/acorn/
+
+# Env-mapp med känsliga filer  
+Env/
+
+# Loggar
+*.log
+web/app/debug.log
+
+# Cache-filer (inte .gitkeep)
+web/app/cache/acorn/framework/cache/*.php
+web/app/cache/acorn/logs/
+
+# WordPress-kärna (felplacerad)
+wp-content/
+wp-includes/
+wp-admin/
+
+# Mer DS_Store
+**/.DS_Store
+
+# WordPress root-filer
+wp-config.php
+wp-login.php
+wp-settings.php
+wp-load.php
+wp-cron.php
+wp-signup.php
+wp-trackback.php
+wp-mail.php
+wp-links-opml.php
+xmlrpc.php
+wp-admin/
+
+# Fler WordPress root-filer
+wp-config-sample.php
+wp-config-docker.php
+wp-comments-post.php
+wp-blog-header.php
+wp-activate.php
+
+# Testfiler
+web/test.php
+web/dbtest2.php
+web/wp-config.php

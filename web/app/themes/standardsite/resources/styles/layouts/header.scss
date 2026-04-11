@@ -1,0 +1,132 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: $header_bg;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  height: $header_height;
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 80px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.site-branding {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.site-name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-dark);
+  img {
+    max-height: 48px;
+    width: auto;
+  }
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  ul { display: flex; gap: 32px; list-style: none; margin: 0; padding: 0; }
+  a, ul li a {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #444;
+    transition: color 0.2s;
+    &:hover { color: var(--accent); }
+  }
+}
+
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text-dark);
+    transition: all 0.3s ease;
+  }
+  &.is-active {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg-dark);
+  z-index: 9998;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  &.active { display: flex; }
+}
+
+.mobile-menu-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  a {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    font-weight: 400;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    &:hover { color: var(--accent-light); }
+  }
+}
+
+@media (max-width: 768px) {
+  .menu-toggle { display: flex; }
+  .nav-left, .nav-right { display: none; }
+  .header-inner {
+    padding: 0 24px;
+    justify-content: center;
+  }
+  .site-branding {
+    position: static;
+    transform: none;
+  }
+  .menu-toggle {
+    position: absolute;
+    right: 24px;
+  }
+}
+
+body.admin-bar {
+  header { top: 32px; }
+  @media screen and (max-width: 782px) {
+    header { top: 46px; }
+  }
+}
