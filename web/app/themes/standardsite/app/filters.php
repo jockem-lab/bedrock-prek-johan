@@ -498,3 +498,46 @@ add_filter("fasad_bridge_facts", function ($facts, $listing) {
 
     return $facts;
 }, 10, 2);
+
+
+// Registrera rewrite-regel för fasad_listing
+// Hantera /objekt/[slug] URL:er
+add_filter('query_vars', function($vars) {
+    $vars[] = 'fasad_listing';
+    return $vars;
+});
+
+add_action('init', function() {
+    add_rewrite_rule(
+        'objekt/([^/]+)/?$',
+        'index.php?fasad_listing=$matches[1]',
+        'top'
+    );
+}, 20);
+
+// Tvinga rätt post_type när fasad_listing query-var finns
+add_action('pre_get_posts', function($query) {
+    if (!$query->is_main_query()) return;
+    $fasad_slug = $query->get('fasad_listing');
+    if (!empty($fasad_slug) && $fasad_slug !== '1') {
+        $query->set('post_type', 'fasad_listing');
+        $query->set('name', $fasad_slug);
+        $query->is_single = true;
+        $query->is_404 = false;
+    }
+});
+
+
+// Tvinga single-fasad_listing template när fasad_listing query-var finns
+add_filter('template_include', function($template) {
+    if (get_query_var('fasad_listing') && get_query_var('fasad_listing') !== '1') {
+        $new_template = locate_template(['single-fasad_listing.php']);
+        if ($new_template) return $new_template;
+        // Sage 10 hanterar templates via index.php
+        global $wp_query;
+        $wp_query->is_single = true;
+        $wp_query->is_singular = true;
+        $wp_query->post_type = 'fasad_listing';
+    }
+    return $template;
+}, 99);
