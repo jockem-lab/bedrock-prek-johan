@@ -530,14 +530,12 @@ add_action('pre_get_posts', function($query) {
 
 // Tvinga single-fasad_listing template när fasad_listing query-var finns
 add_filter('template_include', function($template) {
-    if (get_query_var('fasad_listing') && get_query_var('fasad_listing') !== '1') {
-        $new_template = locate_template(['single-fasad_listing.php']);
-        if ($new_template) return $new_template;
-        // Sage 10 hanterar templates via index.php
+    $fasad_slug = get_query_var('fasad_listing');
+    if (!empty($fasad_slug) && $fasad_slug !== '1' && strlen($fasad_slug) > 2) {
         global $wp_query;
         $wp_query->is_single = true;
         $wp_query->is_singular = true;
-        $wp_query->post_type = 'fasad_listing';
+        $wp_query->is_404 = false;
     }
     return $template;
 }, 99);

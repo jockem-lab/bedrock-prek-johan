@@ -11,25 +11,37 @@ class SingleListing extends PrekComposer
 
     public function with()
     {
+        // Hämta post_id från olika källor
         $post_id = get_the_ID();
+        if (!$post_id) {
+            global $wp_query;
+            $post_id = $wp_query->get_queried_object_id();
+        }
+        if (!$post_id) {
+            $fasad_slug = get_query_var('fasad_listing');
+            if ($fasad_slug) {
+                $post = get_page_by_path($fasad_slug, OBJECT, 'fasad_listing');
+                if ($post) $post_id = $post->ID;
+            }
+        }
         if (!$post_id) return ['listing' => null];
 
         // Location
         $location_raw = get_post_meta($post_id, '_fasad_location', true);
-        $location = $location_raw ? unserialize($location_raw) : null;
+        $location = $location_raw ? @unserialize($location_raw) : null;
         $address  = $location->address ?? get_the_title();
         $city     = $location->city ?? '';
         $zipCode  = $location->zipCode ?? '';
 
         // Economy/pris
         $economy_raw = get_post_meta($post_id, '_fasad_economy', true);
-        $economy = $economy_raw ? unserialize($economy_raw) : null;
+        $economy = $economy_raw ? @unserialize($economy_raw) : null;
         $price_amount = $economy->price->primary->amount ?? 0;
         $price = $price_amount ? number_format($price_amount, 0, ',', ' ') . ' kr' : '';
 
         // Bilder
         $images_raw = get_post_meta($post_id, '_fasad_images', true);
-        $images_data = $images_raw ? unserialize($images_raw) : [];
+        $images_data = $images_raw ? @unserialize($images_raw) : [];
         $images = [];
         if (is_array($images_data)) {
             foreach ($images_data as $img) {
@@ -41,19 +53,19 @@ class SingleListing extends PrekComposer
 
         // Fakta
         $size_raw = get_post_meta($post_id, '_fasad_size', true);
-        $size = $size_raw ? unserialize($size_raw) : null;
+        $size = $size_raw ? @unserialize($size_raw) : null;
         $living_area = $size->livingArea ?? '';
 
         $facts_raw = get_post_meta($post_id, '_fasad_facts', true);
-        $facts = $facts_raw ? unserialize($facts_raw) : null;
+        $facts = $facts_raw ? @unserialize($facts_raw) : null;
         $rooms = $facts->rooms ?? '';
 
         $type_raw = get_post_meta($post_id, '_fasad_descriptionType', true);
-        $type_obj = $type_raw ? unserialize($type_raw) : null;
+        $type_obj = $type_raw ? @unserialize($type_raw) : null;
         $type = $type_obj->alias ?? '';
 
         $status_raw = get_post_meta($post_id, '_fasad_status', true);
-        $status_obj = $status_raw ? unserialize($status_raw) : null;
+        $status_obj = $status_raw ? @unserialize($status_raw) : null;
         $status = $status_obj->alias ?? '';
 
         // Säljtext
@@ -62,11 +74,11 @@ class SingleListing extends PrekComposer
 
         // Byggnad/fakta
         $building_raw = get_post_meta($post_id, '_fasad_building', true);
-        $building = $building_raw ? unserialize($building_raw) : null;
+        $building = $building_raw ? @unserialize($building_raw) : null;
         $built_year = $building->constructionYear ?? '';
 
         $association_raw = get_post_meta($post_id, '_fasad_association', true);
-        $association = $association_raw ? unserialize($association_raw) : null;
+        $association = $association_raw ? @unserialize($association_raw) : null;
         $fee = $association->fee ?? '';
 
         return [

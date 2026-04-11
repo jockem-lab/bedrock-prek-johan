@@ -27,12 +27,12 @@ class FrontPage extends PrekComposer
 
                 // Hämta location (serialiserat objekt)
                 $location_raw = get_post_meta($post_id, '_fasad_location', true);
-                $location = $location_raw ? unserialize($location_raw) : null;
+                $location = $location_raw ? @unserialize($location_raw) : null;
                 $address = $location->address ?? get_the_title();
 
                 // Hämta economy/pris
                 $economy_raw = get_post_meta($post_id, '_fasad_economy', true);
-                $economy = $economy_raw ? unserialize($economy_raw) : null;
+                $economy = $economy_raw ? @unserialize($economy_raw) : null;
                 $price = $economy->price->primary->amount ?? '';
                 if ($price) {
                     $price = number_format($price, 0, ',', ' ') . ' kr';
@@ -40,24 +40,24 @@ class FrontPage extends PrekComposer
 
                 // Hämta bilder
                 $images_raw = get_post_meta($post_id, '_fasad_images', true);
-                $images = $images_raw ? unserialize($images_raw) : [];
+                $images = $images_raw ? @unserialize($images_raw) : [];
                 $image = !empty($images[0]->path) ? $images[0]->path : '';
 
                 // Hämta fakta
                 $size_raw = get_post_meta($post_id, '_fasad_size', true);
-                $size = $size_raw ? unserialize($size_raw) : null;
+                $size = $size_raw ? @unserialize($size_raw) : null;
                 $area = $size->livingArea ?? '';
 
                 $facts_raw = get_post_meta($post_id, '_fasad_facts', true);
-                $facts = $facts_raw ? unserialize($facts_raw) : null;
+                $facts = $facts_raw ? @unserialize($facts_raw) : null;
                 $rooms = $facts->rooms ?? '';
 
                 $type_raw = get_post_meta($post_id, '_fasad_descriptionType', true);
-                $type_obj = $type_raw ? unserialize($type_raw) : null;
+                $type_obj = $type_raw ? @unserialize($type_raw) : null;
                 $type = $type_obj->alias ?? '';
 
                 $status_raw = get_post_meta($post_id, '_fasad_status', true);
-                $status = $status_raw ? unserialize($status_raw) : null;
+                $status = $status_raw ? @unserialize($status_raw) : null;
                 $status_alias = $status->alias ?? '';
 
                 $listings[] = (object)[
