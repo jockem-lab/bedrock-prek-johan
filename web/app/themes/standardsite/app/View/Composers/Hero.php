@@ -19,6 +19,11 @@ class Hero extends PrekComposer
 
     public function with()
     {
+        // Hoppa över hero på objektdetaljsidor
+        if (get_query_var('fasad_listing') && get_query_var('fasad_listing') !== '1') {
+            return ['hero' => null];
+        }
+
         $hero = [
             'slides' => [],
             'video' => [],
