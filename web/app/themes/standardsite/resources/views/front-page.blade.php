@@ -7,36 +7,31 @@
       @if(!empty($listings))
         <div class="objekt-grid">
           @foreach($listings as $listing)
-            @php
-              $adress = $listing->location->address ?? '';
-              $pris   = $listing->price ?? '';
-              $typ    = $listing->descriptionType ?? '';
-              $rum    = !empty($listing->rooms) ? $listing->rooms . ' rum' : '';
-              $yta    = !empty($listing->livingArea) ? $listing->livingArea . ' kvm' : '';
-              $bild   = !empty($listing->objectImages[0]->path) ? $listing->objectImages[0]->path : '';
-              $slug   = $listing->slug ?? '';
-              $status = $listing->statusAlias ?? 'till-salu';
-            @endphp
             <div class="objekt-kort">
-              <a href="{{ home_url('/objekt/' . $slug) }}" class="objekt-kort-inner">
+              <a href="{{ home_url('/objekt/' . $listing->slug) }}" class="objekt-kort-inner">
                 <div class="objekt-bild">
-                  @if($bild)
-                    <img src="{{ $bild }}" alt="{{ $adress }}">
+                  @if($listing->image)
+                    <img src="{{ $listing->image }}" alt="{{ $listing->address }}">
                   @else
                     <div class="objekt-bild-placeholder"></div>
                   @endif
+                  @if($listing->status)
+                    <div class="objekt-status objekt-status--{{ $listing->status }}">
+                      {{ ucfirst($listing->status) }}
+                    </div>
+                  @endif
                   <div class="objekt-overlay">
                     <div class="objekt-info">
-                      @if($adress)
-                        <div class="objekt-adress">{{ $adress }}</div>
+                      @if($listing->address)
+                        <div class="objekt-adress">{{ $listing->address }}</div>
                       @endif
-                      @if($pris)
-                        <div class="objekt-pris">{{ $pris }}</div>
+                      @if($listing->price)
+                        <div class="objekt-pris">{{ $listing->price }}</div>
                       @endif
                       <div class="objekt-meta">
-                        @if($typ) <span>{{ $typ }}</span> @endif
-                        @if($rum) <span>{{ $rum }}</span> @endif
-                        @if($yta) <span>{{ $yta }}</span> @endif
+                        @if($listing->type) <span>{{ $listing->type }}</span> @endif
+                        @if($listing->rooms) <span>{{ $listing->rooms }}</span> @endif
+                        @if($listing->area) <span>{{ $listing->area }}</span> @endif
                       </div>
                     </div>
                   </div>
