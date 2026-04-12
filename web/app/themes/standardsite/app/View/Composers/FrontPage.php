@@ -40,8 +40,14 @@ class FrontPage extends PrekComposer
 
                 // Hämta bilder
                 $images_raw = get_post_meta($post_id, '_fasad_images', true);
-                $images = $images_raw ? @unserialize($images_raw) : [];
-                $image = !empty($images[0]->path) ? $images[0]->path : '';
+                $images_s1 = $images_raw ? @unserialize($images_raw) : [];
+                $images = is_string($images_s1) ? @unserialize($images_s1) : $images_s1;
+                $image = '';
+                if (is_array($images) && !empty($images[0]->variants)) {
+                    foreach ($images[0]->variants as $v) {
+                        if (($v->type ?? '') === 'large') { $image = $v->path; break; }
+                    }
+                }
 
                 // Hämta fakta
                 $size_raw = get_post_meta($post_id, '_fasad_size', true);

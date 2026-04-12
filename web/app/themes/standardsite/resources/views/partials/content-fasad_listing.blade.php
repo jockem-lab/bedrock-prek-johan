@@ -77,12 +77,23 @@ $status_raw = fasad_unserialize(get_post_meta($post_id, '_fasad_status', true));
 $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 @endphp
 
-{{-- Hero-bild --}}
-@if(!empty($images[0]))
-  <div class="objekt-detalj-hero">
-    <img src="{{ $images[0] }}" alt="{{ $full_address }}">
+{{-- Hero-bildspel --}}
+@if(!empty($images))
+  <div class="objekt-hero-slideshow">
+    @foreach($images as $i => $img)
+      <div class="objekt-hero-slide {{ $i === 0 ? 'active' : '' }}" style="background-image:url('{{ $img }}')"></div>
+    @endforeach
+    @if(count($images) > 1)
+      <button class="objekt-hero-prev">&#8592;</button>
+      <button class="objekt-hero-next">&#8594;</button>
+      <div class="objekt-hero-dots">
+        @foreach($images as $i => $img)
+          <span class="objekt-hero-dot {{ $i === 0 ? 'active' : '' }}" data-index="{{ $i }}"></span>
+        @endforeach
+      </div>
+    @endif
     @if($status)
-      <div class="objekt-detalj-status objekt-status--{{ $status }}">{{ ucfirst($status) }}</div>
+      <div class="objekt-status-badge objekt-status--{{ $status }}">{{ $status_label ?? strtoupper($status) }}</div>
     @endif
   </div>
 @endif
@@ -198,20 +209,6 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
       </div>
     </div>
 
-    {{-- Bildgalleri --}}
-    @if(count($images) > 1)
-      <div class="objekt-galleri">
-        <div class="objekt-galleri-grid">
-          @foreach($images as $i => $img)
-            <div class="objekt-galleri-item {{ $i === 0 ? 'objekt-galleri-item--stor' : '' }}">
-              <a href="{{ $img }}">
-                <img src="{{ $img }}" alt="Bild {{ $i + 1 }}">
-              </a>
-            </div>
-          @endforeach
-        </div>
-      </div>
-    @endif
   </div>
 
   {{-- Sidebar: mäklarkort --}}
@@ -242,3 +239,18 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
     </div>
   </div>
 </div>
+
+{{-- Bildgalleri - full bredd --}}
+@if(count($images) > 1)
+<div class="objekt-galleri">
+  <div class="objekt-galleri-grid">
+    @foreach($images as $i => $img)
+      <div class="objekt-galleri-item {{ $i === 0 ? 'objekt-galleri-item--stor' : '' }}">
+        <a href="{{ $img }}" target="_blank">
+          <img src="{{ $img }}" alt="Bild {{ $i + 1 }}">
+        </a>
+      </div>
+    @endforeach
+  </div>
+</div>
+@endif

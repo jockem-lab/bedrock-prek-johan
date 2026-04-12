@@ -490,3 +490,39 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Objektsida hero-slideshow
+document.addEventListener('DOMContentLoaded', function() {
+    const slideshow = document.querySelector('.objekt-hero-slideshow');
+    if (!slideshow) return;
+
+    const slides = slideshow.querySelectorAll('.objekt-hero-slide');
+    const dots = slideshow.querySelectorAll('.objekt-hero-dot');
+    if (slides.length <= 1) return;
+
+    let current = 0;
+    let timer = null;
+
+    function goTo(n) {
+        slides[current].classList.remove('active');
+        dots[current]?.classList.remove('active');
+        current = (n + slides.length) % slides.length;
+        slides[current].classList.add('active');
+        dots[current]?.classList.add('active');
+    }
+
+    function autoPlay() {
+        timer = setInterval(() => goTo(current + 1), 5000);
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        autoPlay();
+    }
+
+    slideshow.querySelector('.objekt-hero-next')?.addEventListener('click', () => { goTo(current + 1); resetTimer(); });
+    slideshow.querySelector('.objekt-hero-prev')?.addEventListener('click', () => { goTo(current - 1); resetTimer(); });
+    dots.forEach((dot, i) => dot.addEventListener('click', () => { goTo(i); resetTimer(); }));
+
+    autoPlay();
+});
