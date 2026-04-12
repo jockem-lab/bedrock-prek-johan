@@ -526,3 +526,37 @@ document.addEventListener('DOMContentLoaded', function() {
 
     autoPlay();
 });
+
+// Hamburger-meny
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('menu-toggle');
+    const close = document.getElementById('menu-close');
+    const overlay = document.getElementById('mobile-menu');
+    if (!toggle || !overlay) return;
+
+    function openMenu() {
+        overlay.classList.add('active');
+        toggle.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        overlay.classList.remove('active');
+        toggle.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', function() {
+        overlay.classList.contains('active') ? closeMenu() : openMenu();
+    });
+
+    close?.addEventListener('click', closeMenu);
+
+    overlay.addEventListener('click', function(e) {
+        if (e.target === overlay) closeMenu();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeMenu();
+    });
+});

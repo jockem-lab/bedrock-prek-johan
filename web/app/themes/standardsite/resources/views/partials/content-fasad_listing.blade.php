@@ -215,10 +215,20 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
   <div class="objekt-detalj-sidebar">
     <div class="objekt-detalj-kontakt">
       @if($first_realtor)
-        @if(!empty($first_realtor->image->path))
-          <img src="{{ $first_realtor->image->path }}" alt="{{ $first_realtor->firstname ?? '' }}" class="maklare-bild">
+        @php
+          $maklare_bild = '';
+          if (!empty($first_realtor->image)) {
+              if (is_string($first_realtor->image)) {
+                  $maklare_bild = $first_realtor->image;
+              } elseif (!empty($first_realtor->image->path)) {
+                  $maklare_bild = $first_realtor->image->path;
+              }
+          }
+        @endphp
+        @if($maklare_bild)
+          <img src="{{ $maklare_bild }}" alt="{{ $first_realtor->firstname ?? '' }}" class="maklare-bild">
         @else
-          <img src="https://via.placeholder.com/80" alt="Mäklare" class="maklare-bild">
+          <div class="maklare-bild-placeholder"></div>
         @endif
         <h3>{{ ($first_realtor->firstname ?? '') . ' ' . ($first_realtor->lastname ?? '') }}</h3>
         @if(!empty($first_realtor->title))
