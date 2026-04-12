@@ -1735,3 +1735,128 @@ a.btn-secondary:hover { border-color: #fff; }
   background: var(--accent-dark) !important;
   color: #fff !important;
 }
+
+// Undersidor hero
+.page-hero {
+  background: var(--bg-dark);
+  min-height: 35vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: white;
+    text-align: center;
+  }
+}
+
+.page-sektion {
+  padding: 80px 24px;
+}
+
+.page-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+// Om oss
+.om-oss-intro {
+  max-width: 700px;
+  margin: 0 auto 60px;
+  text-align: center;
+
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    margin-bottom: 16px;
+    color: var(--text-dark);
+  }
+
+  p { color: var(--text-mid); line-height: 1.8; }
+}
+
+.om-oss-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+
+.om-oss-block {
+  h3 {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--text-dark);
+  }
+  p { color: var(--text-mid); line-height: 1.8; }
+}
+
+// Kontakt
+.kontakt-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; gap: 40px; }
+}
+
+.kontakt-info-block {
+  margin-bottom: 32px;
+}
+
+.kontakt-info-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 4px;
+}
+
+.kontakt-info a {
+  color: var(--text-dark);
+  text-decoration: none;
+  &:hover { color: var(--accent); }
+}
+
+.kontakt-formular {
+  h2 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin-bottom: 32px;
+    color: var(--text-dark);
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 8px;
+  }
+
+  input, textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--bg-warm);
+    background: var(--bg-light);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+
+    &:focus { border-color: var(--accent); }
+  }
+
+  textarea { resize: vertical; }
+}
