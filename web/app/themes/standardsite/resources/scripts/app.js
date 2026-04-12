@@ -455,3 +455,17 @@ domReady(async () => {
  * @see {@link https://webpack.js.org/api/hot-module-replacement/}
  */
 import.meta.webpackHot?.accept(console.error);
+
+// Objektsida accordion
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.accordion-trigger').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const item = this.closest('.accordion-item');
+            const content = item.querySelector('.accordion-content');
+            const icon = this.querySelector('.accordion-icon');
+            const isOpen = item.classList.contains('open');
+            item.classList.toggle('open', !isOpen);
+            if (icon) icon.textContent = isOpen ? '+' : '×';
+        });
+    });
+});
