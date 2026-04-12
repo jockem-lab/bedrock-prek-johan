@@ -23,6 +23,17 @@ function fasad_unserialize_listing($raw) {
   <h1>Hem till salu</h1>
 </div>
 
+{{-- Filter --}}
+<div class="till-salu-filter">
+  <div class="filter-knappar">
+    <button class="filter-knapp active" data-filter="alla">ALLA</button>
+    <button class="filter-knapp" data-filter="kommande">KOMMANDE</button>
+    <button class="filter-knapp" data-filter="tillsalu">TILL SALU</button>
+    <button class="filter-knapp" data-filter="budgivning">BUDGIVNING PÅGÅR</button>
+    <button class="filter-knapp" data-filter="sald">SÅLDA</button>
+  </div>
+</div>
+
 {{-- Objektgrid --}}
 <div class="till-salu-innehall">
   <div class="objekt-grid">
@@ -51,16 +62,12 @@ function fasad_unserialize_listing($raw) {
         $type = ($tp && !empty($tp->alias) && is_string($tp->alias)) ? strtoupper($tp->alias) : '';
 
         $status_raw = fasad_unserialize_listing(get_post_meta($pid, '_fasad_status', true));
-        $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
-        $status_label = match($status) {
-            'for_sale' => 'TILL SALU',
-            'sold' => 'SÅLD',
-            'bidding' => 'BUDGIVNING PÅGÅR',
-            'coming' => 'KOMMANDE',
-            default => strtoupper($status),
-        };
+        // Status är ett array med ett objekt
+        $status_obj = is_array($status_raw) ? ($status_raw[0] ?? null) : $status_raw;
+        $status = ($status_obj && !empty($status_obj->tag)) ? $status_obj->tag : '';
+        $status_label = ($status_obj && !empty($status_obj->alias)) ? strtoupper($status_obj->alias) : strtoupper($status);
       @endphp
-      <a href="{{ home_url('/objekt/' . get_post_field('post_name', $pid)) }}" class="objekt-kort">
+      <a href="{{ home_url('/objekt/' . get_post_field('post_name', $pid)) }}" class="objekt-kort" data-status="{{ $status }}">
         <div class="objekt-kort-bild" @if($img_url) style="background-image:url('{{ $img_url }}')" @endif>
           @if($status)
             <span class="objekt-status objekt-status--{{ $status }}">{{ $status_label }}</span>

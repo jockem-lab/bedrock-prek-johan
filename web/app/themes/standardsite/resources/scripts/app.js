@@ -469,3 +469,24 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Till salu-filter
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.filter-knapp');
+    const objekt = document.querySelectorAll('.objekt-kort[data-status]');
+    
+    filterBtns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const filter = this.dataset.filter;
+            objekt.forEach(function(o) {
+                if (filter === 'alla' || o.dataset.status === filter) {
+                    o.classList.remove('hidden');
+                } else {
+                    o.classList.add('hidden');
+                }
+            });
+        });
+    });
+});

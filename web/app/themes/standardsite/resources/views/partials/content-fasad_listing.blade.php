@@ -69,10 +69,7 @@ $salesText = is_string($raw_st) ? $raw_st : '';
 $realtors_raw = fasad_unserialize(get_post_meta($post_id, '_fasad_realtors', true));
 $first_realtor = null;
 if (is_array($realtors_raw) && !empty($realtors_raw)) {
-    $r = $realtors_raw[0];
-    if (!empty($r->meta)) {
-        $first_realtor = $r->meta;
-    }
+    $first_realtor = $realtors_raw[0]; // Data direkt på objektet
 }
 
 // Status
