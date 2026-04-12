@@ -66,7 +66,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
     transition: opacity 0.3s ease;
   }
 }
@@ -90,28 +90,9 @@
   &--nyinkommet { background: var(--accent); color: white; }
 }
 
-.objekt-kort-info {
-  padding: 16px 4px;
-}
 
-.objekt-adress {
-  font-family: var(--font-heading);
-  font-size: 1.1rem;
-  margin-bottom: 4px;
-  color: var(--text-dark);
-}
 
-.objekt-pris {
-  font-size: 0.9rem;
-  color: var(--text-mid);
-  margin-bottom: 2px;
-}
 
-.objekt-typ {
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: var(--text-light);
-}
 
 // Undersidor - border/separator under header
 .main {
