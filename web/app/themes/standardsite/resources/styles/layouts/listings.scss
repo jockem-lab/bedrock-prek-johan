@@ -1,0 +1,121 @@
+// Till salu-sida
+.till-salu-hero {
+  background: var(--bg-dark);
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    color: white;
+    text-align: center;
+  }
+}
+
+.till-salu-innehall {
+  padding: 60px 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Objektgrid
+.objekt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Objektkort
+.objekt-kort {
+  text-decoration: none;
+  color: var(--text-dark);
+  display: block;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .objekt-kort-bild {
+      &::after {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.objekt-kort-bild {
+  position: relative;
+  aspect-ratio: 3/4;
+  background-color: var(--bg-warm);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 50%);
+    transition: opacity 0.3s ease;
+  }
+}
+
+.objekt-status {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  padding: 4px 12px;
+  font-size: 0.65rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+
+  &--for_sale { background: var(--accent); color: white; }
+  &--sold { background: #2c2420; color: white; }
+  &--bidding { background: #8b6914; color: white; }
+  &--coming { background: #4a6741; color: white; }
+}
+
+.objekt-kort-info {
+  padding: 16px 4px;
+}
+
+.objekt-adress {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+  color: var(--text-dark);
+}
+
+.objekt-pris {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  margin-bottom: 2px;
+}
+
+.objekt-typ {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--text-light);
+}
+
+// Undersidor - border/separator under header
+.main {
+  .page:not(.home) &,
+  .single-fasad_listing & {
+    border-top: 1px solid var(--bg-warm);
+  }
+}

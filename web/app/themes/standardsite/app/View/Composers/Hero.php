@@ -19,9 +19,13 @@ class Hero extends PrekComposer
 
     public function with()
     {
-        // Hoppa över hero på objektdetaljsidor
+        // Hoppa över hero på objektdetaljsidor och till salu-sidan
         $fasad_slug = get_query_var('fasad_listing');
         if (!empty($fasad_slug) && $fasad_slug !== '1' && strlen($fasad_slug) > 2) {
+            return ['hero' => null];
+        }
+        // Hoppa över på till salu-sidan (/objekt/)
+        if (is_page('objekt')) {
             return ['hero' => null];
         }
 
