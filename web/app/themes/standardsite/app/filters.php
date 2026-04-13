@@ -627,3 +627,18 @@ add_action('init', function() {
         }
     });
 }, 20);
+
+// Stäng av _load_textdomain_just_in_time warnings från Acorn
+add_filter('acorn/exceptions/ignore', function($exceptions) {
+    return true; // Ignorera alla E_USER_NOTICE/E_USER_WARNING
+});
+
+// Ignorera textdomain warnings
+add_action('init', function() {
+    set_error_handler(function($errno, $errstr) {
+        if (strpos($errstr, '_load_textdomain_just_in_time') !== false) {
+            return true; // Ignorera
+        }
+        return false;
+    }, E_USER_NOTICE | E_USER_WARNING | E_USER_DEPRECATED);
+}, 1);

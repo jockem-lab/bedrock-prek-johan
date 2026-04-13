@@ -4,9 +4,9 @@
 
 {{-- Hero med overlay-text --}}
 <div class="kontakt-hero">
-  <div class="kontakt-hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1600&q=80')"></div>
+  <div class="kontakt-hero-slide active" style="background-image:url('http://localhost:8090/app/uploads/hero1.jpg')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('http://localhost:8090/app/uploads/hero2.jpg')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('http://localhost:8090/app/uploads/hero3.jpg')"></div>
   <div class="kontakt-hero-overlay"></div>
   <div class="kontakt-hero-inner">
     <p class="kontakt-hero-eyebrow">PREK MÄKLERI</p>

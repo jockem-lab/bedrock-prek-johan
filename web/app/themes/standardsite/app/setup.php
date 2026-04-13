@@ -6,6 +6,8 @@
 
 namespace App;
 
+require_once __DIR__ . '/acf.php';
+
 use App\View\Composers\App;
 
 use function Roots\bundle;
@@ -200,17 +202,6 @@ add_action('widgets_init', function () {
 //    ] + $config);
 });
 
-if (function_exists('acf_add_options_page')) {
-    acf_add_options_page(
-        [
-            'page_title' => 'Inställningar',
-            'menu_title' => 'Inställningar',
-            'menu_slug'  => 'acf-options-sitesettings',
-            'capability' => 'edit_posts',
-            'redirect'   => false,
-        ]
-    );
-}
 //function addPageToMenu($pageId, $pageTitle, $menuId, $parent = 0)
 //{
 //    wp_update_nav_menu_item(

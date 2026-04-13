@@ -46,12 +46,13 @@ class Hero extends PrekComposer
         if(!empty($video)){
             $hero['video'] = $video;
         }
-        // Fallback: om inga slides konfigurerade, använd Unsplash-bilder
+        // Fallback: PREK-bilder
         if (empty($hero['slides']) && empty($hero['video'])) {
+            $uploads = content_url('uploads');
             $hero['slides'] = [
-                ['image' => ['src' => 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
-                ['image' => ['src' => 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
-                ['image' => ['src' => 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
+                ['image' => ['src' => $uploads . '/hero1.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
+                ['image' => ['src' => $uploads . '/hero2.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
+                ['image' => ['src' => $uploads . '/hero3.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
             ];
         }
         return [

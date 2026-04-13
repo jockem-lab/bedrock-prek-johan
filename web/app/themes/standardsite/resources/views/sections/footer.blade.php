@@ -30,7 +30,16 @@
 
     <div class="footer-col">
       <h4>Kontakt</h4>
-      <p>Kontakta oss för mer information om våra tjänster.</p>
+      <p><a href="mailto:info@prek.se">info@prek.se</a></p>
+      <p><a href="tel:+46131234567">013-12 34 56</a></p>
+      <p style="margin-top:12px;font-size:12px;opacity:0.6;">
+        Mån–Fre: 09–17<br>
+        Lör: 10–14
+      </p>
+      <div style="margin-top:16px;display:flex;gap:12px;">
+        <a href="#" aria-label="Instagram" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">Instagram</a>
+        <a href="#" aria-label="Facebook" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">Facebook</a>
+      </div>
     </div>
   </div>
 
