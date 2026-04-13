@@ -599,3 +599,31 @@ add_action('template_redirect', function() {
 add_action('fasad_bridge_post_sync', function($params, $syncResult) {
     update_option('_fasad_lastsync', time());
 }, 10, 2);
+
+// Registrera FasadBridge cron-schema
+add_action('init', function() {
+    $hookName = 'sync_all_listings';
+    
+    // Schemalägg daglig sync kl 05:00
+    if (!wp_next_scheduled($hookName)) {
+        $timezone = new \DateTimeZone('Europe/Stockholm');
+        $date = new \DateTime('now', $timezone);
+        $date->setTime(5, 0);
+        wp_schedule_event($date->getTimestamp(), 'daily', $hookName);
+    }
+    
+    // Koppla cron-hook
+    add_action($hookName, function() {
+        $plugins_dir = WP_CONTENT_DIR . '/plugins/';
+        foreach (['fasad-bridge', 'fasad-api-connect', 'prek-web'] as $plugin) {
+            $autoload = $plugins_dir . $plugin . '/vendor/autoload.php';
+            if (file_exists($autoload)) require_once $autoload;
+        }
+        if (class_exists('FasadBridge\\Includes\\PublicSettings')) {
+            delete_option('fasad-sync-lock');
+            $public = new \FasadBridge\Includes\PublicSettings('fasad-bridge', '1.0.0');
+            $public->registerCustomPostTypes();
+            $public->doSync(['lock' => false, 'output' => 'log', 'source' => 'cron']);
+        }
+    });
+}, 20);
