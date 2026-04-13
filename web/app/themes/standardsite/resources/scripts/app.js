@@ -574,3 +574,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 5000);
     });
 });
+
+// GLightbox
+import GLightbox from 'glightbox';
+import 'glightbox/dist/css/glightbox.css';
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.querySelector('.glightbox')) {
+        GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: false,
+        });
+    }
+});

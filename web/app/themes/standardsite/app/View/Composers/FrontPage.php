@@ -51,12 +51,18 @@ class FrontPage extends PrekComposer
 
                 // Hämta fakta
                 $size_raw = get_post_meta($post_id, '_fasad_size', true);
-                $size = $size_raw ? @unserialize($size_raw) : null;
-                $area = $size->livingArea ?? '';
-
-                $facts_raw = get_post_meta($post_id, '_fasad_facts', true);
-                $facts = $facts_raw ? @unserialize($facts_raw) : null;
-                $rooms = $facts->rooms ?? '';
+                $size_s1 = $size_raw ? @unserialize($size_raw) : [];
+                $size = is_string($size_s1) ? @unserialize($size_s1) : $size_s1;
+                $rooms = ($size && !empty($size->rooms)) ? $size->rooms . ' ' . ($size->roomsInformation ?? 'rum') : '';
+                $area = '';
+                if (!empty($size->area->areas) && is_array($size->area->areas)) {
+                    foreach ($size->area->areas as $a) {
+                        if (!empty($a->type) && $a->type === 'Boarea' && !empty($a->size)) {
+                            $area = $a->size . ' ' . strtolower($a->unit ?? 'kvm');
+                            break;
+                        }
+                    }
+                }
 
                 $type_raw = get_post_meta($post_id, '_fasad_descriptionType', true);
                 $type_obj = $type_raw ? @unserialize($type_raw) : null;
@@ -72,8 +78,8 @@ class FrontPage extends PrekComposer
                     'address' => $address,
                     'price'   => $price,
                     'type'    => $type,
-                    'rooms'   => $rooms ? $rooms . ' rum' : '',
-                    'area'    => $area ? $area . ' kvm' : '',
+                    'rooms'   => $rooms,
+                    'area'    => $area,
                     'image'   => $image,
                     'status'  => $status_alias,
                 ];
@@ -82,7 +88,20 @@ class FrontPage extends PrekComposer
         }
 
         return [
-            'listings' => $listings,
+            'listings'         => $listings,
+            'fp_intro_rubrik'  => get_field('fp_intro_rubrik') ?: '',
+            'fp_intro_text'    => get_field('fp_intro_text') ?: '',
+            'fp_intro_knapp'   => [
+                'text' => get_field('fp_intro_knapp_text') ?: 'Se alla objekt',
+                'url'  => get_field('fp_intro_knapp_url') ?: get_permalink(get_page_by_path('objekt')),
+            ],
+            'fp_listings_rubrik' => get_field('fp_listings_rubrik') ?: 'Aktuella objekt',
+            'fp_valuation'     => [
+                'visa'   => get_field('fp_valuation_visa') !== false ? get_field('fp_valuation_visa') : true,
+                'rubrik' => get_field('fp_valuation_rubrik') ?: 'Gratis värdebedömning',
+                'text'   => get_field('fp_valuation_text') ?: '',
+                'knapp'  => get_field('fp_valuation_knapp') ?: 'Boka värdering',
+            ],
         ];
     }
 }

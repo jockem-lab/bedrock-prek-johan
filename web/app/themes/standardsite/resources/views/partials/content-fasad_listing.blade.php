@@ -264,14 +264,15 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
   </div>
 </div>
 
-{{-- Bildgalleri - full bredd --}}
+{{-- Bildgalleri med lightbox --}}
 @if(count($images) > 1)
 <div class="objekt-galleri">
   <div class="objekt-galleri-grid">
     @foreach($images as $i => $img)
       <div class="objekt-galleri-item {{ $i === 0 ? 'objekt-galleri-item--stor' : '' }}">
-        <a href="{{ $img }}" target="_blank">
-          <img src="{{ $img }}" alt="Bild {{ $i + 1 }}">
+        <a href="{{ $img }}" class="glightbox" data-gallery="objekt-galleri" data-title="Bild {{ $i + 1 }}">
+          <img src="{{ $img }}" alt="Bild {{ $i + 1 }}" loading="lazy">
+          <div class="galleri-overlay"><span>+</span></div>
         </a>
       </div>
     @endforeach

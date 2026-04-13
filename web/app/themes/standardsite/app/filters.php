@@ -642,3 +642,38 @@ add_action('init', function() {
         return false;
     }, E_USER_NOTICE | E_USER_WARNING | E_USER_DEPRECATED);
 }, 1);
+
+// Kontaktformulär - hantera POST
+add_action('template_redirect', function() {
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') return;
+    global $wp;
+    if (trim($wp->request, '/') !== 'kontakt-skicka') return;
+
+    $namn      = sanitize_text_field($_POST['namn'] ?? '');
+    $email     = sanitize_email($_POST['email'] ?? '');
+    $telefon   = sanitize_text_field($_POST['telefon'] ?? '');
+    $meddelande = sanitize_textarea_field($_POST['meddelande'] ?? '');
+    $mottagare = sanitize_email($_POST['mottagare'] ?? get_option('admin_email'));
+
+    if (empty($namn) || empty($email) || empty($meddelande)) {
+        wp_redirect(home_url('/kontakt?error=1'));
+        exit;
+    }
+
+    $subject = 'Nytt meddelande från ' . $namn . ' via PREK.se';
+    $body = "Namn: $namn\n";
+    $body .= "E-post: $email\n";
+    if ($telefon) $body .= "Telefon: $telefon\n";
+    $body .= "\nMeddelande:\n$meddelande";
+
+    $headers = [
+        'Content-Type: text/plain; charset=UTF-8',
+        'From: ' . $namn . ' <' . $email . '>',
+        'Reply-To: ' . $email,
+    ];
+
+    wp_mail($mottagare, $subject, $body, $headers);
+
+    wp_redirect(home_url('/kontakt?success=1'));
+    exit;
+});

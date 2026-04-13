@@ -2,16 +2,16 @@
 
 @section('content')
 
-{{-- Hero med bildspel --}}
+{{-- Hero --}}
 <div class="kontakt-hero">
-  <div class="kontakt-hero-slide active" style="background-image:url('http://localhost:8090/app/uploads/hero1.jpg')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('http://localhost:8090/app/uploads/hero2.jpg')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('http://localhost:8090/app/uploads/hero3.jpg')"></div>
+  <div class="kontakt-hero-slide active" style="background-image:url('{{ content_url('uploads') }}/hero1.jpg')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads') }}/hero2.jpg')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads') }}/hero3.jpg')"></div>
   <div class="kontakt-hero-overlay"></div>
   <div class="kontakt-hero-inner">
     <p class="kontakt-hero-eyebrow">PREK MÄKLERI</p>
-    <h1>Om oss</h1>
-    <p class="kontakt-hero-sub">Erfarna mäklare med lokal kännedom</p>
+    <h1>{{ $oo_hero_rubrik }}</h1>
+    <p class="kontakt-hero-sub">{{ $oo_hero_underrubrik }}</p>
   </div>
 </div>
 
@@ -19,46 +19,41 @@
 <section class="page-sektion">
   <div class="page-inner">
     <div class="om-oss-intro">
-      <h2>Vi hittar rätt hem för dig</h2>
-      <p>På PREK kombinerar vi lång erfarenhet av bostadsmarknaden med ett genuint engagemang för varje kund. Vi guidar dig genom hela processen – från första visning till nyckelöverlämning – med ärlighet och lokal expertis som grund.</p>
+      <h2>{{ $oo_intro_rubrik }}</h2>
+      <div class="om-oss-intro-text">{!! $oo_intro_text !!}</div>
     </div>
 
+    @if(!empty($oo_blocks))
     <div class="om-oss-grid">
-      <div class="om-oss-block">
-        <h3>Lokal expertis</h3>
-        <p>Med djup kännedom om den lokala marknaden ger vi dig rätt underlag för att fatta välgrundade beslut – oavsett om du köper eller säljer.</p>
-      </div>
-      <div class="om-oss-block">
-        <h3>Personlig service</h3>
-        <p>Varje affär är unik. Vi lyssnar, förstår dina behov och anpassar vår service efter dig – inte tvärtom.</p>
-      </div>
-      <div class="om-oss-block">
-        <h3>Trygghet i processen</h3>
-        <p>Att köpa eller sälja bostad är ett av livets större beslut. Vi ser till att du känner dig trygg och välinformerad i varje steg.</p>
-      </div>
+      @foreach($oo_blocks as $block)
+        <div class="om-oss-block">
+          @if(!empty($block['ikon']))
+            <img src="{{ $block['ikon']['url'] }}" alt="{{ $block['rubrik'] }}" style="width:48px;height:48px;margin-bottom:16px;">
+          @endif
+          <h3>{{ $block['rubrik'] }}</h3>
+          <p>{{ $block['text'] }}</p>
+        </div>
+      @endforeach
     </div>
+    @endif
   </div>
 </section>
 
 {{-- Värderingar --}}
-<section class="page-sektion" style="background:var(--bg-warm);padding-top:80px;padding-bottom:80px;">
+@if(!empty($oo_values))
+<section class="page-sektion" style="background:var(--bg-warm);">
   <div class="page-inner" style="text-align:center;">
-    <p class="sektion-eyebrow">VÅRA VÄRDERINGAR</p>
+    <p class="sektion-eyebrow">{{ strtoupper($oo_values_rubrik) }}</p>
     <div class="om-oss-grid" style="margin-top:0;">
-      <div class="om-oss-block" style="border-top:2px solid var(--accent);padding-top:24px;">
-        <h3>Ärlighet</h3>
-        <p>Vi ger alltid en ärlig bild av marknaden och objektet – även när det inte är vad man vill höra.</p>
-      </div>
-      <div class="om-oss-block" style="border-top:2px solid var(--accent);padding-top:24px;">
-        <h3>Engagemang</h3>
-        <p>Vi engagerar oss fullt ut i varje affär och arbetar hårt för att uppnå bästa möjliga resultat.</p>
-      </div>
-      <div class="om-oss-block" style="border-top:2px solid var(--accent);padding-top:24px;">
-        <h3>Tillgänglighet</h3>
-        <p>Vi finns tillgängliga när du behöver oss och svarar alltid snabbt på frågor och funderingar.</p>
-      </div>
+      @foreach($oo_values as $value)
+        <div class="om-oss-block" style="border-top:2px solid var(--accent);padding-top:24px;">
+          <h3>{{ $value['rubrik'] }}</h3>
+          <p>{{ $value['text'] }}</p>
+        </div>
+      @endforeach
     </div>
   </div>
 </section>
+@endif
 
 @endsection

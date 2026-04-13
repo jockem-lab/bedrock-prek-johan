@@ -77,27 +77,42 @@ class Hero extends PrekComposer
     private function getSlides()
     {
         $slides = [];
-        $heroSlides = getAcfGroup($this->heroGroup, 'hero_slides');
-        if(is_array($heroSlides)) {
+        // Försök med nya ACF-fält först
+        $heroSlides = get_field('hero_slides');
+        if (is_array($heroSlides) && !empty($heroSlides)) {
             foreach ($heroSlides as $slide) {
-                $imageGroup = $slide['hero_slides_image_group'];
-                $class = [];
-                if (empty($imageGroup) || empty($imageGroup['hero_slides_image'])) {
-                    continue;
-                }
-                $objectPositions = [
-                    'top'    => 'object-top',
-                    'center' => 'object-center',
-                    'bottom' => 'object-bottom',
-                ];
-                $class[] = $objectPositions[$imageGroup['object-position-horizontal']];
-                $class[] = 'slide-image';
-                $imageUrl = wp_get_attachment_image_url($imageGroup['hero_slides_image']['ID'], 'full');
+                if (empty($slide['image'])) continue;
+                $imageUrl = is_array($slide['image']) ? $slide['image']['url'] : wp_get_attachment_image_url($slide['image'], 'full');
+                if (empty($imageUrl)) continue;
                 $slides[] = [
-                    'image' => self::transformImage($imageUrl, $imageUrl, App::getSettings()['heroSettings'], ['class' => $class]),
-                    'title' => $slide['title'],
-                    'subtitle'  => $slide['subtitle'],
+                    'image' => [
+                        'src'        => $imageUrl,
+                        'srcset'     => '',
+                        'attributes' => 'class="slide-image"',
+                    ],
+                    'title'    => $slide['title'] ?? '',
+                    'subtitle' => $slide['subtitle'] ?? '',
                 ];
+            }
+        }
+        // Fallback: gamla fältstrukturen
+        if (empty($slides)) {
+            $heroSlides = getAcfGroup($this->heroGroup, 'hero_slides');
+            if (is_array($heroSlides)) {
+                foreach ($heroSlides as $slide) {
+                    $imageGroup = $slide['hero_slides_image_group'] ?? [];
+                    if (empty($imageGroup) || empty($imageGroup['hero_slides_image'])) continue;
+                    $imageUrl = wp_get_attachment_image_url($imageGroup['hero_slides_image']['ID'], 'full');
+                    $slides[] = [
+                        'image' => [
+                            'src'        => $imageUrl,
+                            'srcset'     => '',
+                            'attributes' => 'class="slide-image"',
+                        ],
+                        'title'    => $slide['title'] ?? '',
+                        'subtitle' => $slide['subtitle'] ?? '',
+                    ];
+                }
             }
         }
         return $slides;
