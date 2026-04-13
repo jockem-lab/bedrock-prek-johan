@@ -138,6 +138,12 @@ if (file_exists($env_config)) {
     require_once $env_config;
 }
 
+
+/**
+ * ACF Pro License
+ */
+Config::define('ACF_PRO_LICENSE', env('ACF_PRO_KEY') ?: '');
+
 Config::apply();
 
 /**
