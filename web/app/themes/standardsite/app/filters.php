@@ -599,13 +599,3 @@ add_action('template_redirect', function() {
 add_action('fasad_bridge_post_sync', function($params, $syncResult) {
     update_option('_fasad_lastsync', time());
 }, 10, 2);
-
-// Sätt ACF Pro licensnyckel från miljövariabel
-add_action('init', function() {
-    if (defined('ACF_PRO_LICENSE') && ACF_PRO_LICENSE) {
-        $current = get_option('acf_pro_license');
-        if ($current !== ACF_PRO_LICENSE) {
-            update_option('acf_pro_license', ACF_PRO_LICENSE);
-        }
-    }
-});

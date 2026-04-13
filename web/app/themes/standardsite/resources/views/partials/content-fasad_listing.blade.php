@@ -43,8 +43,22 @@ if (is_array($imgs)) {
 
 // Size
 $sz = fasad_unserialize(get_post_meta($post_id, '_fasad_size', true));
-$area  = ($sz && !empty($sz->livingArea) && is_scalar($sz->livingArea)) ? $sz->livingArea . ' kvm' : '';
 $rooms = ($sz && !empty($sz->rooms) && is_scalar($sz->rooms)) ? $sz->rooms . ' rum' : '';
+if (!empty($sz->roomsInformation) && is_string($sz->roomsInformation)) {
+    $rooms = $sz->rooms . ' ' . $sz->roomsInformation;
+}
+$area = '';
+if (!empty($sz->area->areas) && is_array($sz->area->areas)) {
+    foreach ($sz->area->areas as $a) {
+        if (!empty($a->type) && $a->type === 'Boarea' && !empty($a->size)) {
+            $area = $a->size . ' ' . strtolower($a->unit ?? 'kvm');
+            break;
+        }
+    }
+    if (empty($area) && !empty($sz->area->areas[0]->size)) {
+        $area = $sz->area->areas[0]->size . ' ' . strtolower($sz->area->areas[0]->unit ?? 'kvm');
+    }
+}
 
 // Type
 $tp = fasad_unserialize(get_post_meta($post_id, '_fasad_descriptionType', true));
