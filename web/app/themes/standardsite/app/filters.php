@@ -539,3 +539,58 @@ add_filter('template_include', function($template) {
     }
     return $template;
 }, 99);
+// Debug sync
+add_action('pre_get_posts', function($query) {
+    if ($query->is_main_query()) {
+        $pn = $query->query['pagename'] ?? 'NOT SET';
+        $name = $query->query['name'] ?? 'NOT SET';
+        error_log("PRE_GET_POSTS pagename=$pn name=$name");
+    }
+}, 5);
+
+// Hantera _sync endpoint direkt
+add_action('template_redirect', function() {
+    global $wp;
+    $request = trim($wp->request, '/');
+    
+    if ($request === '_sync') {
+        status_header(200);
+        header('Content-Type: text/plain; charset=utf-8');
+        echo "PREK Sync starting...\n";
+        flush();
+        
+        $plugins_dir = WP_CONTENT_DIR . '/plugins/';
+        
+        // Ladda alla plugins autoloaders
+        foreach (['fasad-bridge', 'fasad-api-connect', 'prek-web'] as $plugin) {
+            $autoload = $plugins_dir . $plugin . '/vendor/autoload.php';
+            if (file_exists($autoload)) {
+                require_once $autoload;
+                echo "Loaded: $plugin\n";
+            }
+        }
+        
+        // Ladda plugin-huvudfiler
+        foreach (['fasad-bridge/FasadBridge.php', 'fasad-api-connect/FasadApiConnect.php', 'prek-web/PrekWeb.php'] as $plugin_file) {
+            $file = $plugins_dir . $plugin_file;
+            if (file_exists($file) && !class_exists(basename(dirname($file)))) {
+                require_once $file;
+            }
+        }
+        
+        if (class_exists('FasadBridge\\Includes\\PublicSettings')) {
+            echo "Running sync...\n";
+            flush();
+            // Rensa lock innan sync
+            delete_option('fasad-sync-lock');
+            $public = new \FasadBridge\Includes\PublicSettings('fasad-bridge', '1.0.0');
+            // force='all' tvingar uppdatering av alla objekt
+            $force = isset($_GET['force']) ? 'all' : false;
+            $public->doSync(['force' => $force, 'lock' => false]);
+            echo "Sync complete.\n";
+        } else {
+            echo "FasadBridge not found.\n";
+        }
+        die();
+    }
+}, 1);
