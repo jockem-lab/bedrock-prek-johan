@@ -1,9 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="page-hero">
-  <div class="page-hero-inner">
+{{-- Hero med bildspel --}}
+<div class="kontakt-hero">
+  <div class="kontakt-hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&q=80')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?w=1600&q=80')"></div>
+  <div class="kontakt-hero-overlay"></div>
+  <div class="kontakt-hero-inner">
+    <p class="kontakt-hero-eyebrow">PREK MÄKLERI</p>
     <h1>Om oss</h1>
+    <p class="kontakt-hero-sub">Erfarna mäklare med lokal kännedom</p>
   </div>
 </div>
 

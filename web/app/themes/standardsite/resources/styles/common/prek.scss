@@ -1739,7 +1739,7 @@ a.btn-secondary:hover { border-color: #fff; }
 // Undersidor hero
 .page-hero {
   background: var(--bg-dark);
-  min-height: 35vh;
+  min-height: 22vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1757,7 +1757,7 @@ a.btn-secondary:hover { border-color: #fff; }
 }
 
 .page-inner {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -1859,4 +1859,217 @@ a.btn-secondary:hover { border-color: #fff; }
   }
 
   textarea { resize: vertical; }
+}
+
+// Page hero (kontakt, om oss, till salu) - konsekvent styling
+.kontakt-hero {
+  position: relative;
+  height: 50vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kontakt-hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+
+  &.active { opacity: 1; }
+}
+
+.kontakt-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(30,20,15,0.55);
+}
+
+.kontakt-hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 24px;
+
+  h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin: 8px 0;
+    font-weight: 400;
+  }
+}
+
+.kontakt-hero-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+  margin-bottom: 4px;
+}
+
+.kontakt-hero-sub {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 8px;
+}
+
+.sektion-eyebrow {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--text-light);
+  margin-bottom: 32px;
+}
+
+// Mäklare-grid
+.kontakt-maklare-sektion {
+  padding: 60px 0;
+  background: var(--bg-light);
+}
+
+.maklare-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+
+  @media (max-width: 1100px) { grid-template-columns: repeat(3, 1fr); }
+
+  @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.maklare-kort-bild {
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: var(--bg-warm);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(20%);
+    transition: filter 0.3s, transform 0.4s;
+  }
+
+  &:hover img {
+    filter: grayscale(0%);
+    transform: scale(1.03);
+  }
+
+  &--placeholder { background: var(--bg-warm); }
+}
+
+.maklare-kort-info {
+  h3 {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    font-family: var(--font-body);
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--text-dark);
+  }
+
+  p { font-size: 0.85rem; color: var(--text-mid); margin: 2px 0; }
+
+  a {
+    color: var(--text-mid);
+    text-decoration: none;
+    &:hover { color: var(--accent); }
+  }
+}
+
+.maklare-kort-titel {
+  color: var(--text-light) !important;
+  font-size: 0.75rem !important;
+  margin-bottom: 8px !important;
+}
+
+.kontakt-sektion-ljus {
+  background: white;
+}
+
+// === KONSEKVENT LAYOUT FÖR ALLA UNDERSIDOR ===
+.kontakt-hero,
+.page-hero {
+  height: 45vh !important;
+  min-height: 280px !important;
+  max-height: 480px !important;
+}
+
+.kontakt-hero-inner {
+  width: 100%;
+  max-width: 800px;
+  padding: 0 24px;
+  margin: 0 auto;
+}
+
+// Konsekvent innehållsbredd och padding
+.till-salu-filter .filter-knappar,
+.till-salu-innehall,
+.kontakt-maklare-sektion > *,
+.page-sektion .page-inner,
+.kontakt-sektion-ljus .page-inner {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.till-salu-filter {
+  padding: 0 !important;
+}
+
+.till-salu-filter .filter-knappar {
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+}
+
+.till-salu-innehall {
+  padding-top: 48px !important;
+  padding-bottom: 80px !important;
+}
+
+.kontakt-maklare-sektion {
+  padding: 60px 0 !important;
+}
+
+.page-sektion {
+  padding: 80px 0 !important;
+}
+
+// Tvinga konsekvent vänstermarginal för filter
+.till-salu-filter .filter-knappar {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
+// Rubrik-typsnitt på om oss-sektionen
+.om-oss-intro h2,
+.om-oss-block h3 {
+  font-family: var(--font-heading) !important;
+  font-weight: 400 !important;
+}
+
+// Eyebrow-text konsekvent position
+.sektion-eyebrow {
+  display: block;
+  margin-bottom: 24px;
+  padding-left: 0;
+}
+
+// Kontakt maklare sektion - konsekvent padding
+.kontakt-maklare-sektion .page-inner {
+  padding-top: 0 !important;
+}
+
+// Centrera filter-knappar
+.till-salu-filter .filter-knappar {
+  justify-content: center !important;
 }

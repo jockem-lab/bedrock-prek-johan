@@ -24,8 +24,8 @@ class Hero extends PrekComposer
         if (!empty($fasad_slug) && $fasad_slug !== '1' && strlen($fasad_slug) > 2) {
             return ['hero' => null];
         }
-        // Hoppa över på till salu-sidan (/objekt/)
-        if (is_page('objekt')) {
+        // Hoppa över på undersidor
+        if (is_page(['objekt', 'kontakt', 'om-oss'])) {
             return ['hero' => null];
         }
 

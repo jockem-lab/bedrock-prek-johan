@@ -1,22 +1,5 @@
-// Till salu-sida
-.till-salu-hero {
-  background: var(--bg-dark);
-  min-height: 40vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-
-  h1 {
-    font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    color: white;
-    text-align: center;
-  }
-}
-
 .till-salu-innehall {
-  padding: 60px 24px;
+  padding: 48px 24px 80px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -106,15 +89,15 @@
 .till-salu-filter {
   background: var(--bg-light);
   border-bottom: 1px solid var(--bg-warm);
-  padding: 0 24px;
 
   .filter-knappar {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 20px 40px;
     display: flex;
-    gap: 4px;
+    gap: 8px;
     overflow-x: auto;
-    padding: 16px 0;
+    justify-content: center;
   }
 }
 

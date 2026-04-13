@@ -560,3 +560,17 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Escape') closeMenu();
     });
 });
+
+// Page hero slideshow (kontakt, om oss, till salu)
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.kontakt-hero').forEach(function(hero) {
+        const slides = hero.querySelectorAll('.kontakt-hero-slide');
+        if (slides.length <= 1) return;
+        let current = 0;
+        setInterval(function() {
+            slides[current].classList.remove('active');
+            current = (current + 1) % slides.length;
+            slides[current].classList.add('active');
+        }, 5000);
+    });
+});

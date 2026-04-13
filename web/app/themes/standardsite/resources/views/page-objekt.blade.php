@@ -18,9 +18,17 @@ function fasad_unserialize_listing($raw) {
 }
 @endphp
 
-{{-- Hero --}}
-<div class="till-salu-hero">
-  <h1>Hem till salu</h1>
+{{-- Hero med bildspel --}}
+<div class="kontakt-hero">
+  <div class="kontakt-hero-slide active" style="background-image:url('https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1600&q=80')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80')"></div>
+  <div class="kontakt-hero-overlay"></div>
+  <div class="kontakt-hero-inner">
+    <p class="kontakt-hero-eyebrow">PREK MÄKLERI</p>
+    <h1>Hem till salu</h1>
+    <p class="kontakt-hero-sub">Linköping och Östergötland</p>
+  </div>
 </div>
 
 {{-- Filter --}}
