@@ -594,3 +594,8 @@ add_action('template_redirect', function() {
         die();
     }
 }, 1);
+
+// Uppdatera _fasad_lastsync efter sync
+add_action('fasad_bridge_post_sync', function($params, $syncResult) {
+    update_option('_fasad_lastsync', time());
+}, 10, 2);
