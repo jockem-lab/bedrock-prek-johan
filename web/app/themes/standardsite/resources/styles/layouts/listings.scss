@@ -120,7 +120,8 @@
   }
 }
 
-.objekt-kort[data-status] {
+.objekt-kort[data-status],
+.objekt-kort-inner[data-status] {
   transition: opacity 0.3s, transform 0.3s;
   &.hidden {
     display: none;
