@@ -544,7 +544,6 @@ add_action('pre_get_posts', function($query) {
     if ($query->is_main_query()) {
         $pn = $query->query['pagename'] ?? 'NOT SET';
         $name = $query->query['name'] ?? 'NOT SET';
-        error_log("PRE_GET_POSTS pagename=$pn name=$name");
     }
 }, 5);
 
@@ -676,4 +675,50 @@ add_action('template_redirect', function() {
 
     wp_redirect(home_url('/kontakt?success=1'));
     exit;
+});
+
+add_action('template_redirect', function() {
+    if (!get_query_var('bildproxy')) return;
+    
+    $url = $_GET['url'] ?? '';
+    if (empty($url)) die('No URL');
+    
+    // Tillåt bara FasAD-bilder
+    if (!preg_match('#^https://images[0-9]*\.fasad\.eu/#', $url)) die('Invalid URL');
+    
+    $response = wp_remote_get($url, ['timeout' => 15]);
+    if (is_wp_error($response)) die('Error');
+    
+    $content_type = wp_remote_retrieve_header($response, 'content-type') ?: 'image/jpeg';
+    $body = wp_remote_retrieve_body($response);
+    
+    header('Content-Type: ' . $content_type);
+    header('Cache-Control: public, max-age=86400');
+    header('Access-Control-Allow-Origin: *');
+    echo $body;
+    die();
+}, 1);
+
+// Bildproxy för FasAD-bilder via REST API
+add_action('rest_api_init', function() {
+    register_rest_route('prek/v1', '/bildproxy', [
+        'methods'             => 'GET',
+        'callback'            => function($request) {
+            $url = $request->get_param('url');
+            if (empty($url) || !preg_match('#^https://images[0-9]*\.fasad\.eu/#', $url)) {
+                return new \WP_Error('invalid', 'Invalid URL', ['status' => 400]);
+            }
+            $response = wp_remote_get($url, ['timeout' => 15]);
+            if (is_wp_error($response)) {
+                return new \WP_Error('fetch_error', 'Could not fetch image', ['status' => 500]);
+            }
+            $content_type = wp_remote_retrieve_header($response, 'content-type') ?: 'image/jpeg';
+            $body = wp_remote_retrieve_body($response);
+            header('Content-Type: ' . $content_type);
+            header('Cache-Control: public, max-age=86400');
+            echo $body;
+            exit;
+        },
+        'permission_callback' => '__return_true',
+    ]);
 });

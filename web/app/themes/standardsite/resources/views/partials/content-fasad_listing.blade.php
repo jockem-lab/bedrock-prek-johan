@@ -33,8 +33,8 @@ if (is_array($imgs)) {
     foreach ($imgs as $img) {
         if (!empty($img->variants) && is_array($img->variants)) {
             foreach ($img->variants as $v) {
-                if (($v->type ?? '') === 'highres' && !empty($v->path)) {
-                    $images[] = $v->path; break;
+                if (($v->type ?? '') === 'large' && !empty($v->path)) {
+                    $images[] = rest_url('prek/v1/bildproxy?url=') . urlencode($v->path); break;
                 }
             }
         }
@@ -268,14 +268,28 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 @if(count($images) > 1)
 <div class="objekt-galleri">
   <div class="objekt-galleri-grid">
-    @foreach($images as $i => $img)
+    @foreach(array_slice($images, 0, 5) as $i => $img)
       <div class="objekt-galleri-item {{ $i === 0 ? 'objekt-galleri-item--stor' : '' }}">
-        <a href="{{ $img }}" class="glightbox" data-gallery="objekt-galleri" data-title="Bild {{ $i + 1 }}">
+        <a href="javascript:void(0)" class="galleri-trigger" data-index="{{ $i }}" data-highres="{{ $img }}" data-text="Bild {{ $i + 1 }}">
           <img src="{{ $img }}" alt="Bild {{ $i + 1 }}" loading="lazy">
-          <div class="galleri-overlay"><span>+</span></div>
+          <div class="galleri-overlay"><span>&#x2B;</span></div>
         </a>
       </div>
     @endforeach
+  </div>
+</div>
+
+{{-- Alla bilder för lightbox --}}
+<script>var allImages = @json($images);</script>
+{{-- Lightbox --}}
+<div id="lightbox" class="lightbox">
+  <button id="lightbox-close" class="lightbox-close">&times;</button>
+  <button id="lightbox-prev" class="lightbox-prev">&#8592;</button>
+  <button id="lightbox-next" class="lightbox-next">&#8594;</button>
+  <div class="lightbox-inner">
+    <img id="lightbox-img" src="" alt="">
+    <p id="lightbox-caption" class="lightbox-caption"></p>
+    <p id="lightbox-counter" class="lightbox-counter"></p>
   </div>
 </div>
 @endif

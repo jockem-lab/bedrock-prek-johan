@@ -20,25 +20,23 @@ function fasad_unserialize_listing($raw) {
 
 {{-- Hero med bildspel --}}
 <div class="kontakt-hero">
-  <div class="kontakt-hero-slide active" style="background-image:url('http://localhost:8090/app/uploads/hero1.jpg')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('http://localhost:8090/app/uploads/hero2.jpg')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('http://localhost:8090/app/uploads/hero3.jpg')"></div>
+  <div class="kontakt-hero-slide active" style="background-image:url('{{ content_url('uploads/hero1.jpg') }}')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads/hero2.jpg') }}')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads/hero3.jpg') }}')"></div>
   <div class="kontakt-hero-overlay"></div>
   <div class="kontakt-hero-inner">
     <p class="kontakt-hero-eyebrow">PREK MÄKLERI</p>
-    <h1>Hem till salu</h1>
-    <p class="kontakt-hero-sub">Linköping och Östergötland</p>
+    <h1>{{ $ts_hero_rubrik }}</h1>
+    <p class="kontakt-hero-sub">{{ $ts_hero_underrubrik }}</p>
   </div>
 </div>
 
 {{-- Filter --}}
 <div class="till-salu-filter">
   <div class="filter-knappar">
-    <button class="filter-knapp active" data-filter="alla">ALLA</button>
-    <button class="filter-knapp" data-filter="kommande">KOMMANDE</button>
-    <button class="filter-knapp" data-filter="tillsalu">TILL SALU</button>
-    <button class="filter-knapp" data-filter="budgivning">BUDGIVNING PÅGÅR</button>
-    <button class="filter-knapp" data-filter="sald">SÅLDA</button>
+    @foreach($ts_filter_knappar as $i => $knapp)
+      <button class="filter-knapp {{ $i === 0 ? 'active' : '' }}" data-filter="{{ $knapp['filter'] ?? ($knapp['acf_filter'] ?? 'alla') }}">{{ $knapp['text'] ?? ($knapp['acf_text'] ?? '') }}</button>
+    @endforeach
   </div>
 </div>
 

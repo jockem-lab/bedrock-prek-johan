@@ -62,8 +62,11 @@
           <p style="margin-bottom:24px;color:var(--text-mid);">{{ $k_form_text }}</p>
         @endif
 
-        @if(session('kontakt_success'))
+        @if(request('success') == '1')
           <div class="kontakt-success">Tack! Ditt meddelande har skickats.</div>
+        @endif
+        @if(request('error') == '1')
+          <div class="kontakt-error">Något gick fel. Fyll i alla obligatoriska fält och försök igen.</div>
         @endif
 
         <form class="kontakt-formulär" method="POST" action="{{ home_url('/kontakt-skicka') }}">

@@ -2153,3 +2153,21 @@ a.btn-secondary:hover { border-color: #fff; }
 }
 
 .kontakt-karta iframe { width: 100%; height: 400px; display: block; }
+
+.kontakt-success {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  color: #2e7d32;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}
+
+.kontakt-error {
+  background: #fce4ec;
+  border: 1px solid #f48fb1;
+  color: #c62828;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 0.9rem;
+}

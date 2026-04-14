@@ -119,9 +119,19 @@ class HeaderFooter extends PrekComposer
                 'header' => $headerLogo,
                 'footer' => $footerLogo,
             ],
-            'menuType' => App::getOption('header_menu_type', 'burgeronly'),
-            'footerText'  => App::getOption('footer_text'),
+            'menuType'    => App::getOption('header_menu_type', 'burgeronly'),
+            'footerText'  => App::getOption('prek_footer_text'),
+            'footerExtra' => App::getOption('prek_footer_extra'),
             'officesInfo' => $this->officesInfo(),
+            'kontaktPhone'   => App::getOption('prek_phone'),
+            'kontaktEmail'   => App::getOption('prek_email'),
+            'kontaktAddress' => App::getOption('prek_address'),
+            'kontaktCity'    => App::getOption('prek_city'),
+            'openingHours'   => App::getOption('prek_opening_hours'),
+            'instagram'      => App::getOption('prek_instagram'),
+            'facebook'       => App::getOption('prek_facebook'),
+            'linkedin'       => App::getOption('prek_linkedin'),
+            'orgNr'          => App::getOption('prek_org_nr'),
         ];
     }
 }

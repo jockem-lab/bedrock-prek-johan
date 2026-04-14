@@ -575,17 +575,80 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// GLightbox
-import GLightbox from 'glightbox';
-import 'glightbox/dist/css/glightbox.css';
+// Bildgalleri lightbox
+function initLightbox() {
+  var lb = document.getElementById('lightbox');
+  if (!lb) return;
 
-document.addEventListener('DOMContentLoaded', () => {
-    if (document.querySelector('.glightbox')) {
-        GLightbox({
-            selector: '.glightbox',
-            touchNavigation: true,
-            loop: true,
-            autoplayVideos: false,
-        });
+  var lbImg = document.getElementById('lightbox-img');
+  var lbCaption = document.getElementById('lightbox-caption');
+  var lbCounter = document.getElementById('lightbox-counter');
+  var triggers = document.querySelectorAll('.galleri-trigger');
+  var images = (typeof allImages !== 'undefined') ? allImages : [];
+  var total = images.length || triggers.length;
+  var current = 0;
+
+  function openLightbox(index) {
+    current = index;
+    showImage();
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function showImage() {
+    lbCounter.textContent = (current + 1) + ' / ' + total;
+    if (images.length > 0) {
+      var src = images[current];
+      lbImg.src = src;
+      lbImg.alt = 'Bild ' + (current + 1);
+      lbCaption.textContent = 'Bild ' + (current + 1);
+    } else {
+      var a = triggers[current];
+      lbImg.src = a.dataset.highres;
+      lbImg.alt = a.dataset.text || '';
+      lbCaption.textContent = a.dataset.text || '';
     }
-});
+  }
+
+  triggers.forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openLightbox(parseInt(this.dataset.index));
+    });
+  });
+
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox-prev').addEventListener('click', function() {
+    current = (current - 1 + total) % total;
+    showImage();
+  });
+  document.getElementById('lightbox-next').addEventListener('click', function() {
+    current = (current + 1) % total;
+    showImage();
+  });
+
+  lb.addEventListener('click', function(e) {
+    if (e.target === lb) closeLightbox();
+  });
+
+  document.addEventListener('keydown', function(e) {
+    if (!lb.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { current = (current - 1 + total) % total; showImage(); }
+    if (e.key === 'ArrowRight') { current = (current + 1) % total; showImage(); }
+  });
+}
+
+// Kör lightbox-init vid DOMContentLoaded och window load
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initLightbox);
+} else {
+  initLightbox();
+}
+window.addEventListener('load', initLightbox);
