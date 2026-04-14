@@ -35,7 +35,7 @@ function fasad_unserialize_listing($raw) {
 <div class="till-salu-filter">
   <div class="filter-knappar">
     @foreach($ts_filter_knappar as $i => $knapp)
-      <button class="filter-knapp {{ $i === 0 ? 'active' : '' }}" data-filter="{{ $knapp['filter'] ?? ($knapp['acf_filter'] ?? 'alla') }}">{{ $knapp['text'] ?? ($knapp['acf_text'] ?? '') }}</button>
+      <button class="filter-knapp {{ $i === 0 ? 'active' : '' }}" data-filter="{{ $knapp['filter'] }}">{{ $knapp['text'] }}</button>
     @endforeach
   </div>
 </div>
@@ -67,11 +67,22 @@ function fasad_unserialize_listing($raw) {
         $tp = fasad_unserialize_listing(get_post_meta($pid, '_fasad_descriptionType', true));
         $type = ($tp && !empty($tp->alias) && is_string($tp->alias)) ? strtoupper($tp->alias) : '';
 
-        $status_raw = fasad_unserialize_listing(get_post_meta($pid, '_fasad_status', true));
-        // Status är ett array med ett objekt
-        $status_obj = is_array($status_raw) ? ($status_raw[0] ?? null) : $status_raw;
-        $status = ($status_obj && !empty($status_obj->tag)) ? $status_obj->tag : '';
-        $status_label = ($status_obj && !empty($status_obj->alias)) ? strtoupper($status_obj->alias) : strtoupper($status);
+        $is_sold = get_post_meta($pid, '_fasad_sold', true);
+        $is_published = get_post_meta($pid, '_fasad_published', true);
+        $is_brokered = get_post_meta($pid, '_fasad_firstPublishedAsBrokered', true);
+        if ($is_sold == '1') {
+            $status = 'sald';
+            $status_label = 'SÅLD';
+        } elseif ($is_published == '1' && $is_brokered) {
+            $status = 'kommande';
+            $status_label = 'KOMMANDE';
+        } elseif ($is_published == '1') {
+            $status = 'tillsalu';
+            $status_label = 'TILL SALU';
+        } else {
+            $status = '';
+            $status_label = '';
+        }
       @endphp
       <a href="{{ home_url('/objekt/' . get_post_field('post_name', $pid)) }}" class="objekt-kort-inner" data-status="{{ $status }}">
         <div class="objekt-bild">

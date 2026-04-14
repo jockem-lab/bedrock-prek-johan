@@ -90,7 +90,7 @@ class Common
         $currencyAlias = !empty($listing->economy->price->primary->currency->alias) ? $listing->economy->price->primary->currency->alias : 'kr';
         if ($listing->meta->sold) {
             if (!empty($listing->meta->economy->price->final)) {
-                $listingJson['facts'][] = \PrekWebHelper\Includes\Helpers::numberFormat($listing->meta->economy->price->final, 0, $currencyAlias, ' ');
+                $listingJson['facts'][] = number_format($listing->meta->economy->price->final, 0, ',', ' ') . ' ' . $currencyAlias;
             }
         } else {
             if (!empty($listing->meta->price)) {
@@ -110,7 +110,7 @@ class Common
         if (!empty($listing->meta->livingAreaStr)) {
             $listingJson['facts'][] = $listing->meta->livingAreaStr;
         } elseif (!empty($listing->meta->local->totalBuildingArea)) {
-            $listingJson['facts'][] = \PrekWebHelper\Includes\Helpers::numberFormat($listing->meta->local->totalBuildingArea->size, 0, mb_strtolower($listing->meta->local->totalBuildingArea->unit));
+            $listingJson['facts'][] = number_format($listing->meta->local->totalBuildingArea->size, 0, ',', ' ') . ' ' . mb_strtolower($listing->meta->local->totalBuildingArea->unit);
         }
         if (!empty($listing->meta->plotAreaStr)) {
             $plotAreaStr = $listing->meta->plotAreaStr;

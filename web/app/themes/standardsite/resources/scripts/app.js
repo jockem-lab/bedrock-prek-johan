@@ -473,7 +473,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Till salu-filter
 document.addEventListener('DOMContentLoaded', function() {
     const filterBtns = document.querySelectorAll('.filter-knapp');
-    const objekt = document.querySelectorAll('.objekt-kort[data-status]');
+    const objekt = document.querySelectorAll('.objekt-kort-inner[data-status]');
     
     filterBtns.forEach(function(btn) {
         btn.addEventListener('click', function() {

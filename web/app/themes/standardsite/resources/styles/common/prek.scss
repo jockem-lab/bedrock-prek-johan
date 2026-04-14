@@ -2171,3 +2171,8 @@ a.btn-secondary:hover { border-color: #fff; }
   margin-bottom: 24px;
   font-size: 0.9rem;
 }
+
+.objekt-status--tillsalu { background: var(--accent); color: white; }
+.objekt-status--sald { background: #2c2420; color: white; }
+.objekt-status--budgivning { background: #8b6914; color: white; }
+.objekt-status--kommande { background: #4a6741; color: white; }

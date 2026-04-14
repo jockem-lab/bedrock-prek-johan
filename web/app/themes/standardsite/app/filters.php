@@ -409,7 +409,10 @@ add_filter('body_class', function ($classes) {
 });
 
 add_filter('prek_web_helper_form_debug_level', function ($level) {
-    return \PrekWebHelper\Includes\Form::DEBUG_LOG_SLACK;
+    if (class_exists('\PrekWebHelper\Includes\Form')) {
+        return \PrekWebHelper\Includes\Form::DEBUG_LOG_SLACK;
+    }
+    return $level;
 });
 
 add_filter('prekweb-coworkerFasadSequence', '__return_false');
@@ -482,7 +485,7 @@ add_filter("fasad_bridge_facts", function ($facts, $listing) {
             }
             $facts['operatingCosts_' . $operatingCost->alias . '_m'] = [
                 'label' => $operatingCost->alias,
-                'value' => \PrekWebHelper\Includes\Helpers::numberFormat($operatingCost->amountMonth, 1, 'kr/mån', ' '),
+                'value' => number_format($operatingCost->amountMonth, 0, ',', ' ') . ' kr/mån',
             ];
             //$facts['operatingCosts_' . $operatingCost->alias . '_y'] = [
             //    'label' => $operatingCost->alias,
