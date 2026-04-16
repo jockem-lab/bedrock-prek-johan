@@ -217,3 +217,40 @@ add_action('widgets_init', function () {
 //        ]
 //    );
 //}
+
+/**
+ * Performance: preload, preconnect och font-display optimeringar.
+ */
+add_action('wp_head', function () {
+    // Preconnect till Google Fonts
+    echo '<link rel="preconnect" href="https://fonts.googleapis.com">' . "\n";
+    echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>' . "\n";
+
+    // Google Fonts asynkront (icke-blockerande)
+    echo '<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" as="style" onload="this.onload=null;this.rel=\'stylesheet\'">' . "\n";
+    echo '<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap"></noscript>' . "\n";
+
+    // Preload hero-bild (LCP-fix)
+    $hero1 = content_url('uploads/hero1.jpg');
+    echo '<link rel="preload" as="image" href="' . esc_url($hero1) . '" fetchpriority="high">' . "\n";
+
+    // Preload CSS
+    echo '<style>
+        /* Font-display swap inline för snabbare text-rendering */
+        @font-face { font-display: swap; }
+    </style>' . "\n";
+}, 1);
+
+/**
+ * Performance: ta bort onödiga WordPress-skript och stilar.
+ */
+add_action('wp_enqueue_scripts', function () {
+    // Ta bort jQuery Migrate (inte nödvändig i produktion)
+    // wp_deregister_script('jquery-migrate');
+
+    // Ta bort Gutenberg block library CSS om det inte används
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style('global-styles');
+}, 100);
+
