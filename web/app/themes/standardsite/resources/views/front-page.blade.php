@@ -10,38 +10,48 @@
       <h2 class="sektion-rubrik">{{ $fp_listings_rubrik ?? 'Aktuella objekt' }}</h2>
     </div>
     @if(!empty($listings))
-      <div class="mosaik-grid">
-        @foreach($listings as $i => $listing)
-          <a href="{{ home_url('/objekt/' . $listing->slug) }}"
-             class="mosaik-kort {{ $i === 0 ? 'mosaik-kort--stor' : '' }}">
-            <div class="mosaik-bild" style="background-image:url('{{ $listing->image }}')">
-              @if(!$listing->image)
-                <div style="width:100%;height:100%;background:#243558;"></div>
-              @endif
-            </div>
-            @if($listing->status)
-              <div class="objekt-status objekt-status--{{ $listing->status }}">
-                @php echo match($listing->status) {
-                  'sald' => 'Såld', 'kommande' => 'Kommande',
-                  'tillsalu' => 'Till salu', 'budgivning' => 'Budgivning',
-                  default => ucfirst($listing->status)
-                }; @endphp
-              </div>
+      <div class="mosaik-v2">
+
+        {{-- Rad 1: stor vänster + två höger --}}
+        <div class="mosaik-v2-rad mosaik-v2-rad--1">
+          @if(isset($listings[0]))
+            @include('partials.mosaik-kort', ['listing' => $listings[0], 'stor' => true])
+          @endif
+          <div class="mosaik-v2-col">
+            @if(isset($listings[1]))
+              @include('partials.mosaik-kort', ['listing' => $listings[1], 'stor' => false])
             @endif
-            <div class="mosaik-info">
-              @if($listing->address)
-                <div class="mosaik-adress">{{ $listing->address }}</div>
-              @endif
-              @if($listing->price)
-                <div class="mosaik-pris">{{ $listing->price }}</div>
-              @endif
-              <div class="mosaik-meta">
-                @if($listing->rooms) <span>{{ $listing->rooms }}</span> @endif
-                @if($listing->area) <span>{{ $listing->area }}</span> @endif
-              </div>
-            </div>
-          </a>
-        @endforeach
+            @if(isset($listings[2]))
+              @include('partials.mosaik-kort', ['listing' => $listings[2], 'stor' => false])
+            @endif
+          </div>
+        </div>
+
+        {{-- Rad 2: CTA + två mitten + en stor höger --}}
+        <div class="mosaik-v2-rad mosaik-v2-rad--2">
+          <div class="mosaik-v2-col">
+            <a href="{{ home_url('/kontakt') }}" class="mosaik-cta">
+              <span class="sektion-eyebrow-label">Oscars Mäkleri</span>
+              <h3>Klicka här för att värdera din bostad</h3>
+              <span class="mosaik-cta-arrow">→</span>
+            </a>
+            @if(isset($listings[3]))
+              @include('partials.mosaik-kort', ['listing' => $listings[3], 'stor' => false])
+            @endif
+          </div>
+          <div class="mosaik-v2-col">
+            @if(isset($listings[4]))
+              @include('partials.mosaik-kort', ['listing' => $listings[4], 'stor' => false])
+            @endif
+            @if(isset($listings[5]))
+              @include('partials.mosaik-kort', ['listing' => $listings[5], 'stor' => false])
+            @endif
+          </div>
+          @if(isset($listings[6]))
+            @include('partials.mosaik-kort', ['listing' => $listings[6], 'stor' => true])
+          @endif
+        </div>
+
       </div>
       <div style="text-align:center;margin-top:48px;">
         <a href="{{ home_url('/objekt') }}" class="btn-primary">Se alla objekt</a>

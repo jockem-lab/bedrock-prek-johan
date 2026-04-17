@@ -725,3 +725,29 @@ add_action('rest_api_init', function() {
         'permission_callback' => '__return_true',
     ]);
 });
+
+/**
+ * Spekulantregister - hantera formulär
+ */
+add_action('template_redirect', function () {
+    if (
+        $_SERVER['REQUEST_METHOD'] !== 'POST' ||
+        ($_POST['form_type'] ?? '') !== 'spekulant' ||
+        !wp_verify_nonce($_POST['spekulant_nonce'] ?? '', 'spekulant_form')
+    ) return;
+
+    $namn   = sanitize_text_field($_POST['spekulant_namn'] ?? '');
+    $email  = sanitize_email($_POST['spekulant_email'] ?? '');
+    $soker  = sanitize_textarea_field($_POST['spekulant_soker'] ?? '');
+
+    if ($namn && $email) {
+        $to      = get_option('admin_email');
+        $subject = 'Ny spekulantanmälan — ' . $namn;
+        $body    = "Namn: {$namn}\nE-post: {$email}\n\nVad de söker:\n{$soker}";
+        $headers = ['Content-Type: text/plain; charset=UTF-8', 'From: ' . get_bloginfo('name') . ' <' . $to . '>'];
+        wp_mail($to, $subject, $body, $headers);
+    }
+
+    wp_redirect(add_query_arg('spekulant', 'success', get_permalink()));
+    exit;
+});

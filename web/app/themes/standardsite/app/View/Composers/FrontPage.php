@@ -15,7 +15,7 @@ class FrontPage extends PrekComposer
         $query = new \WP_Query([
             'post_type'      => 'fasad_listing',
             'post_status'    => 'publish',
-            'posts_per_page' => 6,
+            'posts_per_page' => 7,
             'orderby'        => 'meta_value',
             'meta_key'       => '_fasad_firstPublished',
             'order'          => 'DESC',
