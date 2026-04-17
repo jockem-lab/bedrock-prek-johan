@@ -25,7 +25,7 @@ class Hero extends PrekComposer
             return ['hero' => null];
         }
         // Hoppa över på undersidor
-        if (is_page(['objekt', 'kontakt', 'om-oss', 'kommande', 'salda', 'underhand'])) {
+        if (is_page(['objekt', 'kontakt', 'om-oss', 'kommande', 'salda', 'underhand', 'journal']) || get_post_type() === 'journal') {
             return ['hero' => null];
         }
 

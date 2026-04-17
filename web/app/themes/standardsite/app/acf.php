@@ -651,3 +651,58 @@ add_action('init', function() {
         ]);
     }
 }, 20);
+
+/**
+ * ACF: Journal
+ */
+if (function_exists('acf_add_local_field_group')) {
+    acf_add_local_field_group([
+        'key'    => 'group_journal',
+        'title'  => 'Journalartikel',
+        'fields' => [
+            [
+                'key'     => 'field_j_hero_typ',
+                'label'   => 'Hero-typ',
+                'name'    => 'j_hero_typ',
+                'type'    => 'radio',
+                'choices' => ['bild' => 'Bild', 'video' => 'Video'],
+                'default_value' => 'bild',
+                'layout'  => 'horizontal',
+            ],
+            [
+                'key'               => 'field_j_hero_bild',
+                'label'             => 'Hero-bild',
+                'name'              => 'j_hero_bild',
+                'type'              => 'image',
+                'return_format'     => 'array',
+                'conditional_logic' => [
+                    [['field' => 'field_j_hero_typ', 'operator' => '==', 'value' => 'bild']],
+                ],
+            ],
+            [
+                'key'               => 'field_j_hero_video',
+                'label'             => 'Video-URL (YouTube/Vimeo)',
+                'name'              => 'j_hero_video',
+                'type'              => 'url',
+                'conditional_logic' => [
+                    [['field' => 'field_j_hero_typ', 'operator' => '==', 'value' => 'video']],
+                ],
+            ],
+            [
+                'key'   => 'field_j_lasttid',
+                'label' => 'Lästid (minuter)',
+                'name'  => 'j_lasttid',
+                'type'  => 'number',
+            ],
+            [
+                'key'   => 'field_j_kategori',
+                'label' => 'Kategori',
+                'name'  => 'j_kategori',
+                'type'  => 'text',
+            ],
+        ],
+        'location' => [
+            [['param' => 'post_type', 'operator' => '==', 'value' => 'journal']],
+        ],
+    ]);
+}

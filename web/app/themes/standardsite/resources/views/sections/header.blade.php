@@ -1,17 +1,16 @@
 <header class="theme-custom-header-background">
   <div class="header-inner">
     <nav class="nav-left">
-      <a href="{{ home_url('/objekt') }}" id="dd-trigger">Till salu</a>
-      <a href="{{ home_url('/om-oss') }}">Om oss</a>
+      <a href="{{ home_url('/objekt') }}" id="dd-trigger">Våra hem</a>
+      <a href="{{ home_url('/underhand') }}">Underhand</a>
+      <a href="{{ home_url('/salda') }}">Sålda</a>
     </nav>
 
     <div class="site-branding">
-      <a href="{{ home_url('/') }}" class="site-name">
-        @if($logo['header'])
-          <img src="{{ $logo['header']['url'] }}" alt="{{ $siteName }}" style="{{ $logo['header']['style'] ?? '' }}">
-        @else
-          {{ $siteName }}
-        @endif
+      <a href="{{ home_url('/') }}" class="site-name" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;">
+        <span style="font-size:9px;letter-spacing:0.2em;color:rgba(255,255,255,0.5);font-family:var(--font-body);font-weight:400;text-transform:uppercase;">Östermalm sedan 2001</span>
+        <span style="font-size:15px;letter-spacing:0.22em;color:#fff;font-family:var(--font-body);font-weight:500;text-transform:uppercase;">Oscars</span>
+        <span style="font-size:8px;letter-spacing:0.18em;color:rgba(255,255,255,0.5);font-family:var(--font-body);font-weight:400;text-transform:uppercase;">Fastighetsmäkleri</span>
       </a>
     </div>
 
@@ -19,7 +18,9 @@
       @if(has_nav_menu('secondary_navigation'))
         {!! wp_nav_menu(['theme_location' => 'secondary_navigation', 'menu_class' => 'nav-right-items', 'container' => false, 'echo' => false, 'depth' => 1]) !!}
       @else
-        <a href="{{ home_url('/kontakt') }}">Kontakt</a>
+        <a href="{{ home_url('/kontakt') }}">Sälj bostad</a>
+        <a href="{{ home_url('/om-oss') }}">Om oss</a>
+        <a href="{{ home_url('/journal') }}">Journal</a>
       @endif
     </nav>
 
@@ -88,12 +89,12 @@
 
 <div class="mobile-menu-overlay" id="mobile-menu">
   <nav class="mobile-menu-nav">
-    <a href="{{ home_url('/objekt') }}">Till salu</a>
-    <a href="{{ home_url('/kommande') }}">Kommande</a>
+    <a href="{{ home_url('/objekt') }}">Våra hem</a>
     <a href="{{ home_url('/underhand') }}">Underhand</a>
     <a href="{{ home_url('/salda') }}">Sålda</a>
+    <a href="{{ home_url('/kontakt') }}">Sälj bostad</a>
     <a href="{{ home_url('/om-oss') }}">Om oss</a>
-    <a href="{{ home_url('/kontakt') }}">Kontakt</a>
+    <a href="{{ home_url('/journal') }}">Journal</a>
   </nav>
   <button class="menu-toggle is-active" id="menu-close" style="position:absolute;top:24px;right:24px;">
     <span></span>

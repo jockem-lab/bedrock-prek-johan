@@ -2949,3 +2949,444 @@ body {
     text-align: left !important;
   }
 }
+
+/* ── Underhand ── */
+.uh-grid {
+  display: flex;
+  flex-direction: column;
+}
+.uh-kort {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 48px;
+  padding: 48px 0;
+  align-items: start;
+}
+.uh-divider {
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+}
+.uh-bilder {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 200px 200px;
+  gap: 4px;
+}
+.uh-bild {
+  background-size: cover;
+  background-position: center;
+  background-color: #243558;
+}
+.uh-bild--stor {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.uh-omrade {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.01em;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.uh-punkter {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.uh-punkter li {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  padding-left: 16px;
+  position: relative;
+}
+.uh-punkter li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+.uh-kontakt {
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.uh-kontakt-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.uh-kontakt a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.uh-kontakt a:hover { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .uh-kort {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .uh-bilder {
+    grid-template-rows: 160px 160px !important;
+  }
+}
+
+/* ── Underhand v2 — ESNY-stil ── */
+.uh-dold { display: none; }
+
+.uh-rad {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 40px;
+  padding: 48px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  align-items: start;
+}
+.uh-rad:first-child { border-top: 0.5px solid rgba(255,255,255,0.08); }
+
+.uh-bilder-rad {
+  display: flex;
+  gap: 4px;
+  height: 200px;
+}
+.uh-bild-item {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  background-color: #243558;
+  min-width: 0;
+}
+.uh-bild-item:first-child {
+  flex: 2.5;
+}
+
+.uh-rad-info {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.uh-omrade {
+  font-family: var(--font-heading) !important;
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  color: #fff !important;
+  letter-spacing: -0.01em !important;
+  text-transform: uppercase !important;
+}
+
+.uh-punkter {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.uh-punkter li {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  padding-left: 14px;
+  position: relative;
+}
+.uh-punkter li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.uh-kontakt {
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.uh-kontakt-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.uh-kontakt a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.uh-kontakt a:hover { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .uh-rad {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .uh-bilder-rad {
+    height: 140px !important;
+  }
+}
+
+/* ── Underhand karusell ── */
+.uh-dold {
+  display: none !important;
+}
+.uh-rad {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 40px;
+  padding: 48px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  align-items: start;
+}
+.uh-rad:first-child {
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+}
+.uh-karusell {
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+  background: #243558;
+}
+.uh-karusell-track {
+  display: flex;
+  height: 100%;
+  transition: transform 0.4s ease;
+}
+.uh-karusell-bild {
+  min-width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-color: #243558;
+  flex-shrink: 0;
+}
+.uh-karusell-prev,
+.uh-karusell-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+  z-index: 2;
+}
+.uh-karusell-prev { left: 12px; }
+.uh-karusell-next { right: 12px; }
+.uh-karusell-prev:hover,
+.uh-karusell-next:hover { background: rgba(0,0,0,0.7); }
+.uh-karusell-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+.uh-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.uh-dot.active { background: #fff; }
+
+@media (max-width: 768px) {
+  .uh-rad {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    padding: 32px 0 !important;
+  }
+  .uh-karusell { height: 220px !important; }
+}
+
+/* ── Journal ── */
+.journal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 320px;
+  gap: 8px;
+}
+.journal-kort--featured {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.journal-kort {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  background: #243558;
+}
+.journal-kort:hover .journal-bild-inner {
+  transform: scale(1.04);
+}
+.journal-bild {
+  position: absolute;
+  inset: 0;
+}
+.journal-bild::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,18,35,0.9) 0%, rgba(10,18,35,0.1) 60%, transparent 100%);
+  z-index: 1;
+}
+.journal-bild-inner {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+.journal-video-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  z-index: 2;
+}
+.journal-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  z-index: 2;
+}
+.journal-kategori {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.journal-titel {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 0 0 8px;
+}
+.journal-kort--featured .journal-titel {
+  font-size: 32px;
+}
+.journal-meta {
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Artikel-hero */
+.journal-artikel-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #111D33;
+}
+
+/* Artikel-innehåll */
+.journal-innehall {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.8);
+}
+.journal-innehall h2 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 300;
+  color: #fff;
+  margin: 40px 0 16px;
+}
+.journal-innehall p { margin-bottom: 20px; }
+.journal-innehall img {
+  width: 100%;
+  height: auto;
+  margin: 32px 0;
+}
+.journal-innehall a { color: var(--accent); }
+
+@media (max-width: 768px) {
+  .journal-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: 260px !important;
+  }
+  .journal-kort--featured {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+  .journal-artikel-hero {
+    height: 50vh !important;
+    min-height: 300px !important;
+  }
+}
+
+/* ── Social-knappar i footer ── */
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 0.5px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.65) !important;
+  text-decoration: none !important;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: all 0.2s;
+}
+.social-btn:hover {
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
+}

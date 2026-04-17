@@ -254,3 +254,44 @@ add_action('wp_enqueue_scripts', function () {
     wp_dequeue_style('global-styles');
 }, 100);
 
+
+/**
+ * Custom post type: Underhand
+ */
+add_action('init', function () {
+    register_post_type('underhand', [
+        'labels' => [
+            'name'          => 'Underhandsobjekt',
+            'singular_name' => 'Underhandsobjekt',
+            'add_new_item'  => 'Lägg till objekt',
+            'edit_item'     => 'Redigera objekt',
+        ],
+        'public'       => false,
+        'show_ui'      => true,
+        'show_in_menu' => true,
+        'supports'     => ['title', 'thumbnail'],
+        'menu_icon'    => 'dashicons-hidden',
+        'has_archive'  => false,
+    ]);
+});
+
+/**
+ * Custom post type: Journal
+ */
+add_action('init', function () {
+    register_post_type('journal', [
+        'labels' => [
+            'name'          => 'Journal',
+            'singular_name' => 'Journalartikel',
+            'add_new_item'  => 'Lägg till artikel',
+            'edit_item'     => 'Redigera artikel',
+        ],
+        'public'       => true,
+        'show_ui'      => true,
+        'show_in_menu' => true,
+        'supports'     => ['title', 'editor', 'thumbnail', 'excerpt'],
+        'menu_icon'    => 'dashicons-book-alt',
+        'has_archive'  => false,
+        'rewrite'      => ['slug' => 'journal'],
+    ]);
+});

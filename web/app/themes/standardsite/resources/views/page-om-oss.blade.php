@@ -55,4 +55,49 @@
 </section>
 @endif
 
+{{-- Team --}}
+@if(!empty($oo_team))
+<section style="padding:80px 40px;background:#111D33;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div class="sektion-header" style="margin-bottom:48px;">
+      <span class="sektion-eyebrow-label">Oscars Mäkleri</span>
+      <h2 class="sektion-rubrik">{{ $oo_team_rubrik }}</h2>
+    </div>
+    <div class="maklare-grid">
+      @foreach($oo_team as $m)
+        <div class="maklare-kort">
+          <div class="maklare-kort-bild">
+            @if($m->bild)
+              <img src="{{ $m->bild }}" alt="{{ $m->namn }}" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+            @else
+              <div style="width:100%;height:100%;background:#243558;display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:var(--font-heading);font-size:48px;font-weight:300;color:rgba(255,255,255,0.3);">{{ strtoupper(substr($m->namn, 0, 1)) }}</span>
+              </div>
+            @endif
+          </div>
+          <div class="maklare-kort-info">
+            <h3>{{ $m->namn }}</h3>
+            <p class="maklare-kort-titel">{{ $m->titel }}</p>
+            @if($m->telefon)
+              <p><a href="tel:{{ $m->telefon }}">{{ $m->telefon }}</a></p>
+            @endif
+            @if($m->email)
+              <p><a href="mailto:{{ $m->email }}">{{ $m->email }}</a></p>
+            @endif
+            @if(!empty($m->instagram))
+              <p style="margin-top:8px;">
+                <a href="{{ $m->instagram }}" target="_blank" class="social-btn" style="padding:6px 12px;font-size:10px;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+                  Instagram
+                </a>
+              </p>
+            @endif
+          </div>
+        </div>
+      @endforeach
+    </div>
+  </div>
+</section>
+@endif
+
 @endsection

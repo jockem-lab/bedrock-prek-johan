@@ -50,15 +50,30 @@
         <p style="margin-top:12px;font-size:12px;opacity:0.6;">{!! nl2br(e($openingHours)) !!}</p>
       @endif
       @if($instagram || $facebook || $linkedin)
-        <div style="margin-top:16px;display:flex;gap:12px;">
+        <div style="margin-top:20px;display:flex;gap:10px;">
           @if($instagram)
-            <a href="{{ $instagram }}" aria-label="Instagram" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">Instagram</a>
+            <a href="{{ $instagram }}" aria-label="Instagram" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/>
+              </svg>
+              <span>Instagram</span>
+            </a>
           @endif
           @if($facebook)
-            <a href="{{ $facebook }}" aria-label="Facebook" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">Facebook</a>
+            <a href="{{ $facebook }}" aria-label="Facebook" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+              </svg>
+              <span>Facebook</span>
+            </a>
           @endif
           @if($linkedin)
-            <a href="{{ $linkedin }}" aria-label="LinkedIn" style="color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;">LinkedIn</a>
+            <a href="{{ $linkedin }}" aria-label="LinkedIn" class="social-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
           @endif
         </div>
       @endif
