@@ -361,7 +361,7 @@ add_action('acf/init', function () {
                 'label'       => 'Rubrik',
                 'name'        => 'oo_intro_rubrik',
                 'type'        => 'text',
-                'placeholder' => 'Vi hittar rätt hem för dig',
+                'placeholder' => 'Med hjärtat i varje affär',
             ],
             [
                 'key'         => 'field_oo_intro_text',

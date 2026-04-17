@@ -13,13 +13,7 @@
         <span class="hero-eyebrow">Välkommen</span>
         <h1>{{ $hero['slides'][0]['title'] }}</h1>
       @else
-        <span class="hero-eyebrow">Mäklare i Linköping sedan 2001</span>
-        <h1>Vi hittar rätt hem för dig</h1>
-        <p class="hero-sub">Erfarna mäklare med djup lokalkännedom. Vi guidar dig genom hela processen – från första visning till nyckelöverlämning.</p>
-        <div class="hero-btns">
-          <a href="{{ home_url('/objekt') }}" class="btn-primary">Se objekt till salu</a>
-          <a href="{{ home_url('/kontakt') }}" class="btn-secondary">Kontakta oss</a>
-        </div>
+        <h1 style="font-family:var(--font-heading);font-size:clamp(48px,6vw,96px);font-weight:300;letter-spacing:-0.02em;line-height:1.0;color:#fff;text-transform:uppercase;">Med hjärtat<br><em style="font-style:italic;font-weight:300;">i varje affär</em></h1>
       @endif
     </div>
   </div>

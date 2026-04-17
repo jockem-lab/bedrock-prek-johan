@@ -1,0 +1,251 @@
+.till-salu-innehall {
+  padding: 48px 24px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Objektgrid
+.objekt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+
+  @media (max-width: 900px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Objektkort
+.objekt-kort {
+  text-decoration: none;
+  color: var(--text-dark);
+  display: block;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+
+    .objekt-kort-bild {
+      &::after {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.objekt-kort-bild {
+  position: relative;
+  aspect-ratio: 3/4;
+  background-color: var(--bg-warm);
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+    transition: opacity 0.3s ease;
+  }
+}
+
+.objekt-status {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  padding: 4px 12px;
+  font-size: 0.65rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  border-radius: 2px;
+
+  &--for_sale, &--tillsalu { background: var(--accent); color: white; }
+  &--sold, &--sald { background: #2c2420; color: white; }
+  &--bidding, &--budgivning { background: #8b6914; color: white; }
+  &--coming, &--kommande { background: #4a6741; color: white; }
+  &--nyinkommet { background: var(--accent); color: white; }
+}
+
+
+
+
+
+// Undersidor - border/separator under header
+.main {
+  .page:not(.home) &,
+  .single-fasad_listing & {
+    border-top: 1px solid var(--bg-warm);
+  }
+}
+
+// Filter
+.till-salu-filter {
+  background: var(--bg-light);
+  border-bottom: 1px solid var(--bg-warm);
+
+  .filter-knappar {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 40px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    justify-content: center;
+  }
+}
+
+.filter-knapp {
+  padding: 8px 20px;
+  border: 1px solid var(--text-light);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  color: var(--text-dark);
+
+  &:hover, &.active {
+    background: var(--text-dark);
+    border-color: var(--text-dark);
+    color: white;
+  }
+}
+
+.objekt-kort[data-status] {
+  transition: opacity 0.3s, transform 0.3s;
+  &.hidden {
+    display: none;
+  }
+}
+
+// Objektsida hero-slideshow
+.objekt-hero-slideshow {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  overflow: hidden;
+  background: var(--bg-dark);
+}
+
+.objekt-hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1s ease;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.objekt-hero-prev,
+.objekt-hero-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+
+  &:hover { background: rgba(255,255,255,0.3); }
+}
+
+.objekt-hero-prev { left: 24px; }
+.objekt-hero-next { right: 24px; }
+
+.objekt-hero-dots {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.objekt-hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &.active { background: white; }
+}
+
+.objekt-status-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  z-index: 10;
+  padding: 6px 16px;
+  font-size: 0.65rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+// Bildgalleri - full bredd under objektinnehåll
+.objekt-galleri {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.objekt-galleri-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 8px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.objekt-galleri-item {
+  aspect-ratio: 4/3;
+  overflow: hidden;
+
+  &--stor {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    aspect-ratio: unset;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}

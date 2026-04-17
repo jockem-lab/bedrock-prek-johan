@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
 
 :root {
-  --accent:        #1a1a1a;
-  --accent-dark:   #000000;
-  --accent-light:  #6b6b6b;
-  --text-dark:     #1a1a1a;
-  --text-mid:      #6b6b6b;
-  --text-light:    #a0a0a0;
-  --bg-light:      #f8f6f2;
-  --bg-warm:       #efece6;
-  --bg-dark:       #1a1a1a;
-  --bg-form:       #2c2c2c;
-  --font-heading:  'Comic Sans MS', cursive;
-  --font-serif:    'Comic Sans MS', cursive;
-  --font-body:     'Comic Sans MS', cursive;
+  --accent:        #C8A97E;
+  --accent-dark:   #A8895E;
+  --accent-light:  #E8D5BC;
+  --text-dark:     #1C1C1E;
+  --text-mid:      #7A6E5F;
+  --text-light:    #B8A99A;
+  --bg-light:      #F5F2EE;
+  --bg-warm:       #E8E2DA;
+  --bg-dark:       #1C1C1E;
+  --bg-form:       #2E2E2E;
+  --font-heading:  'Cormorant', Georgia, serif;
+  --font-serif:    'Cormorant', Georgia, serif;
+  --font-body:     'DM Sans', sans-serif;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1404,7 +1404,7 @@ a.btn-secondary:hover { border-color: #fff; }
 .objekt-galleri-item {
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: var(--bg-warm);
 }
 .objekt-galleri-item--stor {
   grid-column: span 2;
@@ -2176,3 +2176,387 @@ a.btn-secondary:hover { border-color: #fff; }
 .objekt-status--sald { background: #2c2420; color: white; }
 .objekt-status--budgivning { background: #8b6914; color: white; }
 .objekt-status--kommande { background: #4a6741; color: white; }
+
+/* ── Oscars typografi-override ── */
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-dark);
+  background: var(--bg-light);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+h1 { font-size: clamp(36px, 4vw, 64px); }
+h2 { font-size: clamp(26px, 3vw, 44px); }
+h3 { font-size: clamp(20px, 2vw, 28px); }
+.site-name {
+  font-family: var(--font-body) !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase !important;
+  color: var(--text-dark) !important;
+}
+.nav-left a, .nav-right a {
+  font-weight: 400 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--text-mid) !important;
+}
+.site-header {
+  background: #fff !important;
+  border-bottom: 0.5px solid var(--bg-warm) !important;
+}
+.site-footer {
+  background: var(--bg-dark) !important;
+}
+.footer-logo {
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+  letter-spacing: 0.18em !important;
+}
+.btn-primary, a.btn-primary {
+  background: var(--text-dark) !important;
+  border-radius: 0 !important;
+  letter-spacing: 0.12em !important;
+}
+.btn-primary:hover, a.btn-primary:hover {
+  background: var(--accent) !important;
+}
+.btn-secondary, a.btn-secondary {
+  border-radius: 0 !important;
+}
+.btn-outline {
+  border-radius: 0 !important;
+}
+.filter-tab {
+  border-radius: 0 !important;
+}
+.filter-tab.active {
+  background: var(--text-dark) !important;
+  border-color: var(--text-dark) !important;
+}
+
+/* ── Sektion-rubrik Luca Faloni-stil ── */
+.sektion-header {
+  margin-bottom: 48px;
+}
+.sektion-eyebrow-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 12px;
+}
+.sektion-rubrik {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--text-dark);
+  text-transform: uppercase;
+}
+/* Hero — renare, mer Luca Faloni */
+.hero-inner {
+  text-align: center;
+  padding: 0 24px;
+}
+.hero-overlay {
+  background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 100%) !important;
+}
+
+/* ── Undersida hero-rubrik ── */
+.undersida-rubrik {
+  font-family: var(--font-heading) !important;
+  font-size: clamp(36px, 5vw, 72px) !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.0 !important;
+  color: #fff !important;
+  text-transform: uppercase !important;
+}
+
+/* ── Nav dropdown ── */
+.nav-dropdown-wrap {
+  position: relative;
+}
+.nav-dropdown-trigger {
+  cursor: pointer;
+}
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  border: 0.5px solid var(--bg-warm);
+  box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  z-index: 999;
+  min-width: 560px;
+}
+.nav-dropdown-wrap:hover .nav-dropdown {
+  display: block;
+}
+.nav-dropdown-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.nav-dropdown-links {
+  padding: 32px;
+  border-right: 0.5px solid var(--bg-warm);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.nav-dropdown-links a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid var(--bg-warm);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.nav-dropdown-links a:last-child {
+  border-bottom: none;
+}
+.nav-dropdown-links a:hover .nav-dropdown-label {
+  color: var(--accent) !important;
+}
+.nav-dropdown-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  transition: color 0.2s;
+}
+.nav-dropdown-sub {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 300;
+  color: var(--text-light);
+  letter-spacing: 0;
+  text-transform: none;
+}
+.nav-dropdown-featured {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.nav-dropdown-objekt {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-decoration: none;
+}
+.nav-dropdown-objekt-bild {
+  width: 100%;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-warm);
+  transition: opacity 0.2s;
+}
+.nav-dropdown-objekt:hover .nav-dropdown-objekt-bild {
+  opacity: 0.85;
+}
+.nav-dropdown-objekt-adress {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-mid);
+  letter-spacing: 0.06em;
+}
+
+/* ── Nav dropdown fixes ── */
+.nav-dropdown-wrap {
+  padding-bottom: 16px !important;
+}
+.nav-dropdown {
+  top: 100% !important;
+  margin-top: 0 !important;
+}
+.nav-dropdown-wrap:hover .nav-dropdown {
+  display: block !important;
+}
+.nav-dropdown-links a {
+  padding: 14px 0 !important;
+}
+.nav-dropdown-label {
+  font-size: 12px !important;
+  color: var(--text-dark) !important;
+  font-weight: 500 !important;
+}
+.nav-dropdown-sub {
+  font-size: 12px !important;
+  color: var(--text-mid) !important;
+  margin-top: 2px !important;
+}
+.nav-dropdown-objekt-bild {
+  height: 120px !important;
+  background-color: var(--bg-warm) !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+.nav-dropdown-objekt-adress {
+  font-size: 12px !important;
+  color: var(--text-dark) !important;
+  font-weight: 400 !important;
+}
+.nav-dropdown {
+  min-width: 600px !important;
+}
+
+/* ── Nav dropdown position fix ── */
+.nav-left {
+  position: static !important;
+}
+.nav-dropdown-wrap {
+  position: static !important;
+}
+.nav-dropdown {
+  position: fixed !important;
+  top: 72px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  min-width: 560px !important;
+  max-width: 700px !important;
+  width: 560px !important;
+}
+.nav-dropdown-inner {
+  grid-template-columns: 220px 1fr !important;
+}
+.nav-dropdown-links {
+  padding: 24px !important;
+}
+.nav-dropdown-featured {
+  padding: 24px !important;
+}
+
+/* ── Nav dropdown v3 — fixed position ── */
+.nav-dropdown {
+  display: none;
+  position: fixed !important;
+  top: 72px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 580px !important;
+  min-width: unset !important;
+  background: #fff !important;
+  border: 0.5px solid var(--bg-warm) !important;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.1) !important;
+  z-index: 9999 !important;
+}
+.nav-dropdown-wrap:hover .nav-dropdown {
+  display: none !important;
+}
+.nav-dropdown-inner {
+  display: grid !important;
+  grid-template-columns: 200px 1fr !important;
+}
+
+/* ── Objekt-sektion padding fix ── */
+.objekt-sektion .objekt-inner {
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+
+/* ── Objekt-badge Luca Faloni-stil ── */
+.objekt-status {
+  background: transparent !important;
+  border: 1px solid rgba(255,255,255,0.7) !important;
+  color: #fff !important;
+  font-family: var(--font-body) !important;
+  font-size: 9px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  padding: 5px 10px !important;
+  border-radius: 0 !important;
+}
+.objekt-status--kommande   { border-color: rgba(255,255,255,0.6) !important; }
+.objekt-status--till-salu  { border-color: rgba(255,255,255,0.6) !important; }
+.objekt-status--budgivning { border-color: var(--accent) !important; color: var(--accent) !important; }
+.objekt-status--sald       { border-color: rgba(255,255,255,0.6) !important; }
+
+/* ── Mobilfixar ── */
+
+/* Objektkort — fix text-overflow på mobil */
+@media (max-width: 768px) {
+  .objekt-adress {
+    font-size: 15px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+  .objekt-pris {
+    font-size: 13px !important;
+  }
+  .objekt-meta {
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    font-size: 11px !important;
+  }
+  .objekt-bild {
+    height: 280px !important;
+  }
+
+  /* Galleri — 1 kolumn på mobil, inget svart block */
+  .objekt-galleri-grid {
+    grid-template-columns: 1fr !important;
+    gap: 4px !important;
+  }
+  .objekt-galleri-item,
+  .objekt-galleri-item--stor {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+    background: var(--bg-warm) !important;
+  }
+  .objekt-galleri-item img {
+    height: 260px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+  }
+  .objekt-galleri-item--stor img {
+    height: 260px !important;
+  }
+
+  /* Faktarad — stapla på mobil */
+  .objekt-detalj-faktarad-inner {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  /* Mäklarbild — bättre crop */
+  .maklare-bild {
+    object-position: top center !important;
+  }
+
+  /* Bildspel sticker inte utanför */
+  .objekt-detalj-hero {
+    height: 50vw !important;
+    min-height: 260px !important;
+  }
+
+  /* Hero-slideshow på mobil */
+  .hero {
+    min-height: 70vh !important;
+  }
+  .hero-inner h1 {
+    font-size: clamp(32px, 8vw, 52px) !important;
+    word-break: break-word !important;
+  }
+}

@@ -16,7 +16,8 @@ class FrontPage extends PrekComposer
             'post_type'      => 'fasad_listing',
             'post_status'    => 'publish',
             'posts_per_page' => 6,
-            'orderby'        => 'date',
+            'orderby'        => 'meta_value',
+            'meta_key'       => '_fasad_firstPublished',
             'order'          => 'DESC',
         ]);
 

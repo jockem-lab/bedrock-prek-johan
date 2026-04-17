@@ -3,13 +3,25 @@
 @section('content')
 @php
 // Hämta alla fasad_listing-poster
-$listings_query = new WP_Query([
+// Hämta aktiva objekt först, sedan sålda
+$listings_active = new WP_Query([
     'post_type'      => 'fasad_listing',
     'posts_per_page' => -1,
     'post_status'    => 'publish',
     'orderby'        => 'date',
     'order'          => 'DESC',
+    'meta_query'     => [['key' => '_fasad_sold', 'value' => '0', 'compare' => '=']],
 ]);
+$listings_sold = new WP_Query([
+    'post_type'      => 'fasad_listing',
+    'posts_per_page' => -1,
+    'post_status'    => 'publish',
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+    'meta_query'     => [['key' => '_fasad_sold', 'value' => '1', 'compare' => '=']],
+]);
+$listings_query = $listings_active;
+$all_posts = array_merge($listings_active->posts, $listings_sold->posts);
 
 function fasad_unserialize_listing($raw) {
     if (!is_string($raw)) return $raw;
@@ -20,14 +32,12 @@ function fasad_unserialize_listing($raw) {
 
 {{-- Hero med bildspel --}}
 <div class="kontakt-hero">
-  <div class="kontakt-hero-slide active" style="background-image:url('{{ content_url('uploads/hero1.jpg') }}')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads/hero2.jpg') }}')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads/hero3.jpg') }}')"></div>
+  <div class="kontakt-hero-slide active" style="background-image:url('{{ content_url('uploads/oscars-hero1.jpg') }}')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads/oscars-hero2.jpg') }}')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads/oscars-hero3.jpg') }}')"></div>
   <div class="kontakt-hero-overlay"></div>
   <div class="kontakt-hero-inner">
-    <p class="kontakt-hero-eyebrow">PREK MÄKLERI</p>
-    <h1>{{ $ts_hero_rubrik }}</h1>
-    <p class="kontakt-hero-sub">{{ $ts_hero_underrubrik }}</p>
+    <h1 class="undersida-rubrik">{{ $ts_hero_rubrik ?: 'Våra hem' }}</h1>
   </div>
 </div>
 
@@ -42,9 +52,10 @@ function fasad_unserialize_listing($raw) {
 
 {{-- Objektgrid --}}
 <div class="till-salu-innehall">
-  <div class="objekt-grid">
-    @while($listings_query->have_posts())
-      @php $listings_query->the_post(); $pid = get_the_ID(); @endphp
+  <div class="objekt-grid" id="objekt-grid">
+    @foreach($all_posts as $lp)
+      @php $pid = $lp->ID; @endphp
+      <div class="objekt-kort">
       @php
         $loc = fasad_unserialize_listing(get_post_meta($pid, '_fasad_location', true));
         $address = ($loc && !empty($loc->address)) ? $loc->address : get_the_title();
@@ -105,8 +116,40 @@ function fasad_unserialize_listing($raw) {
           </div>
         </div>
       </a>
-    @endwhile
+      </div>
+    @endforeach
     @php wp_reset_postdata(); @endphp
   </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var knappar = document.querySelectorAll('.filter-knapp');
+  var kort    = document.querySelectorAll('#objekt-grid .objekt-kort');
+
+  function filtrera(filter) {
+    kort.forEach(function(k) {
+      var inner  = k.querySelector('.objekt-kort-inner');
+      var status = inner ? inner.getAttribute('data-status') : '';
+      if (filter === 'alla') {
+        k.style.display = status === 'sald' ? 'none' : 'block';
+      } else if (filter === 'sald') {
+        k.style.display = status === 'sald' ? 'block' : 'none';
+      } else {
+        k.style.display = status === filter ? 'block' : 'none';
+      }
+    });
+  }
+
+  filtrera('alla');
+
+  knappar.forEach(function(knapp) {
+    knapp.addEventListener('click', function() {
+      knappar.forEach(function(k) { k.classList.remove('active'); });
+      knapp.classList.add('active');
+      filtrera(knapp.getAttribute('data-filter'));
+    });
+  });
+});
+</script>
 @endsection

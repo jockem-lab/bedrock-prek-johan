@@ -4,14 +4,13 @@
 
 {{-- Hero --}}
 <div class="kontakt-hero">
-  <div class="kontakt-hero-slide active" style="background-image:url('{{ content_url('uploads') }}/hero1.jpg')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads') }}/hero2.jpg')"></div>
-  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads') }}/hero3.jpg')"></div>
+  <div class="kontakt-hero-slide active" style="background-image:url('{{ content_url('uploads') }}/oscars-hero1.jpg')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads') }}/oscars-hero2.jpg')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads') }}/oscars-hero3.jpg')"></div>
+  <div class="kontakt-hero-slide" style="background-image:url('{{ content_url('uploads') }}/oscars-hero4.jpg')"></div>
   <div class="kontakt-hero-overlay"></div>
   <div class="kontakt-hero-inner">
-    <p class="kontakt-hero-eyebrow">PREK MÄKLERI</p>
-    <h1>{{ $oo_hero_rubrik }}</h1>
-    <p class="kontakt-hero-sub">{{ $oo_hero_underrubrik }}</p>
+    <h1 class="undersida-rubrik">{{ $oo_hero_rubrik ?: 'Om oss' }}</h1>
   </div>
 </div>
 

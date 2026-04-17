@@ -11,7 +11,7 @@ class OmOss extends PrekComposer
         return [
             'oo_hero_rubrik'      => get_field('oo_hero_rubrik') ?: 'Om oss',
             'oo_hero_underrubrik' => get_field('oo_hero_underrubrik') ?: 'Erfarna mäklare med lokal kännedom',
-            'oo_intro_rubrik'     => get_field('oo_intro_rubrik') ?: 'Vi hittar rätt hem för dig',
+            'oo_intro_rubrik'     => get_field('oo_intro_rubrik') ?: 'Med hjärtat i varje affär',
             'oo_intro_text'       => get_field('oo_intro_text') ?: 'På PREK kombinerar vi lång erfarenhet av bostadsmarknaden med ett genuint engagemang för varje kund.',
             'oo_blocks'           => get_field('oo_blocks') ?: [
                 ['rubrik' => 'Lokal expertis', 'text' => 'Med djup kännedom om den lokala marknaden ger vi dig rätt underlag för att fatta välgrundade beslut.'],

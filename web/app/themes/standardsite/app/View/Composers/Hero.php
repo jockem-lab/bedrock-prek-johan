@@ -25,7 +25,7 @@ class Hero extends PrekComposer
             return ['hero' => null];
         }
         // Hoppa över på undersidor
-        if (is_page(['objekt', 'kontakt', 'om-oss'])) {
+        if (is_page(['objekt', 'kontakt', 'om-oss', 'kommande', 'salda', 'underhand'])) {
             return ['hero' => null];
         }
 
@@ -50,9 +50,9 @@ class Hero extends PrekComposer
         if (empty($hero['slides']) && empty($hero['video'])) {
             $uploads = content_url('uploads');
             $hero['slides'] = [
-                ['image' => ['src' => $uploads . '/hero1.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
-                ['image' => ['src' => $uploads . '/hero2.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
-                ['image' => ['src' => $uploads . '/hero3.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
+                ['image' => ['src' => $uploads . '/oscars-hero1.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
+                ['image' => ['src' => $uploads . '/oscars-hero2.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
+                ['image' => ['src' => $uploads . '/oscars-hero3.jpg', 'srcset' => '', 'attributes' => 'class="slide-image"'], 'title' => '', 'subtitle' => ''],
             ];
         }
         return [
