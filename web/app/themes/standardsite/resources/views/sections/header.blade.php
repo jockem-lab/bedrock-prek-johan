@@ -108,6 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var trigger = document.getElementById('dd-trigger');
   var panel   = document.getElementById('dd-panel');
   if (!trigger || !panel) return;
+  var closeTimer = null;
 
   function position() {
     var r = trigger.getBoundingClientRect();
@@ -119,13 +120,22 @@ document.addEventListener('DOMContentLoaded', function() {
     panel.style.top = '72px';
   }
 
-  trigger.addEventListener('mouseenter', function() { position(); panel.style.display = 'block'; });
-  trigger.addEventListener('mouseleave', function(e) {
-    if (!panel.contains(e.relatedTarget)) panel.style.display = 'none';
-  });
-  panel.addEventListener('mouseleave', function(e) {
-    if (e.relatedTarget !== trigger) panel.style.display = 'none';
-  });
+  function open() {
+    clearTimeout(closeTimer);
+    position();
+    panel.style.display = 'block';
+  }
+
+  function close() {
+    closeTimer = setTimeout(function() {
+      panel.style.display = 'none';
+    }, 200);
+  }
+
+  trigger.addEventListener('mouseenter', open);
+  trigger.addEventListener('mouseleave', close);
+  panel.addEventListener('mouseenter', function() { clearTimeout(closeTimer); });
+  panel.addEventListener('mouseleave', close);
 });
 </script>
 

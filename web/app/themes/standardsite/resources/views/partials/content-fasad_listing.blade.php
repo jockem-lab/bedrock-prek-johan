@@ -33,13 +33,14 @@ if (is_array($imgs)) {
     foreach ($imgs as $img) {
         if (!empty($img->variants) && is_array($img->variants)) {
             foreach ($img->variants as $v) {
-                if (($v->type ?? '') === 'large' && !empty($v->path)) {
+                if (($v->type ?? '') === 'highres' && !empty($v->path)) {
                     $images[] = rest_url('prek/v1/bildproxy?url=') . urlencode($v->path); break;
                 }
             }
         }
     }
 }
+$images_hero = array_slice($images, 0, 5);
 
 // Size
 $sz = fasad_unserialize(get_post_meta($post_id, '_fasad_size', true));
@@ -94,20 +95,26 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 {{-- Hero-bildspel --}}
 @if(!empty($images))
   <div class="objekt-hero-slideshow">
-    @foreach($images as $i => $img)
+    @foreach($images_hero as $i => $img)
       <div class="objekt-hero-slide {{ $i === 0 ? 'active' : '' }}" style="background-image:url('{{ $img }}')"></div>
     @endforeach
     @if(count($images) > 1)
       <button class="objekt-hero-prev">&#8592;</button>
       <button class="objekt-hero-next">&#8594;</button>
       <div class="objekt-hero-dots">
-        @foreach($images as $i => $img)
+        @foreach($images_hero as $i => $img)
           <span class="objekt-hero-dot {{ $i === 0 ? 'active' : '' }}" data-index="{{ $i }}"></span>
         @endforeach
       </div>
     @endif
     @if($status)
       <div class="objekt-status-badge objekt-status--{{ $status }}">{{ $status_label ?? strtoupper($status) }}</div>
+    @endif
+    @if(count($images) >= 5)
+      <button onclick="document.querySelector('.objekt-galleri').scrollIntoView({behavior:'smooth'})"
+              class="objekt-visa-fler-btn">
+        Visa fler bilder
+      </button>
     @endif
   </div>
 @endif
@@ -249,7 +256,13 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
           <p class="maklare-titel">{{ $first_realtor->title }}</p>
         @endif
         @if(!empty($first_realtor->cellphone))
-          <p><a href="tel:{{ $first_realtor->cellphone }}">{{ $first_realtor->cellphone }}</a></p>
+          @php
+            $tel = $first_realtor->cellphone ?? '';
+            $tel_display = preg_replace('/^46/', '0', $tel);
+            $tel_display = preg_replace('/^(\d{3})(\d{3})(\d{2})(\d{2})$/', '$1-$2 $3 $4', $tel_display);
+            $tel_href = '+' . ltrim($tel, '+');
+          @endphp
+          <p><a href="tel:{{ $tel_href }}">{{ $tel_display }}</a></p>
         @endif
         @if(!empty($first_realtor->email))
           <p><a href="mailto:{{ $first_realtor->email }}">{{ $first_realtor->email }}</a></p>
@@ -267,9 +280,9 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 {{-- Bildgalleri med lightbox --}}
 @if(count($images) > 1)
 <div class="objekt-galleri">
-  <div class="objekt-galleri-grid">
-    @foreach(array_slice($images, 0, 5) as $i => $img)
-      <div class="objekt-galleri-item {{ $i === 0 ? 'objekt-galleri-item--stor' : '' }}">
+  <div class="objekt-galleri-grid" id="galleri-grid">
+    @foreach($images as $i => $img)
+      <div class="objekt-galleri-item {{ $i === 0 ? 'objekt-galleri-item--stor' : '' }}{{ $i >= 5 ? ' galleri-dold' : '' }}">
         <a href="javascript:void(0)" class="galleri-trigger" data-index="{{ $i }}" data-highres="{{ $img }}" data-text="Bild {{ $i + 1 }}">
           <img src="{{ $img }}" alt="Bild {{ $i + 1 }}" loading="lazy">
           <div class="galleri-overlay"><span>&#x2B;</span></div>
@@ -277,10 +290,27 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
       </div>
     @endforeach
   </div>
+  @if(count($images) > 5)
+    <div style="text-align:center;margin-top:24px;" id="galleri-visa-fler-wrap">
+      <button class="btn-primary" onclick="visaAllaGalleri()">
+        Visa alla {{ count($images) }} bilder
+      </button>
+    </div>
+  @endif
 </div>
 
 {{-- Alla bilder för lightbox --}}
-<script>var allImages = @json($images);</script>
+<script>
+var allImages = @json($images);
+
+function visaAllaGalleri() {
+  document.querySelectorAll('.galleri-dold').forEach(function(el) {
+    el.classList.remove('galleri-dold');
+  });
+  var wrap = document.getElementById('galleri-visa-fler-wrap');
+  if (wrap) wrap.style.display = 'none';
+}
+</script>
 {{-- Lightbox --}}
 <div id="lightbox" class="lightbox">
   <button id="lightbox-close" class="lightbox-close">&times;</button>

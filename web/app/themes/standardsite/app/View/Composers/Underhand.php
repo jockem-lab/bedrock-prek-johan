@@ -27,7 +27,7 @@ class Underhand extends PrekComposer
                 'kvm'      => get_field('uh_kvm', $post->ID),
                 'rum'      => get_field('uh_rum', $post->ID),
                 'punkter'  => array_column($punkter, 'punkt'),
-                'bilder'   => array_map(fn($b) => $b['url'], $bilder),
+                'bilder'   => array_slice(array_map(fn($b) => $b['url'], $bilder), 0, 5),
                 'maklare'  => [
                     'namn'     => get_field('uh_maklare_namn', $post->ID),
                     'email'    => get_field('uh_maklare_email', $post->ID),
@@ -70,7 +70,7 @@ class Underhand extends PrekComposer
                 'kvm'     => is_object($size) ? ($size->livingArea ?? '') : '',
                 'rum'     => is_object($size) ? ($size->rooms ?? '') : '',
                 'punkter' => [],
-                'bilder'  => $bilder,
+                'bilder'  => array_slice($bilder, 0, 5),
                 'maklare' => [
                     'namn'    => $realtor ? ($realtor->name ?? '') : '',
                     'email'   => $realtor ? ($realtor->email ?? '') : '',

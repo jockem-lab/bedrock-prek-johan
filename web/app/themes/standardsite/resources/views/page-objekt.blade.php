@@ -10,7 +10,11 @@ $listings_active = new WP_Query([
     'post_status'    => 'publish',
     'orderby'        => 'date',
     'order'          => 'DESC',
-    'meta_query'     => [['key' => '_fasad_sold', 'value' => '0', 'compare' => '=']],
+    'meta_query'     => [
+        'relation' => 'AND',
+        ['key' => '_fasad_sold',    'value' => '0', 'compare' => '='],
+        ['key' => '_fasad_minilist', 'value' => '1', 'compare' => '!='],
+    ],
 ]);
 $listings_sold = new WP_Query([
     'post_type'      => 'fasad_listing',
@@ -18,7 +22,11 @@ $listings_sold = new WP_Query([
     'post_status'    => 'publish',
     'orderby'        => 'date',
     'order'          => 'DESC',
-    'meta_query'     => [['key' => '_fasad_sold', 'value' => '1', 'compare' => '=']],
+    'meta_query'     => [
+        'relation' => 'AND',
+        ['key' => '_fasad_sold',    'value' => '1', 'compare' => '='],
+        ['key' => '_fasad_minilist', 'value' => '1', 'compare' => '!='],
+    ],
 ]);
 $listings_query = $listings_active;
 $all_posts = array_merge($listings_active->posts, $listings_sold->posts);

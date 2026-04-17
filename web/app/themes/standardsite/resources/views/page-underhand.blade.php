@@ -36,7 +36,7 @@
             <div class="uh-karusell" id="karusell-{{ $i }}">
               <div class="uh-karusell-track">
                 @if(!empty($obj->bilder))
-                  @foreach($obj->bilder as $bild)
+                  @foreach(array_slice($obj->bilder, 0, 5) as $bild)
                     <div class="uh-karusell-bild" style="background-image:url('{{ $bild }}')"></div>
                   @endforeach
                 @else
