@@ -3,14 +3,14 @@
 :root {
   --accent:        #C8A97E;
   --accent-dark:   #A8895E;
-  --accent-light:  #E8D5BC;
-  --text-dark:     #1C1C1E;
-  --text-mid:      #7A6E5F;
-  --text-light:    #B8A99A;
-  --bg-light:      #F5F2EE;
-  --bg-warm:       #E8E2DA;
-  --bg-dark:       #1C1C1E;
-  --bg-form:       #2E2E2E;
+  --accent-light:  #D4BC98;
+  --text-dark:     #FFFFFF;
+  --text-mid:      rgba(255,255,255,0.7);
+  --text-light:    rgba(255,255,255,0.45);
+  --bg-light:      #1B2A4A;
+  --bg-warm:       #243558;
+  --bg-dark:       #111D33;
+  --bg-form:       #0D1626;
   --font-heading:  'Cormorant', Georgia, serif;
   --font-serif:    'Cormorant', Georgia, serif;
   --font-body:     'DM Sans', sans-serif;
@@ -2558,5 +2558,394 @@ h3 { font-size: clamp(20px, 2vw, 28px); }
   .hero-inner h1 {
     font-size: clamp(32px, 8vw, 52px) !important;
     word-break: break-word !important;
+  }
+}
+
+/* ── Mobil v2 — filter, galleri, karusell ── */
+@media (max-width: 768px) {
+
+  /* Filter — wrap istället för scroll */
+  .filter-knappar {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    overflow-x: visible !important;
+    white-space: normal !important;
+    justify-content: center !important;
+    padding: 16px !important;
+  }
+  .filter-knapp {
+    font-size: 10px !important;
+    padding: 8px 12px !important;
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+
+  /* Objektgrid — alltid 1 kolumn på mobil */
+  .objekt-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+    padding: 0 !important;
+  }
+  .objekt-bild {
+    height: 260px !important;
+    min-height: unset !important;
+  }
+
+  /* Galleri — fix tomma ytor */
+  .objekt-galleri {
+    padding: 24px 0 !important;
+  }
+  .objekt-galleri-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 4px !important;
+    padding: 0 !important;
+  }
+  .objekt-galleri-item,
+  .objekt-galleri-item--stor {
+    width: 100% !important;
+    height: auto !important;
+    background: transparent !important;
+  }
+  .objekt-galleri-item img,
+  .objekt-galleri-item--stor img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 300px !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+
+  /* Karusell/hero-slider — fix svart */
+  .objekt-detalj-hero {
+    height: auto !important;
+    min-height: 240px !important;
+    max-height: 60vw !important;
+    background: var(--bg-warm) !important;
+  }
+  .objekt-detalj-hero img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 60vw !important;
+    object-fit: cover !important;
+    background: var(--bg-warm) !important;
+  }
+  .hero-slide,
+  .page-slide,
+  .kontakt-hero-slide {
+    background-color: var(--bg-warm) !important;
+  }
+}
+
+/* ── Navy tema — globalt ── */
+body {
+  background: #1B2A4A !important;
+  color: #fff !important;
+}
+
+/* Header */
+.site-header {
+  background: #111D33 !important;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08) !important;
+}
+.site-name {
+  color: #fff !important;
+}
+.nav-left a, .nav-right a {
+  color: rgba(255,255,255,0.75) !important;
+}
+.nav-left a:hover, .nav-right a:hover {
+  color: #C8A97E !important;
+}
+#dd-trigger {
+  color: rgba(255,255,255,0.75) !important;
+}
+
+/* Dropdown */
+#dd-panel {
+  background: #111D33 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+#dd-panel a span:first-child {
+  color: #fff !important;
+}
+#dd-panel a span:last-child {
+  color: rgba(255,255,255,0.5) !important;
+}
+#dd-panel > div > div:first-child {
+  border-right-color: rgba(255,255,255,0.08) !important;
+}
+#dd-panel a {
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+#dd-panel a:hover span:first-child {
+  color: #C8A97E !important;
+}
+
+/* Hamburger */
+.menu-toggle span {
+  background: #fff !important;
+}
+
+/* Objektkort */
+.objekt-bild-placeholder {
+  background: #243558 !important;
+}
+.objekt-sektion {
+  background: #1B2A4A !important;
+}
+.sektion-rubrik {
+  color: #fff !important;
+}
+.sektion-eyebrow-label {
+  color: rgba(255,255,255,0.45) !important;
+}
+
+/* Filter */
+.filter-knapp {
+  border-color: rgba(255,255,255,0.2) !important;
+  color: rgba(255,255,255,0.7) !important;
+  background: transparent !important;
+}
+.filter-knapp:hover {
+  border-color: #C8A97E !important;
+  color: #C8A97E !important;
+}
+.filter-knapp.active {
+  background: #C8A97E !important;
+  border-color: #C8A97E !important;
+  color: #111D33 !important;
+}
+
+/* Knappar */
+.btn-primary, a.btn-primary {
+  background: #C8A97E !important;
+  color: #111D33 !important;
+}
+.btn-primary:hover, a.btn-primary:hover {
+  background: #A8895E !important;
+}
+.btn-secondary, a.btn-secondary {
+  border-color: rgba(255,255,255,0.4) !important;
+  color: #fff !important;
+}
+.btn-outline {
+  border-color: rgba(255,255,255,0.4) !important;
+  color: #fff !important;
+}
+.btn-outline:hover {
+  background: #C8A97E !important;
+  border-color: #C8A97E !important;
+  color: #111D33 !important;
+}
+
+/* Faktarad */
+.objekt-detalj-faktarad {
+  background: #243558 !important;
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+.faktarad-label { color: rgba(255,255,255,0.45) !important; }
+.faktarad-värde { color: #fff !important; }
+.faktarad-item { border-right-color: rgba(255,255,255,0.08) !important; }
+
+/* Mäklarkort */
+.objekt-detalj-kontakt {
+  background: #243558 !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+.objekt-detalj-kontakt h3,
+.objekt-detalj-kontakt p,
+.objekt-detalj-kontakt a {
+  color: #fff !important;
+}
+
+/* Accordion */
+.accordion-trigger { color: #fff !important; }
+.accordion-icon { color: rgba(255,255,255,0.5) !important; }
+.accordion-item { border-bottom-color: rgba(255,255,255,0.08) !important; }
+.fakta-tabell th { color: rgba(255,255,255,0.5) !important; }
+.fakta-tabell td { color: #fff !important; }
+.fakta-tabell tr { border-bottom-color: rgba(255,255,255,0.08) !important; }
+
+/* Beskrivning */
+.objekt-detalj-beskrivning { color: rgba(255,255,255,0.75) !important; }
+.objekt-detalj-undertitel { color: rgba(255,255,255,0.6) !important; }
+.beskrivning-rubrik {
+  color: #fff !important;
+  border-bottom-color: rgba(255,255,255,0.08) !important;
+}
+
+/* Galleri */
+.objekt-galleri { background: #111D33 !important; }
+.objekt-galleri-item { background: #243558 !important; }
+
+/* Om oss */
+.om-oss-text h2, .om-oss-text p { color: rgba(255,255,255,0.8) !important; }
+.om-varden { background: #243558 !important; }
+.om-varden h2, .om-varden-kort h3, .om-varden-kort p { color: rgba(255,255,255,0.8) !important; }
+.om-varden-kort { border-top-color: rgba(255,255,255,0.12) !important; }
+.om-fakta-tal { color: #C8A97E !important; }
+.om-fakta-label { color: rgba(255,255,255,0.45) !important; }
+
+/* Kontaktformulär */
+.kontakt-form input,
+.kontakt-form textarea,
+.kontakt-formulär input,
+.kontakt-formulär textarea {
+  background: #243558 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #fff !important;
+}
+.kontakt-form input::placeholder,
+.kontakt-form textarea::placeholder {
+  color: rgba(255,255,255,0.35) !important;
+}
+.kontakt-form input:focus,
+.kontakt-form textarea:focus {
+  border-color: #C8A97E !important;
+}
+.kontakt-info-label { color: #C8A97E !important; }
+.kontakt-info-block p, .kontakt-info-block a { color: rgba(255,255,255,0.75) !important; }
+.kontakt-info { border-right-color: rgba(255,255,255,0.08) !important; }
+.kontakt-formular h2 { color: #fff !important; }
+.kontakt-form-grupp label { color: rgba(255,255,255,0.45) !important; }
+
+/* Footer */
+.site-footer { background: #111D33 !important; }
+.footer-col h4 { color: rgba(255,255,255,0.35) !important; }
+.footer-col a, .footer-col p { color: rgba(255,255,255,0.65) !important; }
+.footer-col a:hover { color: #C8A97E !important; }
+.footer-bottom { color: rgba(255,255,255,0.2) !important; border-top-color: rgba(255,255,255,0.06) !important; }
+.footer-tagline { color: rgba(255,255,255,0.3) !important; }
+
+/* 404 */
+.objekt-tomma { color: rgba(255,255,255,0.5) !important; }
+.objekt-antal { color: rgba(255,255,255,0.4) !important; }
+
+/* Dokumentlista */
+.dokument-lista a { color: rgba(255,255,255,0.75) !important; }
+.dokument-lista li { border-bottom-color: rgba(255,255,255,0.08) !important; }
+
+/* Undersida-sektioner */
+.om-intro { background: #1B2A4A !important; }
+.om-intro-text p { color: rgba(255,255,255,0.75) !important; }
+.om-intro-fakta { border-left-color: rgba(255,255,255,0.08) !important; }
+.kontakt-sektion { background: #1B2A4A !important; }
+.page-sektion { background: #1B2A4A !important; }
+
+/* ── Mosaikgrid ── */
+.mosaik-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 320px;
+  gap: 8px;
+}
+.mosaik-kort--stor {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+.mosaik-kort {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  background: #243558;
+}
+.mosaik-kort:hover .mosaik-bild {
+  transform: scale(1.04);
+}
+.mosaik-bild {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+.mosaik-bild::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,18,35,0.85) 0%, rgba(10,18,35,0.1) 60%, transparent 100%);
+}
+.mosaik-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 20px 20px;
+  z-index: 2;
+  text-align: center;
+}
+.mosaik-adress {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+.mosaik-kort--stor .mosaik-adress {
+  font-size: 28px;
+}
+.mosaik-pris {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 6px;
+}
+.mosaik-meta {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.mosaik-kort .objekt-status {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 3;
+}
+
+/* Mosaikgrid mobil */
+@media (max-width: 768px) {
+  .mosaik-grid {
+    grid-template-columns: 1fr !important;
+    grid-auto-rows: 260px !important;
+  }
+  .mosaik-kort--stor {
+    grid-column: span 1 !important;
+    grid-row: span 1 !important;
+  }
+}
+
+/* ── Header navy fix ── */
+.site-header,
+.theme-custom-header-background {
+  background: #111D33 !important;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08) !important;
+}
+.header-inner {
+  background: #111D33 !important;
+}
+
+/* Hero — vänsterställd text som kundens skiss */
+.hero-inner {
+  text-align: left !important;
+  max-width: 1200px !important;
+  padding: 0 80px !important;
+  margin: 0 auto !important;
+}
+.hero-inner h1 {
+  max-width: 700px !important;
+}
+@media (max-width: 768px) {
+  .hero-inner {
+    padding: 0 24px !important;
+    text-align: left !important;
   }
 }
