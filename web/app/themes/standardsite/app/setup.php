@@ -327,3 +327,14 @@ add_filter('acf/settings/load_json', function ($paths) {
  */
 add_filter('acf/settings/show_admin', '__return_true');
 
+
+/**
+ * Registrera ACF Composer Fields från temats app-mapp
+ */
+add_action('init', function () {
+    if (class_exists('\Log1x\AcfComposer\AcfComposer')) {
+        app(\Log1x\AcfComposer\AcfComposer::class)->registerPath(
+            get_stylesheet_directory() . '/app'
+        );
+    }
+}, 99);
