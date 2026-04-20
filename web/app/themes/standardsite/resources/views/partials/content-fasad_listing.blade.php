@@ -369,7 +369,7 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 <div class="objekt-galleri">
   <div class="objekt-galleri-grid" id="galleri-grid">
     @foreach($images as $i => $img)
-      <div class="objekt-galleri-item {{ $i === 0 ? 'objekt-galleri-item--stor' : '' }}{{ $i >= 5 ? ' galleri-dold' : '' }}">
+      <div class="objekt-galleri-item {{ $i % 5 === 0 ? 'objekt-galleri-item--stor' : '' }}{{ $i >= 5 ? ' galleri-dold' : '' }}">
         <a href="javascript:void(0)" class="galleri-trigger" data-index="{{ $i }}" data-highres="{{ $img }}" data-text="Bild {{ $i + 1 }}">
           <img src="{{ $img }}" alt="Bild {{ $i + 1 }}" loading="lazy">
           <div class="galleri-overlay"><span>&#x2B;</span></div>
@@ -394,6 +394,12 @@ function visaAllaGalleri() {
   document.querySelectorAll('.galleri-dold').forEach(function(el) {
     el.classList.remove('galleri-dold');
   });
+  // Byt till jämnt rutnät
+  document.querySelectorAll('.objekt-galleri-item--stor').forEach(function(el) {
+    el.classList.remove('objekt-galleri-item--stor');
+  });
+  var grid = document.getElementById('galleri-grid');
+  if (grid) grid.classList.add('galleri-grid--alla');
   var wrap = document.getElementById('galleri-visa-fler-wrap');
   if (wrap) wrap.style.display = 'none';
 }

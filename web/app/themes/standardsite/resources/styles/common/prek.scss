@@ -3924,3 +3924,29 @@ html body.admin-bar {
   border: 0.5px solid rgba(255,255,255,0.1) !important;
   padding: 32px !important;
 }
+
+/* ── Galleri alla bilder — jämnt rutnät ── */
+.galleri-grid--alla {
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-auto-flow: row !important;
+}
+.galleri-grid--alla .objekt-galleri-item {
+  grid-column: span 1 !important;
+  grid-row: span 1 !important;
+}
+.galleri-grid--alla .objekt-galleri-item img {
+  height: 200px !important;
+}
+
+/* ── Galleri alla — dense fix ── */
+.galleri-grid--alla {
+  grid-auto-flow: dense !important;
+}
+
+/* ── Galleri alla — ta bort gap och overlay ── */
+.galleri-grid--alla {
+  gap: 4px !important;
+}
+.galleri-grid--alla .galleri-overlay {
+  display: none !important;
+}
