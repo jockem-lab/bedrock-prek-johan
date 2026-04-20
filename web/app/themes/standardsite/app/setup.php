@@ -309,3 +309,20 @@ add_action('init', function () {
         update_option('oscars_rewrite_flushed', '1');
     }
 });
+
+/**
+ * ACF JSON — spara och ladda fältgrupper från temats acf-json-mapp
+ */
+add_filter('acf/settings/save_json', function () {
+    return get_stylesheet_directory() . '/acf-json';
+});
+
+add_filter('acf/settings/load_json', function ($paths) {
+    $paths[] = get_stylesheet_directory() . '/acf-json';
+    return $paths;
+});
+
+/**
+ * Visa lokalt registrerade ACF-fältgrupper i wp-admin
+ */
+add_filter('acf/settings/show_admin', '__return_true');
