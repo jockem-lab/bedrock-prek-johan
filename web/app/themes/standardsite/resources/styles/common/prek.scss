@@ -3780,3 +3780,147 @@ html body.admin-bar {
 .mosaik-cta-arrow {
   color: #fff !important;
 }
+
+/* ── Visningstider ── */
+.objekt-visningar,
+.objekt-dokument {
+  background: var(--bg-warm);
+  padding: 24px;
+  margin-top: 16px;
+}
+.objekt-visningar h3,
+.objekt-dokument h3 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin: 0 0 16px;
+}
+.visning-rad {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  flex-wrap: wrap;
+}
+.visning-rad:last-child { border-bottom: none; }
+.visning-datum {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #fff;
+  font-weight: 500;
+  min-width: 140px;
+}
+.visning-tid {
+  font-size: 13px;
+  color: var(--text-mid);
+  flex: 1;
+}
+.visning-anmalan-btn {
+  font-size: 11px !important;
+  padding: 6px 14px !important;
+}
+.dokument-rad {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  color: var(--text-mid);
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+.dokument-rad:last-child { border-bottom: none; }
+.dokument-rad:hover { color: var(--blue-light); }
+
+/* ── Ta bort sticky på mäklarkort ── */
+.objekt-detalj-sidebar {
+  position: static !important;
+}
+.objekt-detalj-kontakt {
+  position: static !important;
+}
+
+/* ── Budgivning ── */
+.objekt-budgivning {
+  background: var(--bg-warm);
+  padding: 24px;
+  margin-top: 16px;
+}
+.objekt-budgivning h3 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin: 0 0 16px;
+}
+.bud-rad {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+}
+.bud-rad:last-child { border-bottom: none; }
+.bud-belopp {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  color: #fff;
+}
+.bud-tid {
+  font-size: 12px;
+  color: var(--text-mid);
+}
+
+/* ── Sidebar-kort harmonisering ── */
+.objekt-visningar,
+.objekt-dokument,
+.objekt-budgivning {
+  padding: 32px !important;
+  border-radius: 12px !important;
+  background: var(--bg-warm) !important;
+}
+.objekt-visningar h3,
+.objekt-dokument h3,
+.objekt-budgivning h3 {
+  text-align: center !important;
+  margin-bottom: 20px !important;
+}
+.visning-rad {
+  justify-content: center !important;
+  text-align: center !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+.visning-anmalan-btn {
+  width: 100% !important;
+  text-align: center !important;
+  margin-top: 8px !important;
+  display: block !important;
+}
+.dokument-rad {
+  padding: 12px 0 !important;
+}
+.bud-rad {
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 2px !important;
+}
+
+/* ── Sidebar-kort — enhetlig stil ── */
+.objekt-detalj-kontakt,
+.objekt-visningar,
+.objekt-dokument,
+.objekt-budgivning {
+  background: var(--bg-warm) !important;
+  border-radius: 0 !important;
+  border: 0.5px solid rgba(255,255,255,0.1) !important;
+  padding: 32px !important;
+}

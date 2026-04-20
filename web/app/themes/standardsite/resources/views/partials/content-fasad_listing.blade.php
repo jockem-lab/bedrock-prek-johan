@@ -25,6 +25,32 @@ $fee = '';
 if ($eco && !empty($eco->association->fee->amount))
     $fee = number_format($eco->association->fee->amount, 0, ',', ' ') . ' kr/mån';
 
+// Showings
+$showings_raw = get_post_meta($post_id, '_fasad_showings', true);
+$showings = fasad_unserialize($showings_raw);
+if (!is_array($showings)) $showings = [];
+$showings = array_filter($showings, function($s) {
+    return !empty($s->startDate) && strtotime($s->startDate) > time() - 3600;
+});
+
+// Documents
+$docs_raw = get_post_meta($post_id, '_fasad_documents', true);
+$docs_obj = fasad_unserialize($docs_raw);
+$documents = [];
+if ($docs_obj && !empty($docs_obj->listingDocuments)) {
+    foreach ($docs_obj->listingDocuments as $doc) {
+        $documents[] = (object)[
+            'alias' => $doc->alias ?? '',
+            'href'  => $doc->href ?? '',
+        ];
+    }
+}
+
+// Bids
+$bids_raw = get_post_meta($post_id, '_fasad_bids', true);
+$bids = fasad_unserialize($bids_raw);
+if (!is_array($bids)) $bids = [];
+
 // Images
 $imgs_raw = get_post_meta($post_id, '_fasad_images', true);
 $imgs = fasad_unserialize($imgs_raw);
@@ -222,12 +248,19 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
       @endif
 
       {{-- Dokument --}}
+      @if(!empty($documents))
       <div class="accordion-item">
         <button class="accordion-trigger">Dokument <span class="accordion-icon">+</span></button>
         <div class="accordion-content">
-          <p class="dokument-tomma">Inga dokument har lagts till ännu.</p>
+          @foreach($documents as $doc)
+            <a href="{{ $doc->href }}" target="_blank" class="dokument-rad">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              {{ $doc->alias }}
+            </a>
+          @endforeach
         </div>
       </div>
+      @endif
     </div>
 
   </div>
@@ -274,6 +307,60 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
         <a href="{{ home_url('/kontakt') }}" class="btn-primary">Kontakta oss</a>
       @endif
     </div>
+    {{-- Budgivning --}}
+    @if(!empty($bids))
+    <div class="objekt-budgivning">
+      <h3>Budgivning</h3>
+      @foreach($bids as $bid)
+        @php
+          $belopp = !empty($bid->amount) ? number_format($bid->amount, 0, ',', ' ') . ' kr' : '';
+          $tid = !empty($bid->createdAt) ? date('d/m H:i', strtotime($bid->createdAt)) : '';
+        @endphp
+        <div class="bud-rad">
+          <span class="bud-belopp">{{ $belopp }}</span>
+          <span class="bud-tid">{{ $tid }}</span>
+        </div>
+      @endforeach
+    </div>
+    @endif
+
+    {{-- Visningstider --}}
+    @if(!empty($showings))
+    <div class="objekt-visningar">
+      <h3>Visningstider</h3>
+      @foreach($showings as $showing)
+        @php
+          $start = strtotime($showing->startDate);
+          $end   = strtotime($showing->endDate);
+          $dagar = ['Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag'];
+          $manader = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
+          $datum = $dagar[date('w', $start)] . ' ' . date('j', $start) . ' ' . $manader[(int)date('n', $start)];
+          $tid   = date('H:i', $start) . ' – ' . date('H:i', $end);
+        @endphp
+        <div class="visning-rad">
+          <div class="visning-datum">{{ ucfirst($datum) }}</div>
+          <div class="visning-tid">{{ $tid }}</div>
+          @if(!empty($showing->openForRegistration))
+            <a href="#visningsanmalan" class="btn-primary visning-anmalan-btn">Anmäl intresse</a>
+          @endif
+        </div>
+      @endforeach
+    </div>
+    @endif
+
+    {{-- Dokument --}}
+    @if(!empty($documents))
+    <div class="objekt-dokument">
+      <h3>Ladda ner dokument</h3>
+      @foreach($documents as $doc)
+        <a href="{{ $doc->href }}" target="_blank" class="dokument-rad">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          {{ $doc->alias }}
+        </a>
+      @endforeach
+    </div>
+    @endif
+
   </div>
 </div>
 
