@@ -9,6 +9,8 @@ web/app/plugins/*
 !web/app/plugins/advanced-custom-fields-pro
 web/app/mu-plugins/*/
 !web/app/mu-plugins/.gitkeep
+!web/app/mu-plugins/prek-admin
+!web/app/mu-plugins/prek-web-helper
 web/app/upgrade
 web/app/uploads/*
 !web/app/uploads/.gitkeep

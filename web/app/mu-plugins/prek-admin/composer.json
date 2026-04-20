@@ -1,0 +1,19 @@
+{
+  "name": "prek/prek-admin",
+  "description": "Admin functions for prek",
+  "type": "wordpress-muplugin",
+  "authors": [
+    {
+      "name": "Andreas Lundgren",
+      "email": "andreas.lundgren@prek.se"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PrekAdmin\\":"App/"
+    }
+  },
+  "require": {
+    "prek/prek-web-helper": "*"
+  }
+}

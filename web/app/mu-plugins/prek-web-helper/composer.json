@@ -1,0 +1,16 @@
+{
+  "name": "prek/prek-web-helper",
+  "description": "Helper functions for prek",
+  "type": "wordpress-muplugin",
+  "authors": [
+    {
+      "name": "Andreas Lundgren",
+      "email": "andreas.lundgren@prek.se"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "PrekWebHelper\\":"App/"
+    }
+  }
+}
