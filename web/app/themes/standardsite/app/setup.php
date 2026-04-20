@@ -338,3 +338,9 @@ add_action('init', function () {
         );
     }
 }, 99);
+
+/**
+ * Visa ACF Composer lokala fältgrupper i wp-admin
+ */
+add_filter('acf/settings/show_admin', '__return_true');
+

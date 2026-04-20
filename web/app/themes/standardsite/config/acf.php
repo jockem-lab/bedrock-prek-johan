@@ -20,4 +20,9 @@ return [
         'trueFalse' => ['ui' => 1],
         'select' => ['ui' => 1],
     ],
+
+    /*
+    | Show local field groups in wp-admin
+    */
+    'show_local' => true,
 ];
