@@ -344,3 +344,20 @@ add_action('init', function () {
  */
 add_filter('acf/settings/show_admin', '__return_true');
 
+
+/**
+ * ACF Options-sida för webbplatsinställningar
+ */
+add_action('init', function () {
+    if (function_exists('acf_add_options_page')) {
+        acf_add_options_page([
+            'page_title' => 'Webbplatsinställningar',
+            'menu_title' => 'Inställningar',
+            'menu_slug'  => 'acf-options',
+            'capability' => 'edit_posts',
+            'redirect'   => false,
+            'icon_url'   => 'dashicons-admin-settings',
+            'position'   => 2,
+        ]);
+    }
+}, 20);

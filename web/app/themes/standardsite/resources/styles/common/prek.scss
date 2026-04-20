@@ -75,8 +75,8 @@ h1, h2, h3, h4 {
   color: #444;
   transition: color 0.2s;
 }
-.nav-left a:hover, .nav-right a:hover { color: var(--accent); }
-.main-navigation a:hover { color: var(--accent); }
+.nav-left a:hover, .nav-right a:hover { color: var(--btn-blue); }
+.main-navigation a:hover { color: var(--btn-blue); }
 
 /* Hamburger */
 .menu-toggle {
@@ -290,7 +290,7 @@ h1, h2, h3, h4 {
 .btn-primary,
 a.btn-primary {
   display: inline-block;
-  background: var(--accent);
+  background: var(--btn-blue);
   color: #fff !important;
   padding: 14px 32px;
   border: none;
@@ -304,7 +304,7 @@ a.btn-primary {
   cursor: pointer;
 }
 .btn-primary:hover,
-a.btn-primary:hover { background: var(--accent-dark); }
+a.btn-primary:hover { background: var(--btn-blue-dark); }
 
 .btn-secondary,
 a.btn-secondary {
@@ -467,7 +467,7 @@ a.btn-secondary:hover { border-color: #fff; }
 .objekt-detalj-pris {
   font-size: 24px;
   font-weight: 500;
-  color: var(--accent);
+  color: var(--btn-blue);
   margin-bottom: 32px;
 }
 .objekt-detalj-fakta {
@@ -476,7 +476,7 @@ a.btn-secondary:hover { border-color: #fff; }
   flex-wrap: wrap;
 }
 .fakta-kort {
-  background: var(--accent);
+  background: var(--btn-blue);
   border-radius: 8px;
   padding: 16px 24px;
   display: flex;
@@ -497,7 +497,7 @@ a.btn-secondary:hover { border-color: #fff; }
   color: #ffffff;
 }
 .objekt-detalj-kontakt {
-  background: var(--accent);
+  background: var(--btn-blue);
   border-radius: 12px;
   padding: 32px;
   align-self: start;
@@ -539,7 +539,7 @@ a.btn-secondary:hover { border-color: #fff; }
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--btn-blue);
   margin-bottom: 16px;
 }
 .om-oss-text h2 {
@@ -609,7 +609,7 @@ a.btn-secondary:hover { border-color: #fff; }
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--btn-blue);
   margin-bottom: 16px;
 }
 .boka-text h2 {
@@ -691,7 +691,7 @@ a.btn-secondary:hover { border-color: #fff; }
   border-radius: 3px;
 }
 .objekt-status--kommande   { background: #5a5a5a; color: #fff; }
-.objekt-status--till-salu  { background: var(--accent); color: #fff; }
+.objekt-status--till-salu  { background: var(--btn-blue); color: #fff; }
 .objekt-status--visning    { background: var(--text-dark); color: #fff; }
 .objekt-status--budgivning { background: var(--text-dark); color: #fff; }
 .objekt-status--sald       { background: #5a5a5a; color: #fff; }
@@ -1023,7 +1023,7 @@ a.btn-secondary:hover { border-color: #fff; }
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--btn-blue);
   margin-bottom: 12px;
 }
 .om-varden h2 {
@@ -1124,7 +1124,7 @@ a.btn-secondary:hover { border-color: #fff; }
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--btn-blue);
 }
 .kontakt-info-block p {
   font-size: 15px;
@@ -1136,7 +1136,7 @@ a.btn-secondary:hover { border-color: #fff; }
   text-decoration: none;
   transition: color 0.2s;
 }
-.kontakt-info-block a:hover { color: var(--accent); }
+.kontakt-info-block a:hover { color: var(--btn-blue); }
 
 /* Formulär */
 .kontakt-formular h2 {
@@ -1315,7 +1315,7 @@ a.btn-secondary:hover { border-color: #fff; }
   text-align: left;
 }
 .accordion-trigger:hover {
-  color: var(--accent);
+  color: var(--btn-blue);
 }
 .accordion-icon {
   font-size: 20px;
@@ -1483,11 +1483,11 @@ a.btn-secondary:hover { border-color: #fff; }
 }
 .dokument-lista a::before {
   content: '↓';
-  color: var(--accent);
+  color: var(--btn-blue);
   font-size: 14px;
 }
 .dokument-lista a:hover {
-  color: var(--accent);
+  color: var(--btn-blue);
 }
 .dokument-tomma {
   font-size: 13px;
@@ -1724,7 +1724,7 @@ a.btn-secondary:hover { border-color: #fff; }
   font-size: 14px;
 }
 .objekt-detalj-kontakt a:hover {
-  color: var(--accent) !important;
+  color: var(--btn-blue) !important;
 }
 .objekt-detalj-kontakt .btn-primary {
   width: 100%;
@@ -1735,7 +1735,7 @@ a.btn-secondary:hover { border-color: #fff; }
   color: #fff !important;
 }
 .objekt-detalj-kontakt .btn-primary:hover {
-  background: var(--accent-dark) !important;
+  background: var(--btn-blue-dark) !important;
   color: #fff !important;
 }
 
@@ -1822,7 +1822,7 @@ a.btn-secondary:hover { border-color: #fff; }
 .kontakt-info a {
   color: var(--text-dark);
   text-decoration: none;
-  &:hover { color: var(--accent); }
+  &:hover { color: var(--btn-blue); }
 }
 
 .kontakt-formular {
@@ -1858,7 +1858,7 @@ a.btn-secondary:hover { border-color: #fff; }
     transition: border-color 0.2s;
     box-sizing: border-box;
 
-    &:focus { border-color: var(--accent); }
+    &:focus { border-color: var(--btn-blue); }
   }
 
   textarea { resize: vertical; }
@@ -1983,7 +1983,7 @@ a.btn-secondary:hover { border-color: #fff; }
   a {
     color: var(--text-mid);
     text-decoration: none;
-    &:hover { color: var(--accent); }
+    &:hover { color: var(--btn-blue); }
   }
 }
 
@@ -2142,7 +2142,7 @@ a.btn-secondary:hover { border-color: #fff; }
   color: var(--text-dark);
   outline: none;
   transition: border-color 0.2s;
-  &:focus { border-color: var(--accent); }
+  &:focus { border-color: var(--btn-blue); }
 }
 
 .kontakt-formulär textarea { resize: vertical; }
@@ -2175,7 +2175,7 @@ a.btn-secondary:hover { border-color: #fff; }
   font-size: 0.9rem;
 }
 
-.objekt-status--tillsalu { background: var(--accent); color: white; }
+.objekt-status--tillsalu { background: var(--btn-blue); color: white; }
 .objekt-status--sald { background: #2c2420; color: white; }
 .objekt-status--budgivning { background: #8b6914; color: white; }
 .objekt-status--kommande { background: #4a6741; color: white; }
@@ -2230,7 +2230,7 @@ h3 { font-size: clamp(20px, 2vw, 28px); }
   letter-spacing: 0.12em !important;
 }
 .btn-primary:hover, a.btn-primary:hover {
-  background: var(--accent) !important;
+  background: var(--btn-blue) !important;
 }
 .btn-secondary, a.btn-secondary {
   border-radius: 0 !important;
@@ -2335,7 +2335,7 @@ h3 { font-size: clamp(20px, 2vw, 28px); }
   border-bottom: none;
 }
 .nav-dropdown-links a:hover .nav-dropdown-label {
-  color: var(--accent) !important;
+  color: var(--btn-blue) !important;
 }
 .nav-dropdown-label {
   font-family: var(--font-body);
@@ -2493,7 +2493,7 @@ h3 { font-size: clamp(20px, 2vw, 28px); }
 }
 .objekt-status--kommande   { border-color: rgba(255,255,255,0.6) !important; }
 .objekt-status--till-salu  { border-color: rgba(255,255,255,0.6) !important; }
-.objekt-status--budgivning { border-color: var(--accent) !important; color: var(--accent) !important; }
+.objekt-status--budgivning { border-color: var(--btn-blue) !important; color: var(--btn-blue) !important; }
 .objekt-status--sald       { border-color: rgba(255,255,255,0.6) !important; }
 
 /* ── Mobilfixar ── */
@@ -2659,7 +2659,7 @@ body {
   color: rgba(255,255,255,0.75) !important;
 }
 .nav-left a:hover, .nav-right a:hover {
-  color: #C8A97E !important;
+  color: var(--btn-blue) !important;
 }
 #dd-trigger {
   color: rgba(255,255,255,0.75) !important;
@@ -2683,7 +2683,7 @@ body {
   border-bottom-color: rgba(255,255,255,0.08) !important;
 }
 #dd-panel a:hover span:first-child {
-  color: #C8A97E !important;
+  color: var(--btn-blue) !important;
 }
 
 /* Hamburger */
@@ -2712,22 +2712,22 @@ body {
   background: transparent !important;
 }
 .filter-knapp:hover {
-  border-color: #C8A97E !important;
-  color: #C8A97E !important;
+  border-color: var(--btn-blue) !important;
+  color: var(--btn-blue) !important;
 }
 .filter-knapp.active {
-  background: #C8A97E !important;
-  border-color: #C8A97E !important;
+  background: var(--btn-blue) !important;
+  border-color: var(--btn-blue) !important;
   color: #111D33 !important;
 }
 
 /* Knappar */
 .btn-primary, a.btn-primary {
-  background: #C8A97E !important;
+  background: var(--btn-blue) !important;
   color: #111D33 !important;
 }
 .btn-primary:hover, a.btn-primary:hover {
-  background: #A8895E !important;
+  background: var(--btn-blue-dark) !important;
 }
 .btn-secondary, a.btn-secondary {
   border-color: rgba(255,255,255,0.4) !important;
@@ -2738,8 +2738,8 @@ body {
   color: #fff !important;
 }
 .btn-outline:hover {
-  background: #C8A97E !important;
-  border-color: #C8A97E !important;
+  background: var(--btn-blue) !important;
+  border-color: var(--btn-blue) !important;
   color: #111D33 !important;
 }
 
@@ -2788,7 +2788,7 @@ body {
 .om-varden { background: #243558 !important; }
 .om-varden h2, .om-varden-kort h3, .om-varden-kort p { color: rgba(255,255,255,0.8) !important; }
 .om-varden-kort { border-top-color: rgba(255,255,255,0.12) !important; }
-.om-fakta-tal { color: #C8A97E !important; }
+.om-fakta-tal { color: var(--btn-blue) !important; }
 .om-fakta-label { color: rgba(255,255,255,0.45) !important; }
 
 /* Kontaktformulär */
@@ -2806,9 +2806,9 @@ body {
 }
 .kontakt-form input:focus,
 .kontakt-form textarea:focus {
-  border-color: #C8A97E !important;
+  border-color: var(--btn-blue) !important;
 }
-.kontakt-info-label { color: #C8A97E !important; }
+.kontakt-info-label { color: var(--btn-blue) !important; }
 .kontakt-info-block p, .kontakt-info-block a { color: rgba(255,255,255,0.75) !important; }
 .kontakt-info { border-right-color: rgba(255,255,255,0.08) !important; }
 .kontakt-formular h2 { color: #fff !important; }
@@ -2818,7 +2818,7 @@ body {
 .site-footer { background: #111D33 !important; }
 .footer-col h4 { color: rgba(255,255,255,0.35) !important; }
 .footer-col a, .footer-col p { color: rgba(255,255,255,0.65) !important; }
-.footer-col a:hover { color: #C8A97E !important; }
+.footer-col a:hover { color: var(--btn-blue) !important; }
 .footer-bottom { color: rgba(255,255,255,0.2) !important; border-top-color: rgba(255,255,255,0.06) !important; }
 .footer-tagline { color: rgba(255,255,255,0.3) !important; }
 
@@ -3011,7 +3011,7 @@ body {
   content: '·';
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--btn-blue);
 }
 .uh-kontakt {
   border-top: 0.5px solid rgba(255,255,255,0.08);
@@ -3025,7 +3025,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--btn-blue);
   margin-bottom: 4px;
 }
 .uh-kontakt a {
@@ -3034,7 +3034,7 @@ body {
   text-decoration: none;
   transition: color 0.2s;
 }
-.uh-kontakt a:hover { color: var(--accent); }
+.uh-kontakt a:hover { color: var(--btn-blue); }
 
 @media (max-width: 768px) {
   .uh-kort {
@@ -3110,7 +3110,7 @@ body {
   content: '·';
   position: absolute;
   left: 0;
-  color: var(--accent);
+  color: var(--btn-blue);
 }
 
 .uh-kontakt {
@@ -3125,7 +3125,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--btn-blue);
   margin-bottom: 4px;
 }
 .uh-kontakt a {
@@ -3134,7 +3134,7 @@ body {
   text-decoration: none;
   transition: color 0.2s;
 }
-.uh-kontakt a:hover { color: var(--accent); }
+.uh-kontakt a:hover { color: var(--btn-blue); }
 
 @media (max-width: 768px) {
   .uh-rad {
@@ -3301,7 +3301,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--btn-blue);
   margin-bottom: 8px;
 }
 .journal-titel {
@@ -3356,7 +3356,7 @@ body {
   height: auto;
   margin: 32px 0;
 }
-.journal-innehall a { color: var(--accent); }
+.journal-innehall a { color: var(--btn-blue); }
 
 @media (max-width: 768px) {
   .journal-grid {
@@ -3390,8 +3390,8 @@ body {
   transition: all 0.2s;
 }
 .social-btn:hover {
-  border-color: var(--accent) !important;
-  color: var(--accent) !important;
+  border-color: var(--btn-blue) !important;
+  color: var(--btn-blue) !important;
 }
 
 /* ── Mosaikgrid v2 — asymmetriskt ── */
@@ -3417,7 +3417,7 @@ body {
   gap: 8px;
 }
 .mosaik-cta {
-  background: #C8A97E;
+  background: var(--btn-blue);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -3425,7 +3425,7 @@ body {
   text-decoration: none;
   transition: background 0.2s;
 }
-.mosaik-cta:hover { background: #A8895E; }
+.mosaik-cta:hover { background: var(--btn-blue-dark); }
 .mosaik-cta .sektion-eyebrow-label {
   color: rgba(17,29,51,0.6) !important;
   margin-bottom: 12px;
@@ -3581,7 +3581,7 @@ body {
   justify-content: center !important;
   height: 100% !important;
   padding: 32px !important;
-  background: #C8A97E !important;
+  background: var(--btn-blue) !important;
   text-decoration: none !important;
 }
 
@@ -3702,7 +3702,7 @@ body {
 /* ── Mäklarkort knapp fix ── */
 .objekt-detalj-kontakt .btn-primary,
 .objekt-detalj-kontakt a.btn-primary {
-  background: var(--accent) !important;
+  background: var(--btn-blue) !important;
   color: #111D33 !important;
   display: block !important;
   text-align: center !important;
@@ -3734,12 +3734,49 @@ body {
   backdrop-filter: blur(4px);
 }
 .objekt-visa-fler-btn:hover {
-  background: var(--accent);
+  background: var(--btn-blue);
   color: #111D33;
-  border-color: var(--accent);
+  border-color: var(--btn-blue);
 }
 
 /* ── Galleri dold ── */
 .galleri-dold {
   display: none !important;
+}
+
+/* ── Fix WP admin-bar extra space ── */
+html body.admin-bar {
+  margin-top: 0 !important;
+}
+#acf-field-group-fields { display: none; }
+
+/* ── Fix WP admin-bar padding-bottom på #app ── */
+#app {
+  padding-bottom: 0 !important;
+}
+
+/* ── Knappfärg — ny komplementblå ── */
+:root {
+  --btn-blue: #5B8FA8;
+  --btn-blue-dark: #4A7A92;
+}
+.btn-primary {
+  background: var(--btn-blue) !important;
+  color: #fff !important;
+  border-color: var(--btn-blue) !important;
+}
+.btn-primary:hover {
+  background: var(--btn-blue-dark) !important;
+  border-color: var(--btn-blue-dark) !important;
+}
+.mosaik-cta {
+  background: var(--btn-blue) !important;
+}
+.mosaik-cta:hover {
+  background: var(--btn-blue-dark) !important;
+}
+.mosaik-cta h3,
+.mosaik-cta .sektion-eyebrow-label,
+.mosaik-cta-arrow {
+  color: #fff !important;
 }
