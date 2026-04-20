@@ -30,11 +30,6 @@
   },
   "repositories": [
     {
-      "name": "acf",
-      "type": "composer",
-      "url": "https://connect.advancedcustomfields.com"
-    },
-    {
       "type": "composer",
       "url": "https://wpackagist.org",
       "only": [
@@ -45,6 +40,50 @@
     {
       "type": "composer",
       "url": "https://connect.advancedcustomfields.com"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/fasad-bridge.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/fasad-api-connect.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/prek-web.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/prek-test-forms.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/prek-varnish-purge.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/prek-log.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/prek-web-helper.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/prek-admin.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/prek-standardsite.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/prek-update.git"
+    },
+    {
+      "type": "git",
+      "url": "git@gitlab.prek.srv:wordpress-plugins/fasad-customerpages.git"
     }
   ],
   "require": {
@@ -73,11 +112,22 @@
     "wpackagist-plugin/post-types-order": "^2",
     "wpackagist-plugin/hcaptcha-for-forms-and-more": "^4.13",
     "symfony/console": "^6.0",
-    "wpengine/advanced-custom-fields-pro": "*"
+    "wpengine/advanced-custom-fields-pro": "*",
+    "prek/fasad-api-connect": "*",
+    "prek/fasad-bridge": "*",
+    "prek/fasad-customerpages": "*",
+    "prek/prek-test-forms": "*",
+    "prek/prek-log": "*",
+    "prek/prek-web": "*",
+    "prek/prek-varnish-purge": "*",
+    "prek/prek-web-helper": "^1",
+    "prek/prek-admin": "*",
+    "prek/prek-standardsite": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
-    "roave/security-advisories": "dev-latest"
+    "roave/security-advisories": "dev-latest",
+    "prek/prek-update": "*"
   },
   "config": {
     "optimize-autoloader": true,
