@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5ace46627e14dedc456174380b3923d4",
+    "content-hash": "573f53d2d5c1b114864d19f5b454a84c",
     "packages": [
         {
             "name": "brick/math",
@@ -6598,6 +6598,22 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/wp-seopress/"
+        },
+        {
+            "name": "wpengine/advanced-custom-fields-pro",
+            "version": "6.8.0.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://connect.advancedcustomfields.com/v2/plugins/composer_download?s=composer&p=pro&t=6.8.0.1"
+            },
+            "require": {
+                "composer/installers": "~1.0 || ~2.0"
+            },
+            "replace": {
+                "wpackagist-plugin/advanced-custom-fields": "self.version",
+                "wpengine/advanced-custom-fields": "self.version"
+            },
+            "type": "wordpress-plugin"
         }
     ],
     "packages-dev": [

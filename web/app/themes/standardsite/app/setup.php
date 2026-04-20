@@ -295,3 +295,17 @@ add_action('init', function () {
         'rewrite'      => ['slug' => 'journal'],
     ]);
 });
+
+/**
+ * Flush rewrite rules när nya CPTs registreras
+ */
+add_action('after_switch_theme', function () {
+    flush_rewrite_rules();
+});
+
+add_action('init', function () {
+    if (get_option('oscars_rewrite_flushed') !== '1') {
+        flush_rewrite_rules();
+        update_option('oscars_rewrite_flushed', '1');
+    }
+});
