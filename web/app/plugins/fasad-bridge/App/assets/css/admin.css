@@ -1,0 +1,17 @@
+#sync-log {
+    height: 0;
+    width: 100%;
+    transition: 1.5s;
+}
+
+.synchronizing, .clearing {
+    padding-top: 10px;
+}
+
+#sync_spinner, #clear_spinner{
+    display: none;
+    float: none;
+    padding-left: 30px;
+    padding-bottom: 15px;
+    margin: 0;
+}

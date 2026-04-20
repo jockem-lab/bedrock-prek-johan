@@ -6,7 +6,7 @@
 
 namespace App;
 
-require_once __DIR__ . '/acf.php';
+// ACF-fält hanteras via ACF Composer i app/Fields/
 
 use App\View\Composers\App;
 
@@ -326,3 +326,4 @@ add_filter('acf/settings/load_json', function ($paths) {
  * Visa lokalt registrerade ACF-fältgrupper i wp-admin
  */
 add_filter('acf/settings/show_admin', '__return_true');
+

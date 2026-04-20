@@ -1,0 +1,328 @@
+[
+  {
+    "key": "group_5e68e3dc7ba24",
+    "title": "PREK-inställningar",
+    "fields": [
+      {
+        "key": "field_5e6b59b2c3ee1",
+        "label": "Nycklar",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_5e68e45996ef6",
+        "label": "Nycklar",
+        "name": "prekweb_keys",
+        "type": "group",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "sub_fields": [
+          {
+            "key": "field_5e68e46e96ef8",
+            "label": "Google Maps",
+            "name": "google_maps",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+          },
+          {
+            "key": "field_5e6a5ac8c204e",
+            "label": "Google Analytics",
+            "name": "google_analytics",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+          },
+          {
+            "key": "field_69d513a96cad8",
+            "label": "Hitta Mäklare",
+            "name": "hitta_maklare",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+          }
+        ]
+      },
+      {
+        "key": "field_5e6b59cfc3ee2",
+        "label": "Kod",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_5e6a5b0870980",
+        "label": "Kod",
+        "name": "prekweb_code",
+        "type": "group",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "layout": "block",
+        "sub_fields": [
+          {
+            "key": "field_5e6a5b37027c9",
+            "label": "Head",
+            "name": "head",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+          },
+          {
+            "key": "field_5e6a5b3f027ca",
+            "label": "Footer",
+            "name": "footer",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+          }
+        ]
+      },
+      {
+        "key": "field_5e6d6c12763a2",
+        "label": "Admin",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_5e6d6c25763a3",
+        "label": "Dölj menyval",
+        "name": "prekweb_hidemenus",
+        "type": "checkbox",
+        "instructions": "Ange vilka menyval som ska döljas för icke-PREK-admins.",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "choices": {
+          "index.php": "<b>Adminpanel</b>",
+          "index.php==update-core.php": "&nbsp;&nbsp;&nbsp;&nbsp;Uppdateringar ",
+          "edit.php": "<b>Inlägg</b>",
+          "edit.php==post-new.php": "&nbsp;&nbsp;&nbsp;&nbsp;Skapa nytt",
+          "edit.php==edit-tags.php?taxonomy=category": "&nbsp;&nbsp;&nbsp;&nbsp;Kategorier",
+          "edit.php==edit-tags.php?taxonomy=post_tag": "&nbsp;&nbsp;&nbsp;&nbsp;Etiketter",
+          "upload.php": "<b>Media</b>",
+          "upload.php==media-new.php": "&nbsp;&nbsp;&nbsp;&nbsp;Lägg till ny",
+          "edit.php?post_type=page": "<b>Sidor</b>",
+          "edit.php?post_type=page==post-new.php?post_type=page": "&nbsp;&nbsp;&nbsp;&nbsp;Lägg till ny",
+          "edit.php?post_type=fasad_listing": "<b>Objekt</b>",
+          "edit.php?post_type=fasad_listing==post-new.php?post_type=fasad_listing": "&nbsp;&nbsp;&nbsp;&nbsp;Skapa nytt",
+          "edit.php?post_type=fasad_listing==edit-tags.php?taxonomy=fasad_listing_type&amp;post_type=fasad_listing": "&nbsp;&nbsp;&nbsp;&nbsp;Typ",
+          "edit.php?post_type=fasad_listing==edit-tags.php?taxonomy=fasad_listing_district&amp;post_type=fasad_listing": "&nbsp;&nbsp;&nbsp;&nbsp;Distrikt",
+          "edit.php?post_type=fasad_listing==edit-tags.php?taxonomy=fasad_listing_city&amp;post_type=fasad_listing": "&nbsp;&nbsp;&nbsp;&nbsp;Stad",
+          "edit.php?post_type=fasad_listing==edit-tags.php?taxonomy=fasad_listing_commune&amp;post_type=fasad_listing": "&nbsp;&nbsp;&nbsp;&nbsp;Kommun",
+          "edit.php?post_type=fasad_listing==edit-tags.php?taxonomy=fasad_listing_tag&amp;post_type=fasad_listing": "&nbsp;&nbsp;&nbsp;&nbsp;Taggar",
+          "edit.php?post_type=fasad_office": "<b>Kontor</b>",
+          "edit.php?post_type=fasad_office==post-new.php?post_type=fasad_office": "&nbsp;&nbsp;&nbsp;&nbsp;Skapa nytt",
+          "edit.php?post_type=fasad_realtor": "<b>Medarbetare</b>",
+          "edit.php?post_type=fasad_realtor==post-new.php?post_type=fasad_realtor": "&nbsp;&nbsp;&nbsp;&nbsp;Skapa nytt",
+          "fasad-api-connect": "<b>FasAd API</b>",
+          "fasad-api-connect==fasad-bridge": "&nbsp;&nbsp;&nbsp;&nbsp;FasAd Bridge",
+          "fasad-api-connect==fasad-api-connect_settings": "&nbsp;&nbsp;&nbsp;&nbsp;Inställningar",
+          "edit-comments.php": "<b>Kommentarer </b>",
+          "edit.php?post_type=puff": "<b>Puffar</b>",
+          "edit.php?post_type=puff==post-new.php?post_type=puff": "&nbsp;&nbsp;&nbsp;&nbsp;Skapa ny",
+          "flamingo": "<b>Flamingo</b>",
+          "flamingo==flamingo_inbound": "&nbsp;&nbsp;&nbsp;&nbsp;Inbound Messages",
+          "wpcf7": "<b>Contact</b>",
+          "wpcf7==wpcf7-new": "&nbsp;&nbsp;&nbsp;&nbsp;Add New",
+          "wpcf7==wpcf7-integration": "&nbsp;&nbsp;&nbsp;&nbsp;Integration",
+          "themes.php": "<b>Utseende</b>",
+          "themes.php==customize.php?return=%2Fwp%2Fwp-admin%2Fedit.php%3Fpost_type%3Dacf-field-group%26page%3Dacf-tools": "&nbsp;&nbsp;&nbsp;&nbsp;Anpassa",
+          "themes.php==widgets.php": "&nbsp;&nbsp;&nbsp;&nbsp;Widgetar",
+          "themes.php==nav-menus.php": "&nbsp;&nbsp;&nbsp;&nbsp;Menyer",
+          "plugins.php": "<b>Tillägg </b>",
+          "plugins.php==plugin-install.php": "&nbsp;&nbsp;&nbsp;&nbsp;Lägg till nytt",
+          "users.php": "<b>Användare</b>",
+          "users.php==user-new.php": "&nbsp;&nbsp;&nbsp;&nbsp;Lägg till ny",
+          "users.php==profile.php": "&nbsp;&nbsp;&nbsp;&nbsp;Din profil",
+          "tools.php": "<b>Verktyg</b>",
+          "tools.php==import.php": "&nbsp;&nbsp;&nbsp;&nbsp;Importera",
+          "tools.php==export.php": "&nbsp;&nbsp;&nbsp;&nbsp;Exportera",
+          "tools.php==site-health.php": "&nbsp;&nbsp;&nbsp;&nbsp;Hälsokontroll för webbplatser",
+          "tools.php==export-personal-data.php": "&nbsp;&nbsp;&nbsp;&nbsp;Exportera personuppgifter",
+          "tools.php==erase-personal-data.php": "&nbsp;&nbsp;&nbsp;&nbsp;Ta bort personuppgifter",
+          "options-general.php": "<b>Inställningar</b>",
+          "options-general.php==options-writing.php": "&nbsp;&nbsp;&nbsp;&nbsp;Skriva",
+          "options-general.php==options-reading.php": "&nbsp;&nbsp;&nbsp;&nbsp;Läsa",
+          "options-general.php==options-discussion.php": "&nbsp;&nbsp;&nbsp;&nbsp;Diskussion",
+          "options-general.php==options-media.php": "&nbsp;&nbsp;&nbsp;&nbsp;Media",
+          "options-general.php==options-permalink.php": "&nbsp;&nbsp;&nbsp;&nbsp;Permalänkar",
+          "options-general.php==options-privacy.php": "&nbsp;&nbsp;&nbsp;&nbsp;Integritet",
+          "options-general.php==ctcc": "&nbsp;&nbsp;&nbsp;&nbsp;Cookie Consent",
+          "edit.php?post_type=acf-field-group": "<b>Egna fält</b>",
+          "edit.php?post_type=acf-field-group==post-new.php?post_type=acf-field-group": "&nbsp;&nbsp;&nbsp;&nbsp;Lägg till ny",
+          "edit.php?post_type=acf-field-group==acf-tools": "&nbsp;&nbsp;&nbsp;&nbsp;Verktyg",
+          "edit.php?post_type=acf-field-group==acf-settings-updates": "&nbsp;&nbsp;&nbsp;&nbsp;Uppdateringar",
+          "acf-options-prek-installningar": "<b>PREK, inställningar</b>",
+          "acf-options-prek-installningar==acf-options-fasad": "&nbsp;&nbsp;&nbsp;&nbsp;FasAd",
+          "acf-options-ambassador-installningar": "<b>Ambassadör, Inställningar</b>"
+        },
+        "allow_custom": 0,
+        "default_value": [],
+        "layout": "vertical",
+        "toggle": 0,
+        "return_format": "value",
+        "save_custom": 0
+      },
+      {
+        "key": "field_5e6b59b2c3ee2",
+        "label": "SEO",
+        "name": "",
+        "type": "tab",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "placement": "top",
+        "endpoint": 0
+      },
+      {
+        "key": "field_5e6a5ac8c204f",
+        "label": "Standard delningsbild",
+        "name": "share_image",
+        "type": "image",
+        "instructions": "",
+        "required": 0,
+        "conditional_logic": 0,
+        "wrapper": {
+          "width": "",
+          "class": "",
+          "id": ""
+        },
+        "return_format": "url",
+        "preview_size": "medium",
+        "library": "all",
+        "min_width": "",
+        "min_height": "",
+        "min_size": "",
+        "max_width": "",
+        "max_height": "",
+        "max_size": "",
+        "mime_types": ""
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "options_page",
+          "operator": "==",
+          "value": "acf-options-prek-installningar"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": ""
+  }
+]

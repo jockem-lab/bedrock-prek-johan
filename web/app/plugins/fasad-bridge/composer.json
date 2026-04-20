@@ -1,0 +1,24 @@
+{
+    "name": "prek/fasad-bridge",
+    "description": "A WordPress plugin that is fetching data from FasAd API.",
+    "type": "wordpress-muplugin",
+    "authors": [
+        {
+            "name": "Emil Lindström",
+            "email": "emil.lindstrom@prek.se"
+        },
+        {
+            "name": "Dennis Germundal",
+            "email": "dennis@prek.se"
+        },
+        {
+            "name": "Andreas Lundgren",
+            "email": "andreas.lundgren@prek.se"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FasadBridge\\":"App/"
+        }
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "name": "prek/fasad-api-connect",
+    "description": "A WordPress plugin that is handling connections and requests to FasAd API.",
+    "type": "wordpress-muplugin",
+    "authors": [
+        {
+            "name": "Andreas Lundgren",
+            "email": "andreas.lundgren@prek.se"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FasadApiConnect\\":"App/"
+        }
+    }
+}

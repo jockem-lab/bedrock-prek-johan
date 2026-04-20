@@ -2,6 +2,11 @@
 web/app/plugins/*
 !web/app/plugins/.gitkeep
 !web/app/plugins/fasadsite-rest.php
+!web/app/plugins/fasad-bridge
+!web/app/plugins/fasad-api-connect
+!web/app/plugins/fasad-search-criterias
+!web/app/plugins/prek-web
+!web/app/plugins/advanced-custom-fields-pro
 web/app/mu-plugins/*/
 !web/app/mu-plugins/.gitkeep
 web/app/upgrade
