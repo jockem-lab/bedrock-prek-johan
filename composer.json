@@ -17,12 +17,7 @@
     }
   ],
   "keywords": [
-    "bedrock",
-    "composer",
-    "roots",
-    "wordpress",
-    "wp",
-    "wp-config"
+    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
   ],
   "support": {
     "issues": "https://github.com/roots/bedrock/issues",
@@ -32,10 +27,7 @@
     {
       "type": "composer",
       "url": "https://wpackagist.org",
-      "only": [
-        "wpackagist-plugin/*",
-        "wpackagist-theme/*"
-      ]
+      "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
     },
     {
       "type": "composer",
@@ -85,6 +77,7 @@
       "type": "git",
       "url": "git@gitlab.prek.srv:wordpress-plugins/fasad-customerpages.git"
     }
+
   ],
   "require": {
     "php": ">=8.0",
@@ -95,24 +88,9 @@
     "roots/bedrock-disallow-indexing": "^2.0",
     "roots/wordpress": "^6",
     "roots/wp-config": "1.0.0",
-    "roots/acorn": "^4.0",
-    "wpackagist-plugin/varnish-http-purge": "^5",
-    "wpackagist-plugin/simple-history": "^5",
-    "wpackagist-plugin/wordfence": "^8",
-    "wpackagist-plugin/html-forms": "^1",
-    "wpackagist-plugin/safe-svg": "^2",
-    "wpackagist-plugin/classic-editor": "^1",
-    "wpackagist-plugin/classic-widgets": "^0",
-    "wpackagist-plugin/cookies-and-content-security-policy": "^2",
-    "wpackagist-plugin/wp-sentry-integration": "^8",
-    "wpackagist-plugin/wp-crontrol": "^1",
-    "wpackagist-plugin/wp-maintenance-mode": "^2",
-    "wpackagist-plugin/redirection": "^5",
-    "wpackagist-plugin/wp-seopress": "^9",
-    "wpackagist-plugin/post-types-order": "^2",
-    "wpackagist-plugin/hcaptcha-for-forms-and-more": "^4.13",
-    "symfony/console": "^6.0",
-    "wpengine/advanced-custom-fields-pro": "*",
+    "roots/acorn": "^3.1",
+    "roots/multisite-url-fixer": "^1.1",
+    "wpengine/advanced-custom-fields-pro": "^6.3",
     "prek/fasad-api-connect": "*",
     "prek/fasad-bridge": "*",
     "prek/fasad-customerpages": "*",
@@ -122,7 +100,22 @@
     "prek/prek-varnish-purge": "*",
     "prek/prek-web-helper": "^1",
     "prek/prek-admin": "*",
-    "prek/prek-standardsite": "*"
+    "prek/prek-standardsite": "*",
+    "wpackagist-plugin/varnish-http-purge": "^5",
+    "wpackagist-plugin/simple-history": "^5",
+    "wpackagist-plugin/wordfence": "^8",
+    "wpackagist-plugin/html-forms": "^1",
+    "wpackagist-plugin/safe-svg": "^2",
+    "wpackagist-plugin/classic-editor":"^1",
+    "wpackagist-plugin/classic-widgets":"^0",
+    "wpackagist-plugin/cookies-and-content-security-policy": "^2",
+    "wpackagist-plugin/wp-sentry-integration": "^8",
+    "wpackagist-plugin/wp-crontrol": "^1",
+    "wpackagist-plugin/wp-maintenance-mode": "^2",
+    "wpackagist-plugin/redirection": "^5",
+    "wpackagist-plugin/wp-seopress": "^9",
+    "wpackagist-plugin/post-types-order": "^2",
+    "wpackagist-plugin/hcaptcha-for-forms-and-more": "^4.13"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.7.1",
@@ -150,12 +143,8 @@
         "wpackagist-plugin/safe-svg",
         "wpackagist-plugin/wp-sentry-integration"
       ],
-      "web/app/plugins/{$name}/": [
-        "type:wordpress-plugin"
-      ],
-      "web/app/themes/{$name}/": [
-        "type:wordpress-theme"
-      ]
+      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
+      "web/app/themes/{$name}/": ["type:wordpress-theme"]
     },
     "wordpress-install-dir": "web/wp"
   },
