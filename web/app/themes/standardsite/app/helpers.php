@@ -209,3 +209,19 @@ function attributeLoop($keys, $data)
     }
     return $data;
 }
+// ACF fallback om pluginen inte är laddad
+if (!function_exists('get_field')) {
+    function get_field($field, $post_id = false, $format_value = true) {
+        return null;
+    }
+}
+if (!function_exists('get_fields')) {
+    function get_fields($post_id = false, $format_value = true) {
+        return [];
+    }
+}
+if (!function_exists('have_rows')) {
+    function have_rows($field, $post_id = false) {
+        return false;
+    }
+}

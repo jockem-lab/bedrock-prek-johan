@@ -13,11 +13,11 @@ class TillSalu extends PrekComposer
     public function with()
     {
         // Hero
-        $hero_rubrik      = get_field('ts_hero_rubrik') ?: 'Hem till salu';
-        $hero_underrubrik = get_field('ts_hero_underrubrik') ?: 'Linköping och Östergötland';
+        $hero_rubrik      = \get_field('ts_hero_rubrik') ?: 'Hem till salu';
+        $hero_underrubrik = \get_field('ts_hero_underrubrik') ?: 'Linköping och Östergötland';
 
         // Filter-knappar från ACF repeater, fallback till standard
-        $acf_knappar = get_field('ts_filter_knappar');
+        $acf_knappar = \get_field('ts_filter_knappar');
         if ($acf_knappar && is_array($acf_knappar)) {
             $filter_knappar = array_map(function($k) {
                 return ['text' => strtoupper($k['label'] ?? ''), 'filter' => $k['value'] ?? 'alla'];

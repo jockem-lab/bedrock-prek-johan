@@ -62,7 +62,7 @@ class App extends PrekComposer
 
     public static function getOptions()
     {
-        return function_exists('get_fields') ? (get_fields('option') ?? []) : [];
+        return function_exists('get_fields') ? (\get_fields('option') ?? []) : [];
     }
 
     public static function getOption($optionName, $default = false)
@@ -72,11 +72,11 @@ class App extends PrekComposer
         }
         $optionName = explode('.', $optionName);
         if (is_array(($optionName)) && count($optionName) > 1) {
-            $field = getAttribute($optionName[1], get_field($optionName[0], 'option'));
+            $field = getAttribute($optionName[1], \get_field($optionName[0], 'option'));
         } elseif (is_array($optionName)) {
-            $field = get_field($optionName[0], 'option');
+            $field = \get_field($optionName[0], 'option');
         } else {
-            $field = get_field($optionName, 'option');
+            $field = \get_field($optionName, 'option');
         }
         return ($field !== "" && !is_null($field)) ? $field : $default;
     }

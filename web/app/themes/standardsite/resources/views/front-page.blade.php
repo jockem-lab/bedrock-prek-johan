@@ -2,125 +2,146 @@
 
 @section('content')
 
-{{-- Objekt-sektion --}}
-<section class="objekt-sektion">
-  <div class="objekt-inner">
-    <div class="sektion-header">
-      <span class="sektion-eyebrow-label">Fastigheter</span>
-      <h2 class="sektion-rubrik">{{ $fp_listings_rubrik ?? 'Aktuella objekt' }}</h2>
-    </div>
-    @if(!empty($listings))
-      <div class="mosaik-v2">
-
-        {{-- Rad 1: stor vänster + två höger --}}
-        <div class="mosaik-v2-rad mosaik-v2-rad--1">
-          @if(isset($listings[0]))
-            @include('partials.mosaik-kort', ['listing' => $listings[0], 'stor' => true])
-          @endif
-          <div class="mosaik-v2-col">
-            @if(isset($listings[1]))
-              @include('partials.mosaik-kort', ['listing' => $listings[1], 'stor' => false])
-            @endif
-            @if(isset($listings[2]))
-              @include('partials.mosaik-kort', ['listing' => $listings[2], 'stor' => false])
-            @endif
-          </div>
-        </div>
-
-        {{-- Rad 2: CTA + två mitten + en stor höger --}}
-        <div class="mosaik-v2-rad mosaik-v2-rad--2">
-          <div class="mosaik-v2-col">
-            <a href="{{ home_url('/kontakt') }}" class="mosaik-cta">
-              <span class="sektion-eyebrow-label">Oscars Mäkleri</span>
-              <h3>Klicka här för att värdera din bostad</h3>
-              <span class="mosaik-cta-arrow">→</span>
-            </a>
-            @if(isset($listings[3]))
-              @include('partials.mosaik-kort', ['listing' => $listings[3], 'stor' => false])
-            @endif
-          </div>
-          <div class="mosaik-v2-col">
-            @if(isset($listings[4]))
-              @include('partials.mosaik-kort', ['listing' => $listings[4], 'stor' => false])
-            @endif
-            @if(isset($listings[5]))
-              @include('partials.mosaik-kort', ['listing' => $listings[5], 'stor' => false])
-            @endif
-          </div>
-          @if(isset($listings[6]))
-            @include('partials.mosaik-kort', ['listing' => $listings[6], 'stor' => true])
-          @endif
-        </div>
-
-      </div>
-      <div style="text-align:center;margin-top:48px;">
-        <a href="{{ home_url('/objekt') }}" class="btn-primary">Se alla objekt</a>
-      </div>
-    @else
-      <p class="objekt-tomma">Inga objekt tillgängliga just nu.</p>
-    @endif
-
+{{-- SPLASH SCREEN --}}
+<div id="em-splash">
+  <div id="em-splash-logo">
+    <div id="em-splash-text">ETT MÄKLERI</div>
+    <div id="em-splash-tagline">FASTIGHETSMÄKLERI</div>
   </div>
+</div>
+
+{{-- HERO med bildkarusell --}}
+<section class="em-hero" id="em-hero">
+  <div class="em-hero-slide active" style="background-image:url('/app/uploads/hero/start-hero.jpg')"></div>
+  <div class="em-hero-slide" style="background-image:url('/app/uploads/hero/placeholder3.jpg')"></div>
+  <div class="em-hero-overlay"></div>
 </section>
 
+{{-- SEKTIONER --}}
+<div class="em-sektioner" id="em-sektioner">
 
+  {{-- Lägenheter --}}
+  <section class="em-sektion" data-index="0">
+    <div class="em-sektion-bild">
+      <img src="/app/uploads/hero/placeholder2.jpg" alt="Lägenheter">
+    </div>
+    <div class="em-sektion-text">
+      <p class="em-sektion-eyebrow">TILL SALU</p>
+      <h2 class="em-sektion-rubrik">LÄGENHETER</h2>
+      <p class="em-sektion-beskrivning">Ett kurerat urval av lägenheter i Östermalm, Södermalm, Vasastan och på Kungsholmen. Tidlösa hem med tydlig karaktär. Utöver publicerade objekt förmedlar vi även bostäder underhand, med samma omsorg och diskretion.</p>
+      <a href="{{ home_url('/objekt') }}" class="em-sektion-btn">UTFORSKA VÅRA LÄGENHETER</a>
+    </div>
+  </section>
 
-{{-- Journal-sektion --}}
-@php
-  $journal_query = new WP_Query([
-    'post_type'      => 'journal',
-    'posts_per_page' => 3,
-    'post_status'    => 'publish',
-    'orderby'        => 'date',
-    'order'          => 'DESC',
-  ]);
-  $journal_artiklar = $journal_query->posts;
-@endphp
+  {{-- Hus --}}
+  <section class="em-sektion em-sektion--reverse" data-index="1">
+    <div class="em-sektion-bild">
+      <img src="/app/uploads/hero/placeholder3.jpg" alt="Hus">
+    </div>
+    <div class="em-sektion-text">
+      <p class="em-sektion-eyebrow">TILL SALU</p>
+      <h2 class="em-sektion-rubrik">HUS</h2>
+      <p class="em-sektion-beskrivning">Ett kurerat urval av hus i Stockholm och skärgården. Permanenta boenden och landställen. Villor, radhus och fritidshus. Arkitektur, läge och helhet i fokus.</p>
+      <a href="{{ home_url('/objekt') }}" class="em-sektion-btn">UTFORSKA VÅRA HUS</a>
+    </div>
+  </section>
 
-@if(!empty($journal_artiklar))
-<section style="padding:80px 40px;background:#111D33;">
-  <div style="max-width:1200px;margin:0 auto;">
-    <div class="sektion-header" style="margin-bottom:48px;">
-      <span class="sektion-eyebrow-label">Oscars Mäkleri</span>
-      <h2 class="sektion-rubrik">Journal</h2>
+  {{-- Underhand --}}
+  <section class="em-sektion" data-index="2">
+    <div class="em-sektion-bild">
+      <img src="/app/uploads/hero/placeholder2.jpg" alt="Underhand" style="filter:brightness(0.95);">
     </div>
-    <div class="journal-grid">
-      @foreach($journal_artiklar as $i => $jp)
-        @php
-          $jbild = get_field('j_hero_bild', $jp->ID);
-          $jthumb = get_the_post_thumbnail_url($jp->ID, 'large');
-          if (is_array($jbild)) {
-            $jimg = $jbild['url'] ?? $jthumb;
-          } elseif (is_numeric($jbild)) {
-            $jimg = wp_get_attachment_image_url($jbild, 'large') ?: $jthumb;
-          } else {
-            $jimg = $jthumb;
-          }
-          $jkat = get_field('j_kategori', $jp->ID);
-          $jmin = get_field('j_lasttid', $jp->ID);
-          $jtyp = get_field('j_hero_typ', $jp->ID);
-        @endphp
-        <a href="{{ home_url('/journal/' . $jp->post_name) }}"
-           class="journal-kort {{ $i === 0 ? 'journal-kort--featured' : '' }}">
-          <div class="journal-bild">
-            @if($jtyp === 'video')
-              <div class="journal-video-badge">▶</div>
-            @endif
-            <div class="journal-bild-inner" style="background-image:url('{{ $jimg }}');background-color:#243558;"></div>
-          </div>
-          <div class="journal-info">
-            @if($jkat)<span class="journal-kategori">{{ $jkat }}</span>@endif
-            <h3 class="journal-titel">{{ $jp->post_title }}</h3>
-            @if($jmin)<span class="journal-meta">{{ $jmin }} min</span>@endif
-          </div>
-        </a>
-      @endforeach
+    <div class="em-sektion-text">
+      <p class="em-sektion-eyebrow">INTRESSEANMÄLAN</p>
+      <h2 class="em-sektion-rubrik">UNDERHAND</h2>
+      <p class="em-sektion-beskrivning">En del av de bostäder vi förmedlar når aldrig den öppna marknaden, detta i enlighet med våra uppdragsgivares önskemål. ETT MÄKLERI disponerar över ett omfattande kontaktnät och en köpstark databas som ständigt hålls uppdaterad.</p>
+      <a href="{{ home_url('/underhand') }}" class="em-sektion-btn">MAILA OSS</a>
     </div>
-    <div style="text-align:center;margin-top:40px;">
-      <a href="{{ home_url('/journal') }}" class="btn-primary">Se alla artiklar</a>
+  </section>
+
+  {{-- Anlita oss --}}
+  <section class="em-sektion em-sektion--reverse" data-index="3">
+    <div class="em-sektion-bild">
+      <img src="/app/uploads/hero/placeholder3.jpg" alt="Anlita oss">
     </div>
-  </div>
-</section>
-@endif
+    <div class="em-sektion-text">
+      <p class="em-sektion-eyebrow">VÄRDERING AV BOSTAD</p>
+      <h2 class="em-sektion-rubrik">ANLITA OSS</h2>
+      <p class="em-sektion-beskrivning">Överväger ni att sälja och önskar en värdering av ert hem? Vi ser fram emot att träffa er för ett helt förutsättningslöst möte. Vänligen fyll i formuläret nedan, så återkommer vi snarast möjligt för att diskutera era specifika behov.</p>
+      <a href="{{ home_url('/kontakt') }}" class="em-sektion-btn">FYLL I FORMULÄRET</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function() {
+  var splash = document.getElementById('em-splash');
+  var hero = document.getElementById('em-hero');
+  var header = document.querySelector('.fdr-header');
+  var splashLogo = document.getElementById('em-splash-logo');
+  var splashTagline = document.getElementById('em-splash-tagline');
+
+  // Dölj header under splash
+  if (header) header.style.opacity = '0';
+
+  // Steg 1: Logo fade in centrerad (0 → 0.8s)
+  setTimeout(function() {
+    splashLogo.style.visibility = 'visible';
+    splashLogo.classList.add('em-splash-logo--visible');
+  }, 100);
+
+  // Steg 2: Tagline tonar in (1.4s)
+  setTimeout(function() {
+    splashTagline.classList.add('em-splash-tagline--visible');
+  }, 1400);
+
+  // Steg 3: Logotyp glider till nav-position (2.8s — stannar kvar 1.4s i steg 2)
+  setTimeout(function() {
+    splashLogo.classList.add('em-splash-logo--nav');
+  }, 2200);
+
+  // Steg 4: Splash övergår till hero med bildspel (3.8s)
+  setTimeout(function() {
+    splash.classList.add('em-splash--exit');
+    hero.classList.add('em-hero--visible');
+    if (header) {
+      header.style.transition = 'opacity 0.6s ease';
+      header.style.opacity = '1';
+    }
+  }, 2400);
+
+  // Steg 5: Ta bort splash helt (4.8s)
+  setTimeout(function() {
+    splash.style.display = 'none';
+  }, 4800);
+
+  // Hero karusell
+  setTimeout(function() {
+    var slides = document.querySelectorAll('.em-hero-slide');
+    if (slides.length < 2) return;
+    var current = 0;
+    setInterval(function() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 5000);
+  }, 3000);
+
+  // Scroll-animation för sektioner
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('em-sektion--visible');
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.em-sektion').forEach(function(s) {
+    observer.observe(s);
+  });
+
+})();
+</script>
 
 @endsection

@@ -652,3 +652,39 @@ if (document.readyState === 'loading') {
   initLightbox();
 }
 window.addEventListener('load', initLightbox);
+
+// FDR Menu
+const fdrMenuBtn = document.getElementById('fdr-menu-btn');
+const fdrMenuClose = document.getElementById('fdr-menu-close');
+const fdrMenuOverlay = document.getElementById('fdr-menu-overlay');
+if (fdrMenuBtn && fdrMenuOverlay) {
+  fdrMenuBtn.addEventListener('click', () => fdrMenuOverlay.classList.add('active'));
+  fdrMenuClose?.addEventListener('click', () => fdrMenuOverlay.classList.remove('active'));
+  fdrMenuOverlay.addEventListener('click', (e) => {
+    if (e.target === fdrMenuOverlay) fdrMenuOverlay.classList.remove('active');
+  });
+}
+
+// FDR Hero karusell
+document.querySelectorAll('.fdr-om-hero').forEach(hero => {
+  const slides = hero.querySelectorAll('.fdr-hero-slide');
+  if (slides.length < 2) return;
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000);
+});
+
+// FDR Startsida hero karusell
+document.querySelectorAll('.fdr-hero').forEach(hero => {
+  const slides = hero.querySelectorAll('.fdr-hero-slide');
+  if (slides.length < 2) return;
+  let current = 0;
+  setInterval(() => {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000);
+});

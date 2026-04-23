@@ -78,7 +78,7 @@ class Hero extends PrekComposer
     {
         $slides = [];
         // Försök med nya ACF-fält först
-        $heroSlides = get_field('hero_slides');
+        $heroSlides = \get_field('hero_slides');
         if (is_array($heroSlides) && !empty($heroSlides)) {
             foreach ($heroSlides as $slide) {
                 if (empty($slide['image'])) continue;

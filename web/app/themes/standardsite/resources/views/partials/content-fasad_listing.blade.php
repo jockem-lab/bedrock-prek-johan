@@ -1,7 +1,6 @@
 @php
 $post_id = get_the_ID();
 
-// Helper: dubbel unserialize
 function fasad_unserialize($raw) {
     if (!is_string($raw)) return $raw;
     $s1 = @unserialize($raw);
@@ -9,21 +8,103 @@ function fasad_unserialize($raw) {
 }
 
 // Location
-$loc = fasad_unserialize(get_post_meta($post_id, '_fasad_location', true));
+$loc     = fasad_unserialize(get_post_meta($post_id, '_fasad_location', true));
 $address = ($loc && !empty($loc->address)) ? $loc->address : get_the_title($post_id);
 $city    = ($loc && !empty($loc->city) && is_string($loc->city)) ? $loc->city : '';
-$zip     = ($loc && !empty($loc->zipCode) && is_string($loc->zipCode)) ? $loc->zipCode : '';
-$commune = ($loc && !empty($loc->commune) && is_string($loc->commune)) ? $loc->commune : '';
-$full_address = $address . ($city ? ', ' . $city : '');
+$area    = ($loc && !empty($loc->area) && is_string($loc->area)) ? $loc->area : '';
+$district = ($loc && !empty($loc->district) && is_string($loc->district)) ? $loc->district : '';
+$subarea = $area ?: $district ?: $city;
 
 // Economy
-$eco = fasad_unserialize(get_post_meta($post_id, '_fasad_economy', true));
+$eco   = fasad_unserialize(get_post_meta($post_id, '_fasad_economy', true));
 $price = '';
 if ($eco && !empty($eco->price->primary->amount))
-    $price = number_format($eco->price->primary->amount, 0, ',', ' ') . ' kr';
+    $price = number_format($eco->price->primary->amount, 0, ',', '.') . ' kr/bud';
 $fee = '';
 if ($eco && !empty($eco->association->fee->amount))
-    $fee = number_format($eco->association->fee->amount, 0, ',', ' ') . ' kr/mån';
+    $fee = number_format($eco->association->fee->amount, 0, ',', '.') . ' kr/mån';
+
+// Size
+$sz = fasad_unserialize(get_post_meta($post_id, '_fasad_size', true));
+$rooms_count = ($sz && !empty($sz->rooms) && is_scalar($sz->rooms)) ? $sz->rooms : '';
+$living_area = '';
+$biarea = '';
+if (!empty($sz->area->areas) && is_array($sz->area->areas)) {
+    foreach ($sz->area->areas as $a) {
+        if (!empty($a->type) && $a->type === 'Boarea' && !empty($a->size))
+            $living_area = $a->size . ' kvm';
+        if (!empty($a->type) && $a->type === 'Biarea' && !empty($a->size))
+            $biarea = $a->size . ' kvm';
+    }
+}
+$area_str = $living_area . ($biarea ? ' + ' . $biarea : '');
+$floor = '';
+$elevator = '';
+if (!empty($sz->floor)) $floor = $sz->floor;
+if (!empty($sz->hasElevator)) $elevator = $sz->hasElevator ? 'Ja' : 'Nej';
+$built_year = '';
+$build = fasad_unserialize(get_post_meta($post_id, '_fasad_building', true));
+if ($build && !empty($build->constructionYear)) $built_year = $build->constructionYear;
+
+// Images
+$imgs_raw = get_post_meta($post_id, '_fasad_images', true);
+$imgs     = fasad_unserialize($imgs_raw);
+$images   = [];
+if (is_array($imgs)) {
+    foreach ($imgs as $img) {
+        if (!empty($img->variants) && is_array($img->variants)) {
+            foreach ($img->variants as $v) {
+                if (($v->type ?? '') === 'highres' && !empty($v->path)) {
+                    $images[] = rest_url('prek/v1/bildproxy?url=') . urlencode($v->path);
+                    break;
+                }
+            }
+        }
+    }
+}
+
+// Realtors
+$realtors_raw  = get_post_meta($post_id, '_fasad_realtors', true);
+$realtors_data = fasad_unserialize($realtors_raw);
+$first_realtor = null;
+if (is_array($realtors_data) && !empty($realtors_data)) {
+    $first_realtor = $realtors_data[0];
+} elseif (is_object($realtors_data)) {
+    $first_realtor = $realtors_data;
+}
+
+// Realtor image
+$maklare_bild = '';
+if ($first_realtor && !empty($first_realtor->image)) {
+    if (is_string($first_realtor->image)) $maklare_bild = $first_realtor->image;
+    elseif (!empty($first_realtor->image->path)) $maklare_bild = $first_realtor->image->path;
+}
+$maklare_namn = $first_realtor ? trim(($first_realtor->firstname ?? '') . ' ' . ($first_realtor->lastname ?? '')) : '';
+$maklare_tel = '';
+if ($first_realtor && !empty($first_realtor->cellphone)) {
+    $tel = $first_realtor->cellphone;
+    $maklare_tel_display = preg_replace('/^46/', '0', $tel);
+    $maklare_tel_href = '+' . ltrim($tel, '+');
+}
+$maklare_email = $first_realtor->email ?? '';
+$maklare_titel = $first_realtor->title ?? 'Fastighetsmäklare';
+
+// Status
+$status_raw = get_post_meta($post_id, '_fasad_status', true);
+$status = is_string($status_raw) ? strtolower(trim($status_raw)) : '';
+$minilist = get_post_meta($post_id, '_fasad_minilist', true);
+
+// Descriptions
+$desc_raw  = get_post_meta($post_id, '_fasad_descriptions', true);
+$desc_data = fasad_unserialize($desc_raw);
+$desc_text = '';
+if (is_array($desc_data)) {
+    foreach ($desc_data as $d) {
+        if (!empty($d->text)) { $desc_text = $d->text; break; }
+    }
+} elseif (is_object($desc_data) && !empty($desc_data->text)) {
+    $desc_text = $desc_data->text;
+}
 
 // Showings
 $showings_raw = get_post_meta($post_id, '_fasad_showings', true);
@@ -34,385 +115,157 @@ $showings = array_filter($showings, function($s) {
 });
 
 // Documents
-$docs_raw = get_post_meta($post_id, '_fasad_documents', true);
-$docs_obj = fasad_unserialize($docs_raw);
+$docs_obj  = fasad_unserialize(get_post_meta($post_id, '_fasad_documents', true));
 $documents = [];
 if ($docs_obj && !empty($docs_obj->listingDocuments)) {
     foreach ($docs_obj->listingDocuments as $doc) {
-        $documents[] = (object)[
-            'alias' => $doc->alias ?? '',
-            'href'  => $doc->href ?? '',
-        ];
+        $documents[] = (object)['alias' => $doc->alias ?? '', 'href' => $doc->href ?? ''];
     }
 }
 
 // Bids
-$bids_raw = get_post_meta($post_id, '_fasad_bids', true);
-$bids = fasad_unserialize($bids_raw);
+$bids = fasad_unserialize(get_post_meta($post_id, '_fasad_bids', true));
 if (!is_array($bids)) $bids = [];
-
-// Images
-$imgs_raw = get_post_meta($post_id, '_fasad_images', true);
-$imgs = fasad_unserialize($imgs_raw);
-$images = [];
-if (is_array($imgs)) {
-    foreach ($imgs as $img) {
-        if (!empty($img->variants) && is_array($img->variants)) {
-            foreach ($img->variants as $v) {
-                if (($v->type ?? '') === 'highres' && !empty($v->path)) {
-                    $images[] = rest_url('prek/v1/bildproxy?url=') . urlencode($v->path); break;
-                }
-            }
-        }
-    }
-}
-$images_hero = array_slice($images, 0, 5);
-
-// Size
-$sz = fasad_unserialize(get_post_meta($post_id, '_fasad_size', true));
-$rooms = ($sz && !empty($sz->rooms) && is_scalar($sz->rooms)) ? $sz->rooms . ' rum' : '';
-if (!empty($sz->roomsInformation) && is_string($sz->roomsInformation)) {
-    $rooms = $sz->rooms . ' ' . $sz->roomsInformation;
-}
-$area = '';
-if (!empty($sz->area->areas) && is_array($sz->area->areas)) {
-    foreach ($sz->area->areas as $a) {
-        if (!empty($a->type) && $a->type === 'Boarea' && !empty($a->size)) {
-            $area = $a->size . ' ' . strtolower($a->unit ?? 'kvm');
-            break;
-        }
-    }
-    if (empty($area) && !empty($sz->area->areas[0]->size)) {
-        $area = $sz->area->areas[0]->size . ' ' . strtolower($sz->area->areas[0]->unit ?? 'kvm');
-    }
-}
-
-// Type
-$tp = fasad_unserialize(get_post_meta($post_id, '_fasad_descriptionType', true));
-$type = ($tp && !empty($tp->alias) && is_string($tp->alias)) ? $tp->alias : '';
-
-// Facts
-$facts = fasad_unserialize(get_post_meta($post_id, '_fasad_facts', true));
-$floor    = ($facts && !empty($facts->floor)) ? $facts->floor : '';
-$built    = ($facts && !empty($facts->built)) ? $facts->built : '';
-$elevator = ($facts && isset($facts->elevator)) ? ($facts->elevator ? 'Ja' : 'Nej') : '';
-
-// Building
-$building = fasad_unserialize(get_post_meta($post_id, '_fasad_building', true));
-$built_year = ($building && !empty($building->constructionYear)) ? $building->constructionYear : $built;
-
-// Sales texts
-$salesTitle = is_string(get_post_meta($post_id, '_fasad_salesTitle', true)) ? get_post_meta($post_id, '_fasad_salesTitle', true) : $full_address;
-$raw_st = get_post_meta($post_id, '_fasad_salesText', true);
-$salesText = is_string($raw_st) ? $raw_st : '';
-
-// Realtors
-$realtors_raw = fasad_unserialize(get_post_meta($post_id, '_fasad_realtors', true));
-$first_realtor = null;
-if (is_array($realtors_raw) && !empty($realtors_raw)) {
-    $first_realtor = $realtors_raw[0]; // Data direkt på objektet
-}
-
-// Status
-$status_raw = fasad_unserialize(get_post_meta($post_id, '_fasad_status', true));
-$status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 @endphp
 
-{{-- Hero-bildspel --}}
-@if(!empty($images))
-  <div class="objekt-hero-slideshow">
-    @foreach($images_hero as $i => $img)
-      <div class="objekt-hero-slide {{ $i === 0 ? 'active' : '' }}" style="background-image:url('{{ $img }}')"></div>
-    @endforeach
+<article class="em-listing">
+
+  {{-- Rubrik --}}
+  <header class="em-listing-header">
+    @if($subarea)
+      <p class="em-listing-omrade">{{ strtoupper($subarea) }}</p>
+    @endif
+    <h1 class="em-listing-adress">{{ strtoupper($address) }}</h1>
+  </header>
+
+  {{-- Hero-bild --}}
+  @if(!empty($images))
+  <div class="em-listing-hero">
+    <img src="{{ $images[0] }}" alt="{{ $address }}" class="em-listing-hero-img">
     @if(count($images) > 1)
-      <button class="objekt-hero-prev">&#8592;</button>
-      <button class="objekt-hero-next">&#8594;</button>
-      <div class="objekt-hero-dots">
-        @foreach($images_hero as $i => $img)
-          <span class="objekt-hero-dot {{ $i === 0 ? 'active' : '' }}" data-index="{{ $i }}"></span>
-        @endforeach
-      </div>
-    @endif
-    @if($status)
-      <div class="objekt-status-badge objekt-status--{{ $status }}">{{ $status_label ?? strtoupper($status) }}</div>
-    @endif
-    @if(count($images) >= 5)
-      <button onclick="document.querySelector('.objekt-galleri').scrollIntoView({behavior:'smooth'})"
-              class="objekt-visa-fler-btn">
-        Visa fler bilder
+      <button class="em-listing-alla-bilder" onclick="document.getElementById('em-galleri').scrollIntoView({behavior:'smooth'})">
+        ALLA BILDER
       </button>
     @endif
   </div>
-@endif
+  @endif
 
-{{-- Faktarad --}}
-<div class="objekt-detalj-faktarad">
-  <div class="objekt-detalj-faktarad-inner">
-    @if($full_address)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Adress</span>
-        <span class="faktarad-värde">{{ $full_address }}</span>
-      </div>
-    @endif
-    @if($type)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Typ</span>
-        <span class="faktarad-värde">{{ $type }}</span>
-      </div>
-    @endif
-    @if($rooms)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Rum</span>
-        <span class="faktarad-värde">{{ $rooms }}</span>
-      </div>
-    @endif
-    @if($area)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Boarea</span>
-        <span class="faktarad-värde">{{ $area }}</span>
-      </div>
-    @endif
-    @if($price)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Pris</span>
-        <span class="faktarad-värde">{{ $price }}</span>
-      </div>
-    @endif
-    @if($fee)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Avgift</span>
-        <span class="faktarad-värde">{{ $fee }}</span>
-      </div>
-    @endif
-  </div>
-</div>
-
-{{-- Huvudinnehåll --}}
-<div class="objekt-detalj-inner">
-  <div class="objekt-detalj-content">
-    <h1>{{ $full_address }}</h1>
-    @if($salesTitle && $salesTitle !== $full_address)
-      <p class="objekt-detalj-undertitel">{{ $salesTitle }}</p>
-    @endif
-
-    <div class="objekt-accordion">
-      {{-- Beskrivning --}}
-      @if($salesText)
-        <div class="accordion-item open">
-          <button class="accordion-trigger">Beskrivning <span class="accordion-icon">+</span></button>
-          <div class="accordion-content">
-            <div class="objekt-detalj-beskrivning">{!! nl2br(e($salesText)) !!}</div>
-          </div>
+  {{-- Fakta + Mäklare --}}
+  <div class="em-listing-fakta-wrap">
+    <div class="em-listing-fakta">
+      @if($price)
+        <div class="em-fakta-rad">
+          <span class="em-fakta-label">Pris</span>
+          <span class="em-fakta-värde">{{ $price }}</span>
         </div>
       @endif
-
-      {{-- Fakta --}}
-      <div class="accordion-item open">
-        <button class="accordion-trigger">Fakta <span class="accordion-icon">+</span></button>
-        <div class="accordion-content">
-          <table class="fakta-tabell">
-            @if($commune)<tr><th>Kommun</th><td>{{ $commune }}</td></tr>@endif
-            @if($zip)<tr><th>Postnummer</th><td>{{ $zip }}</td></tr>@endif
-            @if($type)<tr><th>Bostadstyp</th><td>{{ $type }}</td></tr>@endif
-            @if($rooms)<tr><th>Antal rum</th><td>{{ $rooms }}</td></tr>@endif
-            @if($area)<tr><th>Boarea</th><td>{{ $area }}</td></tr>@endif
-            @if($floor)<tr><th>Våningsplan</th><td>{{ $floor }}</td></tr>@endif
-            @if($elevator)<tr><th>Hiss</th><td>{{ $elevator }}</td></tr>@endif
-          </table>
+      @if($fee)
+        <div class="em-fakta-rad">
+          <span class="em-fakta-label">Avgift</span>
+          <span class="em-fakta-värde">{{ $fee }}</span>
         </div>
-      </div>
-
-      {{-- Byggnad --}}
+      @endif
+      @if($area_str)
+        <div class="em-fakta-rad">
+          <span class="em-fakta-label">Storlek</span>
+          <span class="em-fakta-värde">{{ $area_str }}</span>
+        </div>
+      @endif
+      @if($rooms_count)
+        <div class="em-fakta-rad">
+          <span class="em-fakta-label">Antal Rum</span>
+          <span class="em-fakta-värde">{{ $rooms_count }}</span>
+        </div>
+      @endif
+      @if($floor)
+        <div class="em-fakta-rad">
+          <span class="em-fakta-label">Våning</span>
+          <span class="em-fakta-värde">{{ $floor }}{{ $elevator === 'Ja' ? ', hiss finns' : '' }}</span>
+        </div>
+      @endif
       @if($built_year)
-        <div class="accordion-item">
-          <button class="accordion-trigger">Byggnad <span class="accordion-icon">+</span></button>
-          <div class="accordion-content">
-            <table class="fakta-tabell">
-              <tr><th>Byggnadsår</th><td>{{ $built_year }}</td></tr>
-            </table>
-          </div>
+        <div class="em-fakta-rad">
+          <span class="em-fakta-label">Byggår</span>
+          <span class="em-fakta-värde">{{ $built_year }}</span>
         </div>
-      @endif
-
-      {{-- Kostnader --}}
-      @if($price || $fee)
-        <div class="accordion-item">
-          <button class="accordion-trigger">Kostnader <span class="accordion-icon">+</span></button>
-          <div class="accordion-content">
-            <table class="fakta-tabell">
-              @if($price)<tr><th>Pris</th><td>{{ $price }}</td></tr>@endif
-              @if($fee)<tr><th>Månadsavgift</th><td>{{ $fee }}</td></tr>@endif
-            </table>
-          </div>
-        </div>
-      @endif
-
-      {{-- Dokument --}}
-      @if(!empty($documents))
-      <div class="accordion-item">
-        <button class="accordion-trigger">Dokument <span class="accordion-icon">+</span></button>
-        <div class="accordion-content">
-          @foreach($documents as $doc)
-            <a href="{{ $doc->href }}" target="_blank" class="dokument-rad">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              {{ $doc->alias }}
-            </a>
-          @endforeach
-        </div>
-      </div>
       @endif
     </div>
 
+    <div class="em-listing-divider"></div>
+
+    <div class="em-listing-maklare">
+      <p class="em-maklare-label">ANSVARIG MÄKLARE</p>
+      <h2 class="em-maklare-namn">{{ strtoupper($maklare_namn) }}</h2>
+      @if(!empty($maklare_tel_href))
+        <a href="tel:{{ $maklare_tel_href }}" class="em-maklare-kontakt">{{ $maklare_tel_display ?? $first_realtor->cellphone }}</a>
+      @endif
+      @if($maklare_email)
+        <a href="mailto:{{ $maklare_email }}" class="em-maklare-kontakt">{{ strtoupper($maklare_email) }}</a>
+      @endif
+    </div>
   </div>
 
-  {{-- Sidebar: mäklarkort --}}
-  <div class="objekt-detalj-sidebar">
-    <div class="objekt-detalj-kontakt">
-      @if($first_realtor)
-        @php
-          $maklare_bild = '';
-          if (!empty($first_realtor->image)) {
-              if (is_string($first_realtor->image)) {
-                  $maklare_bild = $first_realtor->image;
-              } elseif (!empty($first_realtor->image->path)) {
-                  $maklare_bild = $first_realtor->image->path;
-              }
-          }
-        @endphp
-        @if($maklare_bild)
-          <img src="{{ $maklare_bild }}" alt="{{ $first_realtor->firstname ?? '' }}" class="maklare-bild">
-        @else
-          <div class="maklare-bild-placeholder"></div>
-        @endif
-        <h3>{{ ($first_realtor->firstname ?? '') . ' ' . ($first_realtor->lastname ?? '') }}</h3>
-        @if(!empty($first_realtor->title))
-          <p class="maklare-titel">{{ $first_realtor->title }}</p>
-        @endif
-        @if(!empty($first_realtor->cellphone))
-          @php
-            $tel = $first_realtor->cellphone ?? '';
-            $tel_display = preg_replace('/^46/', '0', $tel);
-            $tel_display = preg_replace('/^(\d{3})(\d{3})(\d{2})(\d{2})$/', '$1-$2 $3 $4', $tel_display);
-            $tel_href = '+' . ltrim($tel, '+');
-          @endphp
-          <p><a href="tel:{{ $tel_href }}">{{ $tel_display }}</a></p>
-        @endif
-        @if(!empty($first_realtor->email))
-          <p><a href="mailto:{{ $first_realtor->email }}">{{ $first_realtor->email }}</a></p>
-        @endif
-        <a href="{{ home_url('/kontakt') }}" class="btn-primary">Kontakta mäklaren</a>
-      @else
-        <h3>Intresserad?</h3>
-        <p>Kontakta oss om {{ $full_address }}.</p>
-        <a href="{{ home_url('/kontakt') }}" class="btn-primary">Kontakta oss</a>
-      @endif
-    </div>
-    {{-- Budgivning --}}
-    @if(!empty($bids))
-    <div class="objekt-budgivning">
-      <h3>Budgivning</h3>
-      @foreach($bids as $bid)
-        @php
-          $belopp = !empty($bid->amount) ? number_format($bid->amount, 0, ',', ' ') . ' kr' : '';
-          $tid = !empty($bid->createdAt) ? date('d/m H:i', strtotime($bid->createdAt)) : '';
-        @endphp
-        <div class="bud-rad">
-          <span class="bud-belopp">{{ $belopp }}</span>
-          <span class="bud-tid">{{ $tid }}</span>
-        </div>
-      @endforeach
-    </div>
-    @endif
-
-    {{-- Visningstider --}}
-    @if(!empty($showings))
-    <div class="objekt-visningar">
-      <h3>Visningstider</h3>
-      @foreach($showings as $showing)
-        @php
-          $start = strtotime($showing->startDate);
-          $end   = strtotime($showing->endDate);
-          $dagar = ['Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag'];
-          $manader = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
-          $datum = $dagar[date('w', $start)] . ' ' . date('j', $start) . ' ' . $manader[(int)date('n', $start)];
-          $tid   = date('H:i', $start) . ' – ' . date('H:i', $end);
-        @endphp
-        <div class="visning-rad">
-          <div class="visning-datum">{{ ucfirst($datum) }}</div>
-          <div class="visning-tid">{{ $tid }}</div>
-          @if(!empty($showing->openForRegistration))
-            <a href="#visningsanmalan" class="btn-primary visning-anmalan-btn">Anmäl intresse</a>
-          @endif
-        </div>
-      @endforeach
-    </div>
-    @endif
-
-    {{-- Dokument --}}
-    @if(!empty($documents))
-    <div class="objekt-dokument">
-      <h3>Ladda ner dokument</h3>
-      @foreach($documents as $doc)
-        <a href="{{ $doc->href }}" target="_blank" class="dokument-rad">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          {{ $doc->alias }}
-        </a>
-      @endforeach
-    </div>
-    @endif
-
+  {{-- Beskrivning --}}
+  @if($desc_text)
+  <div class="em-listing-beskrivning">
+    <div class="em-listing-beskrivning-text">{!! nl2br(e($desc_text)) !!}</div>
   </div>
-</div>
+  @endif
 
-{{-- Bildgalleri med lightbox --}}
-@if(count($images) > 1)
-<div class="objekt-galleri">
-  <div class="objekt-galleri-grid" id="galleri-grid">
-    @foreach($images as $i => $img)
-      <div class="objekt-galleri-item {{ $i % 5 === 0 ? 'objekt-galleri-item--stor' : '' }}{{ $i >= 5 ? ' galleri-dold' : '' }}">
-        <a href="javascript:void(0)" class="galleri-trigger" data-index="{{ $i }}" data-highres="{{ $img }}" data-text="Bild {{ $i + 1 }}">
-          <img src="{{ $img }}" alt="Bild {{ $i + 1 }}" loading="lazy">
-          <div class="galleri-overlay"><span>&#x2B;</span></div>
-        </a>
+  {{-- Visningstider --}}
+  @if(!empty($showings))
+  <div class="em-listing-sektion">
+    <h3 class="em-sektion-rubrik">VISNINGSTIDER</h3>
+    @foreach($showings as $showing)
+      @php
+        $start  = strtotime($showing->startDate);
+        $end    = strtotime($showing->endDate);
+        $dagar  = ['Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag'];
+        $mån    = ['','Jan','Feb','Mar','Apr','Maj','Jun','Jul','Aug','Sep','Okt','Nov','Dec'];
+        $datum  = $dagar[date('w',$start)] . ' ' . date('j',$start) . ' ' . $mån[(int)date('n',$start)];
+        $tid    = date('H:i',$start) . '–' . date('H:i',$end);
+      @endphp
+      <div class="em-visning-rad">
+        <span class="em-visning-datum">{{ $datum }}</span>
+        <span class="em-visning-tid">{{ $tid }}</span>
       </div>
     @endforeach
   </div>
-  @if(count($images) > 5)
-    <div style="text-align:center;margin-top:24px;" id="galleri-visa-fler-wrap">
-      <button class="btn-primary" onclick="visaAllaGalleri()">
-        Visa alla {{ count($images) }} bilder
-      </button>
-    </div>
   @endif
-</div>
 
-{{-- Alla bilder för lightbox --}}
-<script>
-var allImages = @json($images);
-
-function visaAllaGalleri() {
-  document.querySelectorAll('.galleri-dold').forEach(function(el) {
-    el.classList.remove('galleri-dold');
-  });
-  // Byt till jämnt rutnät
-  document.querySelectorAll('.objekt-galleri-item--stor').forEach(function(el) {
-    el.classList.remove('objekt-galleri-item--stor');
-  });
-  var grid = document.getElementById('galleri-grid');
-  if (grid) grid.classList.add('galleri-grid--alla');
-  var wrap = document.getElementById('galleri-visa-fler-wrap');
-  if (wrap) wrap.style.display = 'none';
-}
-</script>
-{{-- Lightbox --}}
-<div id="lightbox" class="lightbox">
-  <button id="lightbox-close" class="lightbox-close">&times;</button>
-  <button id="lightbox-prev" class="lightbox-prev">&#8592;</button>
-  <button id="lightbox-next" class="lightbox-next">&#8594;</button>
-  <div class="lightbox-inner">
-    <img id="lightbox-img" src="" alt="">
-    <p id="lightbox-caption" class="lightbox-caption"></p>
-    <p id="lightbox-counter" class="lightbox-counter"></p>
+  {{-- Dokument --}}
+  @if(!empty($documents))
+  <div class="em-listing-sektion">
+    <h3 class="em-sektion-rubrik">DOKUMENT</h3>
+    @foreach($documents as $doc)
+      <a href="{{ $doc->href }}" target="_blank" class="em-dokument-rad">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        {{ $doc->alias }}
+      </a>
+    @endforeach
   </div>
-</div>
-@endif
+  @endif
+
+  {{-- Bildgalleri --}}
+  @if(count($images) > 1)
+  <div class="em-galleri" id="em-galleri">
+    @foreach($images as $i => $img)
+      <div class="em-galleri-item{{ $i >= 4 ? ' em-galleri-dold' : '' }}">
+        <img src="{{ $img }}" alt="Bild {{ $i+1 }}" loading="lazy">
+      </div>
+    @endforeach
+    @if(count($images) > 4)
+    <div class="em-galleri-visa-fler" id="em-visa-fler">
+      <button onclick="visaAllaEM()" class="em-visa-fler-btn">VISA ALLA {{ count($images) }} BILDER</button>
+    </div>
+    @endif
+  </div>
+  <script>
+  function visaAllaEM() {
+    document.querySelectorAll('.em-galleri-dold').forEach(e => e.classList.remove('em-galleri-dold'));
+    document.getElementById('em-visa-fler')?.remove();
+  }
+  </script>
+  @endif
+
+</article>

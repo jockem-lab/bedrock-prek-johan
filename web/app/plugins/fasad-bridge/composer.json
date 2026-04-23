@@ -6,19 +6,14 @@
         {
             "name": "Emil Lindström",
             "email": "emil.lindstrom@prek.se"
-        },
-        {
-            "name": "Dennis Germundal",
-            "email": "dennis@prek.se"
-        },
-        {
-            "name": "Andreas Lundgren",
-            "email": "andreas.lundgren@prek.se"
         }
     ],
     "autoload": {
         "psr-4": {
-            "FasadBridge\\":"App/"
-        }
+            "FasadBridge\\": "App/"
+        },
+        "files": [
+            "FasadBridge.php"
+        ]
     }
 }

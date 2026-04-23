@@ -19,19 +19,19 @@ class Underhand extends PrekComposer
 
         $objekt = [];
         foreach ($manuella as $post) {
-            $bilder = get_field('uh_bilder', $post->ID) ?: [];
-            $punkter = get_field('uh_beskrivning', $post->ID) ?: [];
+            $bilder = \get_field('uh_bilder', $post->ID) ?: [];
+            $punkter = \get_field('uh_beskrivning', $post->ID) ?: [];
             $objekt[] = (object)[
                 'typ'      => 'manuell',
-                'omrade'   => get_field('uh_omrade', $post->ID) ?: get_the_title($post),
-                'kvm'      => get_field('uh_kvm', $post->ID),
-                'rum'      => get_field('uh_rum', $post->ID),
+                'omrade'   => \get_field('uh_omrade', $post->ID) ?: get_the_title($post),
+                'kvm'      => \get_field('uh_kvm', $post->ID),
+                'rum'      => \get_field('uh_rum', $post->ID),
                 'punkter'  => array_column($punkter, 'punkt'),
                 'bilder'   => array_slice(array_map(fn($b) => $b['url'], $bilder), 0, 5),
                 'maklare'  => [
-                    'namn'     => get_field('uh_maklare_namn', $post->ID),
-                    'email'    => get_field('uh_maklare_email', $post->ID),
-                    'telefon'  => get_field('uh_maklare_telefon', $post->ID),
+                    'namn'     => \get_field('uh_maklare_namn', $post->ID),
+                    'email'    => \get_field('uh_maklare_email', $post->ID),
+                    'telefon'  => \get_field('uh_maklare_telefon', $post->ID),
                 ],
             ];
         }
