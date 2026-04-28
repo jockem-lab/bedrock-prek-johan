@@ -30,7 +30,7 @@
               @if($artikel->hero_bild)
                 <div class="journal-bild-inner" style="background-image:url('{{ $artikel->hero_bild }}')"></div>
               @else
-                <div class="journal-bild-inner" style="background:#243558;"></div>
+                <div class="journal-bild-inner" style="background:var(--bg-warm);"></div>
               @endif
             </div>
             <div class="journal-info">

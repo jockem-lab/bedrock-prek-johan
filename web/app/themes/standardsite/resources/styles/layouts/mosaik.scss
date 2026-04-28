@@ -43,7 +43,7 @@
     overflow: hidden;
     display: block;
     text-decoration: none;
-    background: #243558;
+    background: var(--bg-warm);
 
     &:hover .mosaik-bild {
       transform: scale(1.04);
@@ -96,7 +96,7 @@
       font-family: var(--font-heading);
       font-size: 24px;
       font-weight: 300;
-      color: #111D33;
+      color: var(--bg-dark);
       letter-spacing: -0.01em;
       line-height: 1.2;
       text-transform: uppercase;

@@ -28,7 +28,7 @@ if ($hero_typ === 'video' && $hero_video) {
     <div style="position:absolute;inset:0;background:url('{{ $hero_bild }}') center/cover no-repeat;"></div>
   @endif
   <div style="position:absolute;inset:0;background:rgba(10,18,35,0.5);"></div>
-  <div style="position:relative;z-index:1;text-align:center;padding:0 24px;max-width:800px;">
+  <div style="position:relative;z-index:1;text-align:center;padding:0 24px;max-width:800px;margin:0 auto;">
     @if($kategori)
       <span class="journal-kategori" style="color:rgba(255,255,255,0.7);">{{ $kategori }}</span>
     @endif
@@ -50,5 +50,30 @@ if ($hero_typ === 'video' && $hero_video) {
     </a>
   </div>
 </article>
+
+
+@if(!empty($relaterade))
+<section class="journal-relaterade">
+  <div class="journal-relaterade-inner">
+    <h2 class="journal-relaterade-rubrik">Fler artiklar</h2>
+    <div class="journal-relaterade-grid">
+      @foreach($relaterade as $rel)
+        <a href="{{ $rel['url'] }}" class="journal-rel-kort">
+          <div class="journal-rel-bild" style="background-image:url('{{ $rel['bild'] }}')"></div>
+          <div class="journal-rel-info">
+            @if($rel['kategori'])
+              <span class="journal-kategori">{{ $rel['kategori'] }}</span>
+            @endif
+            <h3 class="journal-rel-titel">{{ $rel['titel'] }}</h3>
+            @if($rel['lasttid'])
+              <span class="journal-meta">{{ $rel['lasttid'] }} min</span>
+            @endif
+          </div>
+        </a>
+      @endforeach
+    </div>
+  </div>
+</section>
+@endif
 
 @endsection

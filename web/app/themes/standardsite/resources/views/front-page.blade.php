@@ -78,7 +78,7 @@
 @endphp
 
 @if(!empty($journal_artiklar))
-<section style="padding:80px 40px;background:#111D33;">
+<section style="padding:80px 40px;background:var(--bg-light);">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="sektion-header" style="margin-bottom:48px;">
       <span class="sektion-eyebrow-label">Oscars Mäkleri</span>

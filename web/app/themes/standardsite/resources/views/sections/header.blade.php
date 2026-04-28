@@ -8,9 +8,9 @@
 
     <div class="site-branding">
       <a href="{{ home_url('/') }}" class="site-name" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;">
-        <span style="font-size:9px;letter-spacing:0.2em;color:rgba(255,255,255,0.5);font-family:var(--font-body);font-weight:400;text-transform:uppercase;">Östermalm sedan 2001</span>
-        <span style="font-size:15px;letter-spacing:0.22em;color:#fff;font-family:var(--font-body);font-weight:500;text-transform:uppercase;">Oscars</span>
-        <span style="font-size:8px;letter-spacing:0.18em;color:rgba(255,255,255,0.5);font-family:var(--font-body);font-weight:400;text-transform:uppercase;">Fastighetsmäkleri</span>
+        <span style="font-size:9px;letter-spacing:0.2em;color:var(--text-mid);font-family:var(--font-body);font-weight:400;text-transform:uppercase;">Östermalm sedan 2001</span>
+        <span style="font-size:15px;letter-spacing:0.22em;color:var(--text-dark);font-family:var(--font-body);font-weight:500;text-transform:uppercase;">Oscars</span>
+        <span style="font-size:8px;letter-spacing:0.18em;color:var(--text-mid);font-family:var(--font-body);font-weight:400;text-transform:uppercase;">Fastighetsmäkleri</span>
       </a>
     </div>
 
@@ -138,5 +138,6 @@ document.addEventListener('DOMContentLoaded', function() {
   panel.addEventListener('mouseleave', close);
 });
 </script>
+
 
 @include('partials.hero')

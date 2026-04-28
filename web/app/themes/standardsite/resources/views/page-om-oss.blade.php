@@ -57,7 +57,7 @@
 
 {{-- Team --}}
 @if(!empty($oo_team))
-<section style="padding:80px 40px;background:#111D33;">
+<section style="padding:80px 40px;background:var(--bg-light);">
   <div style="max-width:1200px;margin:0 auto;">
     <div class="sektion-header" style="margin-bottom:48px;">
       <span class="sektion-eyebrow-label">Oscars Mäkleri</span>
@@ -70,8 +70,8 @@
             @if($m->bild)
               <img src="{{ $m->bild }}" alt="{{ $m->namn }}" style="width:100%;height:100%;object-fit:cover;object-position:top;">
             @else
-              <div style="width:100%;height:100%;background:#243558;display:flex;align-items:center;justify-content:center;">
-                <span style="font-family:var(--font-heading);font-size:48px;font-weight:300;color:rgba(255,255,255,0.3);">{{ strtoupper(substr($m->namn, 0, 1)) }}</span>
+              <div style="width:100%;height:100%;background:var(--bg-warm);display:flex;align-items:center;justify-content:center;">
+                <span style="font-family:var(--font-heading);font-size:48px;font-weight:300;color:var(--text-mid);">{{ strtoupper(substr($m->namn, 0, 1)) }}</span>
               </div>
             @endif
           </div>

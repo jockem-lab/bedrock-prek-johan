@@ -1,18 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
 
+
 :root {
-  --accent:        #C8A97E;
-  --accent-dark:   #A8895E;
-  --accent-light:  #D4BC98;
+  --accent:        #C0392B;
+  --accent-dark:   #96281B;
+  --accent-light:  #E74C3C;
   --blue:          #7BA7C4;
   --blue-dark:     #5A8BA8;
   --blue-light:    #A8C8DC;
-  --text-dark:     #FFFFFF;
-  --text-mid:      rgba(255,255,255,0.7);
+  --text-dark:     #1B2A4A;
+  --text-mid:      rgba(27,42,74,0.65);
   --text-light:    rgba(255,255,255,0.45);
-  --bg-light:      #1B2A4A;
-  --bg-warm:       #243558;
-  --bg-dark:       #111D33;
+  --bg-light:      #F5F0E8;
+  --bg-warm:       #EDE8DF;
+  --bg-dark:       #1B2A4A;
   --bg-form:       #0D1626;
   --font-heading:  'Cormorant', Georgia, serif;
   --font-serif:    'Cormorant', Georgia, serif;
@@ -92,7 +93,7 @@ h1, h2, h3, h4 {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--text-dark);
+  background: #1a1a1a;
   transition: all 0.3s ease;
 }
 .menu-toggle.is-active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -166,7 +167,8 @@ h1, h2, h3, h4 {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.75) 100%);
+  z-index: 1;
 }
 .hero-inner {
   position: relative;
@@ -309,11 +311,11 @@ a.btn-primary:hover { background: var(--btn-blue-dark); }
 .btn-secondary,
 a.btn-secondary {
   display: inline-block;
-  background: transparent;
+  background: var(--bg-dark);
   color: #fff !important;
   padding: 14px 32px;
   border-radius: 4px;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid var(--bg-dark);
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.1em;
@@ -453,7 +455,7 @@ a.btn-secondary:hover { border-color: #fff; }
 .objekt-detalj-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 48px 24px;
+  padding: 80px 24px 48px;
   display: grid;
   position: relative;
   grid-template-columns: 1fr 340px;
@@ -570,7 +572,7 @@ a.btn-secondary:hover { border-color: #fff; }
   transition: background 0.2s, color 0.2s;
 }
 .btn-outline:hover {
-  background: var(--text-dark);
+  background: #1a1a1a;
   color: #fff;
 }
 .om-oss-bild {
@@ -592,7 +594,7 @@ a.btn-secondary:hover { border-color: #fff; }
 }
 /* ── Boka möte ── */
 .boka-sektion {
-  background: var(--text-dark);
+  background: #1a1a1a;
   padding: 96px 24px;
 }
 .boka-inner {
@@ -692,8 +694,8 @@ a.btn-secondary:hover { border-color: #fff; }
 }
 .objekt-status--kommande   { background: #5a5a5a; color: #fff; }
 .objekt-status--till-salu  { background: var(--btn-blue); color: #fff; }
-.objekt-status--visning    { background: var(--text-dark); color: #fff; }
-.objekt-status--budgivning { background: var(--text-dark); color: #fff; }
+.objekt-status--visning    { background: #1a1a1a; color: #fff; }
+.objekt-status--budgivning { background: #1a1a1a; color: #fff; }
 .objekt-status--sald       { background: #5a5a5a; color: #fff; }
 .objekt-status--avpublicerad { background: #888; color: #fff; }
 
@@ -730,7 +732,7 @@ a.btn-secondary:hover { border-color: #fff; }
   color: var(--text-dark);
 }
 .filter-tab.active {
-  background: var(--text-dark);
+  background: #1a1a1a;
   border-color: var(--text-dark);
   color: #fff;
 }
@@ -866,8 +868,6 @@ a.btn-secondary:hover { border-color: #fff; }
   border-radius: 0 !important;
   padding: 32px;
   align-self: start;
-  position: sticky;
-  top: 90px;
   color: var(--text-dark) !important;
 }
 .objekt-detalj-kontakt h3 {
@@ -885,7 +885,7 @@ a.btn-secondary:hover { border-color: #fff; }
 }
 
 .objekt-detalj-status.objekt-status--till-salu {
-  background: var(--text-dark);
+  background: #1a1a1a;
   color: #fff;
 }
 .objekt-detalj-status.objekt-status--kommande {
@@ -2641,1312 +2641,1853 @@ h3 { font-size: clamp(20px, 2vw, 28px); }
   }
 }
 
-/* ── Navy tema — globalt ── */
-body {
-  background: #1B2A4A !important;
-  color: #fff !important;
-}
-
-/* Header */
-.site-header {
-  background: #111D33 !important;
-  border-bottom: 0.5px solid rgba(255,255,255,0.08) !important;
-}
-.site-name {
-  color: #fff !important;
-}
-.nav-left a, .nav-right a {
-  color: rgba(255,255,255,0.75) !important;
-}
-.nav-left a:hover, .nav-right a:hover {
-  color: var(--btn-blue) !important;
-}
-#dd-trigger {
-  color: rgba(255,255,255,0.75) !important;
-}
-
-/* Dropdown */
-#dd-panel {
-  background: #111D33 !important;
-  border-color: rgba(255,255,255,0.1) !important;
-}
-#dd-panel a span:first-child {
-  color: #fff !important;
-}
-#dd-panel a span:last-child {
-  color: rgba(255,255,255,0.5) !important;
-}
-#dd-panel > div > div:first-child {
-  border-right-color: rgba(255,255,255,0.08) !important;
-}
-#dd-panel a {
-  border-bottom-color: rgba(255,255,255,0.08) !important;
-}
-#dd-panel a:hover span:first-child {
-  color: var(--btn-blue) !important;
-}
-
-/* Hamburger */
-.menu-toggle span {
-  background: #fff !important;
-}
-
-/* Objektkort */
-.objekt-bild-placeholder {
-  background: #243558 !important;
-}
-.objekt-sektion {
-  background: #1B2A4A !important;
-}
-.sektion-rubrik {
-  color: #fff !important;
-}
+/* ── Beige-tema fixar ── */
 .sektion-eyebrow-label {
-  color: rgba(255,255,255,0.45) !important;
-}
-
-/* Filter */
-.filter-knapp {
-  border-color: rgba(255,255,255,0.2) !important;
-  color: rgba(255,255,255,0.7) !important;
-  background: transparent !important;
-}
-.filter-knapp:hover {
-  border-color: var(--btn-blue) !important;
-  color: var(--btn-blue) !important;
-}
-.filter-knapp.active {
-  background: var(--btn-blue) !important;
-  border-color: var(--btn-blue) !important;
-  color: #111D33 !important;
-}
-
-/* Knappar */
-.btn-primary, a.btn-primary {
-  background: var(--btn-blue) !important;
-  color: #111D33 !important;
-}
-.btn-primary:hover, a.btn-primary:hover {
-  background: var(--btn-blue-dark) !important;
-}
-.btn-secondary, a.btn-secondary {
-  border-color: rgba(255,255,255,0.4) !important;
-  color: #fff !important;
-}
-.btn-outline {
-  border-color: rgba(255,255,255,0.4) !important;
-  color: #fff !important;
-}
-.btn-outline:hover {
-  background: var(--btn-blue) !important;
-  border-color: var(--btn-blue) !important;
-  color: #111D33 !important;
-}
-
-/* Faktarad */
-.objekt-detalj-faktarad {
-  background: #243558 !important;
-  border-bottom-color: rgba(255,255,255,0.08) !important;
-}
-.faktarad-label { color: rgba(255,255,255,0.45) !important; }
-.faktarad-värde { color: #fff !important; }
-.faktarad-item { border-right-color: rgba(255,255,255,0.08) !important; }
-
-/* Mäklarkort */
-.objekt-detalj-kontakt {
-  background: #243558 !important;
-  border-color: rgba(255,255,255,0.08) !important;
-}
-.objekt-detalj-kontakt h3,
-.objekt-detalj-kontakt p,
-.objekt-detalj-kontakt a {
-  color: #fff !important;
-}
-
-/* Accordion */
-.accordion-trigger { color: #fff !important; }
-.accordion-icon { color: rgba(255,255,255,0.5) !important; }
-.accordion-item { border-bottom-color: rgba(255,255,255,0.08) !important; }
-.fakta-tabell th { color: rgba(255,255,255,0.5) !important; }
-.fakta-tabell td { color: #fff !important; }
-.fakta-tabell tr { border-bottom-color: rgba(255,255,255,0.08) !important; }
-
-/* Beskrivning */
-.objekt-detalj-beskrivning { color: rgba(255,255,255,0.75) !important; }
-.objekt-detalj-undertitel { color: rgba(255,255,255,0.6) !important; }
-.beskrivning-rubrik {
-  color: #fff !important;
-  border-bottom-color: rgba(255,255,255,0.08) !important;
-}
-
-/* Galleri */
-.objekt-galleri { background: #111D33 !important; }
-.objekt-galleri-item { background: #243558 !important; }
-
-/* Om oss */
-.om-oss-text h2, .om-oss-text p { color: rgba(255,255,255,0.8) !important; }
-.om-varden { background: #243558 !important; }
-.om-varden h2, .om-varden-kort h3, .om-varden-kort p { color: rgba(255,255,255,0.8) !important; }
-.om-varden-kort { border-top-color: rgba(255,255,255,0.12) !important; }
-.om-fakta-tal { color: var(--btn-blue) !important; }
-.om-fakta-label { color: rgba(255,255,255,0.45) !important; }
-
-/* Kontaktformulär */
-.kontakt-form input,
-.kontakt-form textarea,
-.kontakt-formulär input,
-.kontakt-formulär textarea {
-  background: #243558 !important;
-  border-color: rgba(255,255,255,0.1) !important;
-  color: #fff !important;
-}
-.kontakt-form input::placeholder,
-.kontakt-form textarea::placeholder {
-  color: rgba(255,255,255,0.35) !important;
-}
-.kontakt-form input:focus,
-.kontakt-form textarea:focus {
-  border-color: var(--btn-blue) !important;
-}
-.kontakt-info-label { color: var(--btn-blue) !important; }
-.kontakt-info-block p, .kontakt-info-block a { color: rgba(255,255,255,0.75) !important; }
-.kontakt-info { border-right-color: rgba(255,255,255,0.08) !important; }
-.kontakt-formular h2 { color: #fff !important; }
-.kontakt-form-grupp label { color: rgba(255,255,255,0.45) !important; }
-
-/* Footer */
-.site-footer { background: #111D33 !important; }
-.footer-col h4 { color: rgba(255,255,255,0.35) !important; }
-.footer-col a, .footer-col p { color: rgba(255,255,255,0.65) !important; }
-.footer-col a:hover { color: var(--btn-blue) !important; }
-.footer-bottom { color: rgba(255,255,255,0.2) !important; border-top-color: rgba(255,255,255,0.06) !important; }
-.footer-tagline { color: rgba(255,255,255,0.3) !important; }
-
-/* 404 */
-.objekt-tomma { color: rgba(255,255,255,0.5) !important; }
-.objekt-antal { color: rgba(255,255,255,0.4) !important; }
-
-/* Dokumentlista */
-.dokument-lista a { color: rgba(255,255,255,0.75) !important; }
-.dokument-lista li { border-bottom-color: rgba(255,255,255,0.08) !important; }
-
-/* Undersida-sektioner */
-.om-intro { background: #1B2A4A !important; }
-.om-intro-text p { color: rgba(255,255,255,0.75) !important; }
-.om-intro-fakta { border-left-color: rgba(255,255,255,0.08) !important; }
-.kontakt-sektion { background: #1B2A4A !important; }
-.page-sektion { background: #1B2A4A !important; }
-
-/* ── Mosaikgrid ── */
-.mosaik-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 320px;
-  gap: 8px;
-}
-.mosaik-kort--stor {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-.mosaik-kort {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  text-decoration: none;
-  background: #243558;
-}
-.mosaik-kort:hover .mosaik-bild {
-  transform: scale(1.04);
-}
-.mosaik-bild {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.6s ease;
-}
-.mosaik-bild::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(10,18,35,0.85) 0%, rgba(10,18,35,0.1) 60%, transparent 100%);
-}
-.mosaik-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 20px 20px 20px;
-  z-index: 2;
-  text-align: center;
-}
-.mosaik-adress {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  font-weight: 300;
-  color: #fff;
-  letter-spacing: 0.02em;
-  margin-bottom: 4px;
-}
-.mosaik-kort--stor .mosaik-adress {
-  font-size: 28px;
-}
-.mosaik-pris {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: rgba(255,255,255,0.8);
-  margin-bottom: 6px;
-}
-.mosaik-meta {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  font-family: var(--font-body);
-  font-size: 11px;
-  color: rgba(255,255,255,0.6);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.mosaik-kort .objekt-status {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 3;
-}
-
-/* Mosaikgrid mobil */
-@media (max-width: 768px) {
-  .mosaik-grid {
-    grid-template-columns: 1fr !important;
-    grid-auto-rows: 260px !important;
-  }
-  .mosaik-kort--stor {
-    grid-column: span 1 !important;
-    grid-row: span 1 !important;
-  }
-}
-
-/* ── Header navy fix ── */
-.site-header,
-.theme-custom-header-background {
-  background: #111D33 !important;
-  border-bottom: 0.5px solid rgba(255,255,255,0.08) !important;
-}
-.header-inner {
-  background: #111D33 !important;
-}
-
-/* Hero — vänsterställd text som kundens skiss */
-.hero-inner {
-  text-align: left !important;
-  max-width: 1200px !important;
-  padding: 0 80px !important;
-  margin: 0 auto !important;
-}
-.hero-inner h1 {
-  max-width: 700px !important;
-}
-@media (max-width: 768px) {
-  .hero-inner {
-    padding: 0 24px !important;
-    text-align: left !important;
-  }
-}
-
-/* ── Underhand ── */
-.uh-grid {
-  display: flex;
-  flex-direction: column;
-}
-.uh-kort {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 48px;
-  padding: 48px 0;
-  align-items: start;
-}
-.uh-divider {
-  border-top: 0.5px solid rgba(255,255,255,0.08);
-}
-.uh-bilder {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 200px 200px;
-  gap: 4px;
-}
-.uh-bild {
-  background-size: cover;
-  background-position: center;
-  background-color: #243558;
-}
-.uh-bild--stor {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-.uh-omrade {
-  font-family: var(--font-heading);
-  font-size: 28px;
-  font-weight: 300;
-  color: #fff;
-  letter-spacing: -0.01em;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-}
-.uh-punkter {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.uh-punkter li {
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: rgba(255,255,255,0.7);
-  padding-left: 16px;
-  position: relative;
-}
-.uh-punkter li::before {
-  content: '·';
-  position: absolute;
-  left: 0;
-  color: var(--btn-blue);
-}
-.uh-kontakt {
-  border-top: 0.5px solid rgba(255,255,255,0.08);
-  padding-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.uh-kontakt-label {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--btn-blue);
-  margin-bottom: 4px;
-}
-.uh-kontakt a {
-  font-size: 14px;
-  color: rgba(255,255,255,0.75);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.uh-kontakt a:hover { color: var(--btn-blue); }
-
-@media (max-width: 768px) {
-  .uh-kort {
-    grid-template-columns: 1fr !important;
-    gap: 24px !important;
-  }
-  .uh-bilder {
-    grid-template-rows: 160px 160px !important;
-  }
-}
-
-/* ── Underhand v2 — ESNY-stil ── */
-.uh-dold { display: none; }
-
-.uh-rad {
-  display: grid;
-  grid-template-columns: 1fr 240px;
-  gap: 40px;
-  padding: 48px 0;
-  border-bottom: 0.5px solid rgba(255,255,255,0.08);
-  align-items: start;
-}
-.uh-rad:first-child { border-top: 0.5px solid rgba(255,255,255,0.08); }
-
-.uh-bilder-rad {
-  display: flex;
-  gap: 4px;
-  height: 200px;
-}
-.uh-bild-item {
-  flex: 1;
-  background-size: cover;
-  background-position: center;
-  background-color: #243558;
-  min-width: 0;
-}
-.uh-bild-item:first-child {
-  flex: 2.5;
-}
-
-.uh-rad-info {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding-top: 8px;
-}
-
-.uh-omrade {
-  font-family: var(--font-heading) !important;
-  font-size: 24px !important;
-  font-weight: 300 !important;
-  color: #fff !important;
-  letter-spacing: -0.01em !important;
-  text-transform: uppercase !important;
-}
-
-.uh-punkter {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.uh-punkter li {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: rgba(255,255,255,0.65);
-  padding-left: 14px;
-  position: relative;
-}
-.uh-punkter li::before {
-  content: '·';
-  position: absolute;
-  left: 0;
-  color: var(--btn-blue);
-}
-
-.uh-kontakt {
-  border-top: 0.5px solid rgba(255,255,255,0.08);
-  padding-top: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.uh-kontakt-label {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--btn-blue);
-  margin-bottom: 4px;
-}
-.uh-kontakt a {
-  font-size: 13px;
-  color: rgba(255,255,255,0.7);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.uh-kontakt a:hover { color: var(--btn-blue); }
-
-@media (max-width: 768px) {
-  .uh-rad {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-  }
-  .uh-bilder-rad {
-    height: 140px !important;
-  }
-}
-
-/* ── Underhand karusell ── */
-.uh-dold {
-  display: none !important;
-}
-.uh-rad {
-  display: grid;
-  grid-template-columns: 1fr 240px;
-  gap: 40px;
-  padding: 48px 0;
-  border-bottom: 0.5px solid rgba(255,255,255,0.08);
-  align-items: start;
-}
-.uh-rad:first-child {
-  border-top: 0.5px solid rgba(255,255,255,0.08);
-}
-.uh-karusell {
-  position: relative;
-  overflow: hidden;
-  height: 320px;
-  background: #243558;
-}
-.uh-karusell-track {
-  display: flex;
-  height: 100%;
-  transition: transform 0.4s ease;
-}
-.uh-karusell-bild {
-  min-width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-color: #243558;
-  flex-shrink: 0;
-}
-.uh-karusell-prev,
-.uh-karusell-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.4);
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-  z-index: 2;
-}
-.uh-karusell-prev { left: 12px; }
-.uh-karusell-next { right: 12px; }
-.uh-karusell-prev:hover,
-.uh-karusell-next:hover { background: rgba(0,0,0,0.7); }
-.uh-karusell-dots {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  z-index: 2;
-}
-.uh-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.4);
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.uh-dot.active { background: #fff; }
-
-@media (max-width: 768px) {
-  .uh-rad {
-    grid-template-columns: 1fr !important;
-    gap: 20px !important;
-    padding: 32px 0 !important;
-  }
-  .uh-karusell { height: 220px !important; }
-}
-
-/* ── Journal ── */
-.journal-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 320px;
-  gap: 8px;
-}
-.journal-kort--featured {
-  grid-column: span 2;
-  grid-row: span 2;
-}
-.journal-kort {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  text-decoration: none;
-  background: #243558;
-}
-.journal-kort:hover .journal-bild-inner {
-  transform: scale(1.04);
-}
-.journal-bild {
-  position: absolute;
-  inset: 0;
-}
-.journal-bild::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(10,18,35,0.9) 0%, rgba(10,18,35,0.1) 60%, transparent 100%);
-  z-index: 1;
-}
-.journal-bild-inner {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  transition: transform 0.6s ease;
-}
-.journal-video-badge {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 48px;
-  height: 48px;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.4);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 16px;
-  z-index: 2;
-}
-.journal-info {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 24px;
-  z-index: 2;
+  background: none !important;
+  color: var(--accent) !important;
 }
 .journal-kategori {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--btn-blue);
-  margin-bottom: 8px;
+  color: var(--accent) !important;
 }
-.journal-titel {
-  font-family: var(--font-heading);
-  font-size: 20px;
-  font-weight: 300;
-  color: #fff;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  margin: 0 0 8px;
+.objekt-status--for_sale,
+.objekt-status--tillsalu,
+.objekt-status--till-salu {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-color: var(--accent) !important;
 }
-.journal-kort--featured .journal-titel {
-  font-size: 32px;
+.maklare-kort-titel {
+  color: var(--text-mid) !important;
 }
-.journal-meta {
-  font-family: var(--font-body);
-  font-size: 11px;
-  color: rgba(255,255,255,0.45);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.maklare-kort-info h3 {
+  color: var(--text-dark) !important;
+}
+.maklare-kort-info p,
+.maklare-kort-info a {
+  color: var(--text-mid) !important;
 }
 
-/* Artikel-hero */
+/* ── Beige-tema — header & navigation ── */
+.site-header,
+header,
+.theme-custom-header-background {
+  background: var(--bg-light) !important;
+  border-bottom: 0.5px solid var(--bg-warm) !important;
+}
+.nav-left a, .nav-right a {
+  color: var(--text-mid) !important;
+}
+.nav-left a:hover, .nav-right a:hover {
+  color: var(--accent) !important;
+}
+.menu-toggle span {
+  background: var(--text-dark) !important;
+}
+.mobile-menu-overlay {
+  background: var(--bg-dark) !important;
+}
+
+/* ── Footer ── */
+.site-footer {
+  background: var(--bg-dark) !important;
+}
+
+/* ── Underhand CTA-text ── */
+.page-underhand section h2,
+.page-underhand section p {
+  color: var(--text-dark) !important;
+}
+
+/* ── Journal artikel hero ── */
 .journal-artikel-hero {
-  position: relative;
-  height: 70vh;
-  min-height: 480px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background: #111D33;
+  /* bakgrund hanteras av hero-bilden */
 }
 
-/* Artikel-innehåll */
-.journal-innehall {
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.9;
-  color: rgba(255,255,255,0.8);
-}
-.journal-innehall h2 {
-  font-family: var(--font-heading);
-  font-size: 28px;
-  font-weight: 300;
-  color: #fff;
-  margin: 40px 0 16px;
-}
-.journal-innehall p { margin-bottom: 20px; }
-.journal-innehall img {
-  width: 100%;
-  height: auto;
-  margin: 32px 0;
-}
-.journal-innehall a { color: var(--btn-blue); }
-
-@media (max-width: 768px) {
-  .journal-grid {
-    grid-template-columns: 1fr !important;
-    grid-auto-rows: 260px !important;
-  }
-  .journal-kort--featured {
-    grid-column: span 1 !important;
-    grid-row: span 1 !important;
-  }
-  .journal-artikel-hero {
-    height: 50vh !important;
-    min-height: 300px !important;
-  }
+/* ── Äldre artiklar-knapp ── */
+.journal-aldre-btn,
+.journal-fler-btn {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-color: var(--accent) !important;
 }
 
-/* ── Social-knappar i footer ── */
+/* ── Objekt-sektion bakgrund ── */
+.objekt-sektion {
+  background: var(--bg-light) !important;
+}
+.sektion-rubrik {
+  color: var(--text-dark) !important;
+}
+
+/* ── Beige-tema komplettering ── */
+
+/* Footer — behåll navy */
+.site-footer,
+footer.site-footer {
+  background: var(--bg-dark) !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+.footer-logo { color: #fff !important; }
+.footer-col h4 { color: rgba(255,255,255,0.4) !important; }
+.footer-col a,
+.footer-col p { color: rgba(255,255,255,0.65) !important; }
+.footer-bottom { color: rgba(255,255,255,0.25) !important; }
+
+/* Objektkort text på mosaik */
+.mosaik-adress { color: #fff !important; }
+.mosaik-pris { color: rgba(255,255,255,0.85) !important; }
+.mosaik-meta { color: rgba(255,255,255,0.6) !important; }
+
+/* Sektion eyebrow — om oss */
+.sektion-eyebrow-label,
+.sektion-eyebrow { color: var(--accent) !important; background: none !important; }
+
+/* Kontakt spekulant-text */
+.kontakt-maklare-sektion p,
+.kontakt-maklare-sektion { color: var(--text-dark) !important; }
+
+/* Journal-grid bilder placeholder */
+.journal-bild-inner { background-color: var(--bg-warm) !important; }
+.journal-kort { background: var(--bg-warm) !important; }
+
+/* Om oss eyebrow */
+.om-varden-eyebrow,
+.om-oss-eyebrow { color: var(--accent) !important; }
+
+/* Page-hero text */
+.page-hero { background: var(--bg-warm) !important; }
+.page-hero h1 { color: var(--text-dark) !important; }
+
+/* ── Footer — beige ── */
+.site-footer,
+footer.site-footer {
+  background: var(--bg-warm) !important;
+  color: var(--text-mid) !important;
+}
+.footer-logo { color: var(--text-dark) !important; }
+.footer-tagline { color: var(--text-mid) !important; }
+.footer-col h4 { color: var(--text-mid) !important; }
+.footer-col a,
+.footer-col p { color: var(--text-mid) !important; }
+.footer-col a:hover { color: var(--accent) !important; }
+.footer-bottom {
+  color: var(--text-mid) !important;
+  border-top-color: rgba(0,0,0,0.08) !important;
+}
 .social-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 8px 14px;
-  border: 0.5px solid rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.65) !important;
-  text-decoration: none !important;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: all 0.2s;
+  border-color: rgba(0,0,0,0.2) !important;
+  color: var(--text-mid) !important;
 }
 .social-btn:hover {
-  border-color: var(--btn-blue) !important;
-  color: var(--btn-blue) !important;
+  border-color: var(--accent) !important;
+  color: var(--accent) !important;
 }
 
-/* ── Mosaikgrid v2 — asymmetriskt ── */
-.mosaik-v2 {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.mosaik-v2-rad {
-  display: grid;
-  gap: 8px;
-  height: 560px;
-}
-.mosaik-v2-rad--1 {
-  grid-template-columns: 1.4fr 1fr;
-}
-.mosaik-v2-rad--2 {
-  grid-template-columns: 1fr 1fr 1.4fr;
-}
-.mosaik-v2-col {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 8px;
-}
-.mosaik-cta {
-  background: var(--btn-blue);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 32px;
-  text-decoration: none;
-  transition: background 0.2s;
-}
-.mosaik-cta:hover { background: var(--btn-blue-dark); }
-.mosaik-cta .sektion-eyebrow-label {
-  color: rgba(17,29,51,0.6) !important;
-  margin-bottom: 12px;
-}
-.mosaik-cta h3 {
-  font-family: var(--font-heading);
-  font-size: 24px;
-  font-weight: 300;
-  color: #111D33;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  text-transform: uppercase;
-  margin: 0 0 16px;
-}
-.mosaik-cta-arrow {
-  font-size: 20px;
-  color: #111D33;
+/* ── Äldre artiklar-knapp — röd ── */
+.journal-aldre-btn,
+a[href*="page"] .btn-primary,
+.journal-pagination .btn-primary {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
 }
 
-@media (max-width: 768px) {
-  .mosaik-v2-rad {
-    grid-template-columns: 1fr !important;
-    height: auto !important;
-  }
-  .mosaik-v2-col {
-    grid-template-rows: 260px 260px !important;
-  }
-  .mosaik-kort--stor {
-    height: 320px !important;
-  }
-  .mosaik-cta {
-    height: 200px !important;
-  }
+/* ── Journal-grid — visa bilder ── */
+.journal-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  grid-auto-rows: 320px !important;
+  gap: 8px !important;
+}
+.journal-kort--featured {
+  grid-column: span 2 !important;
+  grid-row: span 2 !important;
+}
+.journal-bild {
+  position: absolute !important;
+  inset: 0 !important;
+}
+.journal-bild:after {
+  background: linear-gradient(0deg, rgba(10,18,35,0.85) 0%, rgba(10,18,35,0.1) 60%, transparent) !important;
 }
 
-/* ── Mosaikgrid v2 fixes ── */
-.mosaik-v2-rad--1 {
-  grid-template-columns: 1fr 1fr !important;
-  height: 620px !important;
-}
-.mosaik-v2-rad--1 .mosaik-kort--stor {
-  height: 100% !important;
-}
-.mosaik-v2-rad--2 {
-  grid-template-columns: 1fr 1fr 1fr !important;
-  height: 560px !important;
-}
-.mosaik-v2-col {
-  height: 100% !important;
-}
-.mosaik-v2-col .mosaik-kort {
-  height: 100% !important;
-}
-.mosaik-cta {
-  height: 100% !important;
-}
-
-/* Sektion padding fix */
-.objekt-sektion .objekt-inner {
-  padding-left: 40px !important;
-  padding-right: 40px !important;
-}
-.objekt-sektion .sektion-header {
-  padding-left: 0 !important;
-}
-
-/* ── Mosaikgrid v2 fixes ── */
-.mosaik-v2-rad--1 {
-  grid-template-columns: 1fr 1fr !important;
-  height: 620px !important;
-}
-.mosaik-v2-rad--1 .mosaik-kort--stor {
-  height: 100% !important;
-}
-.mosaik-v2-rad--2 {
-  grid-template-columns: 1fr 1fr 1fr !important;
-  height: 560px !important;
-}
-.mosaik-v2-col {
-  height: 100% !important;
-}
-.mosaik-v2-col .mosaik-kort {
-  height: 100% !important;
-}
-.mosaik-cta {
-  height: 100% !important;
-}
-
-/* Sektion padding fix */
-.objekt-sektion .objekt-inner {
-  padding-left: 40px !important;
-  padding-right: 40px !important;
-}
-.objekt-sektion .sektion-header {
-  padding-left: 0 !important;
-}
-
-/* ── Mosaikgrid v2 — komplett omskrivning ── */
-.mosaik-v2 {
+/* ── Journal-artikel hero — fix layout ── */
+.journal-artikel-hero {
+  position: relative !important;
   display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-  width: 100% !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
-.mosaik-v2-rad {
+.journal-artikel-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+}
+.journal-artikel-hero h1,
+.journal-artikel-hero .journal-kategori,
+.journal-artikel-hero .journal-meta {
+  color: #fff !important;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.journal-artikel-hero-inner {
+  text-align: center;
+}
+
+/* ── Journal visa fler-knapp — röd ── */
+#journal-visa-fler {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+}
+#journal-visa-fler:hover {
+  background: var(--accent-dark) !important;
+}
+
+/* ── Journal-grid fix — bilder och layout ── */
+.journal-grid {
   display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  grid-auto-rows: 320px !important;
   gap: 8px !important;
-  width: 100% !important;
+  position: relative !important;
 }
-.mosaik-v2-rad--1 {
-  grid-template-columns: 3fr 2fr !important;
-  height: 580px !important;
+.journal-kort--featured {
+  grid-column: span 2 !important;
+  grid-row: span 2 !important;
 }
-.mosaik-v2-rad--2 {
-  grid-template-columns: 2fr 2fr 3fr !important;
-  height: 540px !important;
-}
-.mosaik-v2-col {
-  display: grid !important;
-  grid-template-rows: 1fr 1fr !important;
-  gap: 8px !important;
-  min-width: 0 !important;
-  height: 100% !important;
-}
-.mosaik-v2 .mosaik-kort {
+.journal-kort {
   position: relative !important;
   overflow: hidden !important;
   display: block !important;
-  height: 100% !important;
-  min-height: 0 !important;
+  background: var(--bg-warm) !important;
+  min-height: 320px !important;
 }
-.mosaik-v2 .mosaik-kort--stor {
-  grid-column: unset !important;
-  grid-row: unset !important;
-  height: 100% !important;
+.journal-bild {
+  position: absolute !important;
+  inset: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
 }
-.mosaik-v2 .mosaik-bild {
+.journal-bild-inner {
   position: absolute !important;
   inset: 0 !important;
   background-size: cover !important;
   background-position: center !important;
+  transition: transform 0.6s ease !important;
 }
-.mosaik-v2 .mosaik-info {
+.journal-kort:hover .journal-bild-inner {
+  transform: scale(1.04) !important;
+}
+.journal-bild:after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(0deg, rgba(10,18,35,0.85) 0%, rgba(10,18,35,0.1) 60%, transparent) !important;
+  z-index: 1 !important;
+}
+.journal-info {
   position: absolute !important;
   bottom: 0 !important;
   left: 0 !important;
   right: 0 !important;
+  padding: 24px !important;
   z-index: 2 !important;
 }
-.mosaik-cta {
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-  height: 100% !important;
-  padding: 32px !important;
-  background: var(--btn-blue) !important;
-  text-decoration: none !important;
-}
 
-@media (max-width: 900px) {
-  .mosaik-v2-rad--1,
-  .mosaik-v2-rad--2 {
-    grid-template-columns: 1fr !important;
-    height: auto !important;
-  }
-  .mosaik-v2 .mosaik-kort {
-    height: 260px !important;
-  }
-  .mosaik-v2-col {
-    grid-template-rows: 260px 260px !important;
-    height: auto !important;
-  }
-  .mosaik-cta {
-    height: 200px !important;
-  }
-}
-
-/* ── Ljusblå accent ── */
-
-/* Nav hover — subtil blå underline */
-.nav-left a:hover,
-.nav-right a:hover,
-#dd-trigger:hover {
-  color: var(--blue-light) !important;
-}
-
-/* Filter-knappar active — blå istället för guld */
-.filter-knapp.active {
-  background: var(--blue) !important;
-  border-color: var(--blue) !important;
+/* ── Journal-grid — text över bilder ── */
+.journal-titel {
   color: #fff !important;
 }
-.filter-knapp:hover {
-  border-color: var(--blue-light) !important;
-  color: var(--blue-light) !important;
+.journal-meta {
+  color: rgba(255,255,255,0.6) !important;
 }
-
-/* Objekt-status kommande — blå badge */
-.objekt-status--kommande {
-  border-color: var(--blue-light) !important;
-  color: var(--blue-light) !important;
-}
-
-/* Mosaik-kort hover — blå overlay-tint */
-.mosaik-kort:hover .mosaik-bild::after {
-  background: linear-gradient(to top, rgba(10,18,35,0.85) 0%, rgba(123,167,196,0.15) 60%, transparent 100%) !important;
-}
-
-/* Journal-kort hover — blå tint */
-.journal-kort:hover .journal-bild::after {
-  background: linear-gradient(to top, rgba(10,18,35,0.9) 0%, rgba(123,167,196,0.15) 60%, transparent 100%) !important;
-}
-
-/* Underhand kontakta-label */
-.uh-kontakt-label {
-  color: var(--blue-light) !important;
-}
-
-/* Journal kategori */
 .journal-kategori {
-  color: var(--blue-light) !important;
+  color: var(--accent-light) !important;
 }
 
-/* Sektion eyebrow */
-.sektion-eyebrow-label {
-  color: var(--blue-light) !important;
+/* ── Underhand — objekt-lista ── */
+.uh-rad {
+  display: grid !important;
+  grid-template-columns: 1fr 240px !important;
+  gap: 40px !important;
+  align-items: start !important;
+  border-bottom: 0.5px solid rgba(0,0,0,0.1) !important;
+  padding: 48px 0 !important;
 }
-
-/* Social-knapp hover */
-.social-btn:hover {
-  border-color: var(--blue-light) !important;
-  color: var(--blue-light) !important;
+.uh-rad:first-child {
+  border-top: 0.5px solid rgba(0,0,0,0.1) !important;
 }
-
-/* Dropdown hover */
-#dd-panel a:hover span:first-child {
-  color: var(--blue-light) !important;
+.uh-dold {
+  display: none !important;
 }
-
-/* Faktarad labels */
-.faktarad-label,
-.uh-kontakt-label,
-.kontakt-info-label {
-  color: var(--blue-light) !important;
+.uh-karusell {
+  position: relative !important;
+  height: 320px !important;
+  overflow: hidden !important;
+  background: var(--bg-warm) !important;
 }
-
-/* Accordion hover */
-.accordion-trigger:hover {
-  color: var(--blue-light) !important;
+.uh-karusell-track {
+  display: flex !important;
+  height: 100% !important;
+  transition: transform 0.4s ease !important;
 }
-
-/* Btn outline hover */
-.btn-outline:hover {
-  background: var(--blue) !important;
-  border-color: var(--blue) !important;
+.uh-karusell-bild {
+  flex-shrink: 0 !important;
+  min-width: 100% !important;
+  height: 100% !important;
+  background-position: center !important;
+  background-size: cover !important;
+  background-color: var(--bg-warm) !important;
 }
-
-/* ── Mäklarbild fix — fokus på ansikte ── */
-.maklare-bild {
-  width: 100px !important;
-  height: 100px !important;
+.uh-karusell-prev,
+.uh-karusell-next {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: rgba(0,0,0,0.4) !important;
+  border: none !important;
+  color: #fff !important;
+  width: 36px !important;
+  height: 36px !important;
+  cursor: pointer !important;
+  z-index: 2 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 18px !important;
+}
+.uh-karusell-prev { left: 12px !important; }
+.uh-karusell-next { right: 12px !important; }
+.uh-karusell-dots {
+  position: absolute !important;
+  bottom: 10px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  gap: 6px !important;
+  z-index: 2 !important;
+}
+.uh-dot {
+  width: 6px !important;
+  height: 6px !important;
   border-radius: 50% !important;
-  object-fit: cover !important;
-  object-position: top center !important;
-  margin-bottom: 12px !important;
+  background: rgba(255,255,255,0.5) !important;
+  cursor: pointer !important;
 }
-.objekt-detalj-kontakt .maklare-bild {
-  width: 110px !important;
-  height: 110px !important;
-  object-position: top center !important;
-  margin: 0 auto 16px !important;
+.uh-dot.active { background: #fff !important; }
+.uh-rad-info {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 16px !important;
+  padding-top: 8px !important;
+}
+.uh-omrade {
+  color: var(--text-dark) !important;
+  font-family: var(--font-heading) !important;
+  font-size: 24px !important;
+  font-weight: 300 !important;
+  letter-spacing: -0.01em !important;
+  text-transform: uppercase !important;
+}
+.uh-punkter {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+}
+.uh-punkter li {
+  color: var(--text-mid) !important;
+  font-size: 13px !important;
+  padding-left: 14px !important;
+  position: relative !important;
+}
+.uh-punkter li:before {
+  content: "·" !important;
+  position: absolute !important;
+  left: 0 !important;
+  color: var(--accent) !important;
+}
+.uh-kontakt {
+  border-top: 0.5px solid rgba(0,0,0,0.1) !important;
+  padding-top: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+}
+.uh-kontakt-label {
+  color: var(--accent) !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  margin-bottom: 4px !important;
+}
+.uh-kontakt a {
+  color: var(--text-mid) !important;
+  font-size: 13px !important;
+  text-decoration: none !important;
+}
+.uh-kontakt a:hover { color: var(--accent) !important; }
+
+@media(max-width: 768px) {
+  .uh-rad {
+    grid-template-columns: 1fr !important;
+  }
+  .uh-karusell {
+    height: 220px !important;
+  }
 }
 
-/* ── Mäklarkort knapp fix ── */
+/* ── Objektsida — split layout ── */
+.objekt-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 85vh;
+  position: relative;
+}
+.objekt-split-bild {
+  position: relative;
+  overflow: hidden;
+}
+.objekt-split-bild .objekt-hero-slideshow {
+  position: absolute !important;
+  inset: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+.objekt-split-bild .objekt-hero-slide {
+  position: absolute !important;
+  inset: 0 !important;
+}
+.objekt-split-info {
+  padding: 80px 64px;
+  background: var(--bg-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+.objekt-split-omrade {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+}
+.objekt-split-adress {
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+}
+.objekt-split-undertitel {
+  color: var(--text-mid);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  margin: 0;
+}
+.objekt-split-intro {
+  color: var(--text-mid);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 440px;
+  margin: 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 24px;
+}
+.objekt-split-fakta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 24px;
+}
+.objekt-split-fakta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.objekt-split-fakta-label {
+  color: var(--text-mid);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.objekt-split-fakta-värde {
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 300;
+}
+
+@media(max-width: 900px) {
+  .objekt-split {
+    grid-template-columns: 1fr;
+  }
+  .objekt-split-bild {
+    height: 60vw;
+    min-height: 300px;
+    position: relative;
+  }
+  .objekt-split-info {
+    padding: 40px 24px;
+  }
+}
+
+/* ── Objektsida — split layout ── */
+.objekt-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 85vh;
+  position: relative;
+}
+.objekt-split-bild {
+  position: relative;
+  overflow: hidden;
+}
+.objekt-split-bild .objekt-hero-slideshow {
+  position: absolute !important;
+  inset: 0 !important;
+  height: 100% !important;
+  width: 100% !important;
+}
+.objekt-split-bild .objekt-hero-slide {
+  position: absolute !important;
+  inset: 0 !important;
+}
+.objekt-split-info {
+  padding: 80px 64px;
+  background: var(--bg-light);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+}
+.objekt-split-omrade {
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+}
+.objekt-split-adress {
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3vw, 48px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0;
+}
+.objekt-split-undertitel {
+  color: var(--text-mid);
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  margin: 0;
+}
+.objekt-split-intro {
+  color: var(--text-mid);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 440px;
+  margin: 0;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 24px;
+}
+.objekt-split-fakta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 24px;
+}
+.objekt-split-fakta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.objekt-split-fakta-label {
+  color: var(--text-mid);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.objekt-split-fakta-värde {
+  color: var(--text-dark);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 300;
+}
+
+@media(max-width: 900px) {
+  .objekt-split {
+    grid-template-columns: 1fr;
+  }
+  .objekt-split-bild {
+    height: 60vw;
+    min-height: 300px;
+    position: relative;
+  }
+  .objekt-split-info {
+    padding: 40px 24px;
+  }
+}
+
+/* === MÄKLARKORT FIXES === */
+.objekt-detalj-sidebar {
+  position: static;
+  margin-top: 60px;
+}
+.objekt-detalj-kontakt {
+  text-align: center;
+  position: static !important;
+  
+  .maklare-bild {
+    display: block;
+    margin: 0 auto 1rem;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+}
+@media (min-width: 1024px) {
+  .objekt-detalj-sidebar {
+    position: sticky;
+    
+    align-self: start;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+  }
+}
+
+/* === GALLERI VERTIKAL LISTA === */
+.objekt-galleri-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-top: 40px;
+}
+.objekt-galleri-bild-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* === OBJEKTSIDA — ta bort padding-top från .main > div === */
+.single-fasad_listing .main > div {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+/* === GLOBAL KNAPP-STIL — mörkblå frame, inverterad vid hover === */
+.btn-primary,
+a.btn-primary,
+.btn-secondary,
+a.btn-secondary,
+.btn-outline,
+a.btn-outline {
+  background: transparent !important;
+  color: var(--text-dark) !important;
+  border: 1px solid var(--text-dark) !important;
+  border-radius: 0 !important;
+  padding: 12px 28px !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  transition: all 0.2s !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+}
+.btn-primary:hover,
+a.btn-primary:hover,
+.btn-secondary:hover,
+a.btn-secondary:hover,
+.btn-outline:hover,
+a.btn-outline:hover {
+  background: var(--text-dark) !important;
+  color: #fff !important;
+  border-color: var(--text-dark) !important;
+}
+
+/* Undantag: mäklarkortet kontakta-knapp behåller mörkblå fyllning */
 .objekt-detalj-kontakt .btn-primary,
 .objekt-detalj-kontakt a.btn-primary {
-  background: var(--btn-blue) !important;
-  color: #111D33 !important;
-  display: block !important;
-  text-align: center !important;
-  margin-top: 16px !important;
+  background: var(--bg-dark) !important;
+  color: #fff !important;
+  border-color: var(--bg-dark) !important;
 }
 .objekt-detalj-kontakt .btn-primary:hover,
 .objekt-detalj-kontakt a.btn-primary:hover {
-  background: var(--blue) !important;
+  background: transparent !important;
+  color: var(--bg-dark) !important;
+  border-color: var(--bg-dark) !important;
+}
+
+/* === MOSAIK-CTA — mörkblå bakgrund, vit text === */
+.mosaik-cta {
+  background: var(--bg-dark) !important;
+  color: #fff !important;
+}
+.mosaik-cta h3,
+.mosaik-cta .mosaik-eyebrow,
+.mosaik-cta .mosaik-cta-arrow {
   color: #fff !important;
 }
 
-/* ── Visa fler bilder-knapp på objektsida ── */
-.objekt-visa-fler-btn {
+/* === RELATERADE ARTIKLAR === */
+.journal-relaterade {
+  background: var(--bg-light);
+  padding: 80px 24px;
+  border-top: 1px solid var(--bg-warm);
+}
+.journal-relaterade-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.journal-relaterade-rubrik {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 40px;
+}
+.journal-relaterade-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.journal-rel-kort {
+  text-decoration: none;
+  color: var(--text-dark);
+  display: block;
+}
+.journal-rel-bild {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-warm);
+  margin-bottom: 20px;
+}
+.journal-rel-kort:hover .journal-rel-bild {
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+.journal-rel-titel {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 8px 0 6px;
+  color: var(--text-dark);
+}
+@media (max-width: 768px) {
+  .journal-relaterade-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+/* FRANZON-TEST-123 */
+
+/* ═══════════════════════════════════
+   FRANZON DU RIETZ — DESIGN SYSTEM
+   ═══════════════════════════════════ */
+
+/* Header */
+.fdr-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--bg-light);
+  border-bottom: 0.5px solid var(--bg-warm);
+  height: 64px;
+}
+.fdr-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 32px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.fdr-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+.fdr-menu-btn span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #1a1a1a;
+  transition: all 0.3s ease;
+}
+.fdr-logo {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 10;
-  background: rgba(17,29,51,0.75);
-  border: 0.5px solid rgba(255,255,255,0.3);
-  color: #fff;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: var(--font-body);
   font-size: 11px;
   font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-dark);
+}
+.fdr-kontakt-btn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  padding: 10px 18px;
+  text-decoration: none;
+  color: var(--text-mid);
+  transition: color 0.2s;
+}
+.fdr-kontakt-btn:hover { color: var(--text-dark); }
+
+/* Slide-in meny */
+.fdr-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  pointer-events: none;
+}
+.fdr-menu-overlay.active {
+  display: flex;
+  pointer-events: all;
+}
+.fdr-menu-panel {
+  width: 320px;
+  height: 100%;
+  background: var(--bg-light);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  overflow-y: auto;
+}
+.fdr-menu-bg-img {
+  flex: 1;
+  background: var(--bg-warm);
+  opacity: 0.95;
+}
+.fdr-menu-close {
+  background: none;
+  border: none;
   cursor: pointer;
+  font-size: 18px;
+  color: var(--text-dark);
+  align-self: flex-end;
+  margin-bottom: 40px;
+  padding: 0;
+}
+.fdr-menu-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+}
+.fdr-menu-nav a {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-dark);
+  padding: 16px 0;
+  border-bottom: 0.5px solid var(--bg-warm);
+  transition: color 0.2s;
+}
+.fdr-menu-nav a:hover { color: var(--accent); }
+.fdr-menu-footer {
+  margin-top: 40px;
+}
+.fdr-menu-footer p,
+.fdr-menu-footer a {
+  font-size: 12px;
+  color: var(--text-mid);
+  text-decoration: none;
+  display: block;
+  line-height: 1.8;
+}
+.fdr-menu-social {
+  display: flex;
+  gap: 16px;
+  margin-top: 16px;
+}
+.fdr-menu-social a {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-mid);
+  text-decoration: none;
+}
+
+/* Hero */
+.fdr-hero {
+  height: 100vh;
+  min-height: 600px;
+  background: #1a1a1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.fdr-hero-inner {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+.fdr-hero-title {
+  font-family: var(--font-body);
+  font-size: clamp(24px, 4vw, 52px);
+  font-weight: 300;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0;
+}
+
+/* Objekt-sektion */
+.fdr-objekt-sektion {
+  background: var(--bg-light);
+  padding: 80px 40px;
+}
+.fdr-objekt-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.fdr-objekt-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.fdr-se-alla {
+  text-align: center;
+  margin-top: 56px;
+}
+.fdr-btn-outline {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-dark);
+  border: 0.5px solid var(--text-dark);
+  padding: 14px 40px;
   transition: all 0.2s;
-  backdrop-filter: blur(4px);
 }
-.objekt-visa-fler-btn:hover {
-  background: var(--btn-blue);
-  color: #111D33;
-  border-color: var(--btn-blue);
+.fdr-btn-outline:hover {
+  background: #1a1a1a;
+  color: #fff;
 }
 
-/* ── Galleri dold ── */
-.galleri-dold {
-  display: none !important;
+@media (max-width: 900px) {
+  .fdr-objekt-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .fdr-objekt-grid { grid-template-columns: 1fr; }
+  .fdr-hero-title { letter-spacing: 0.15em; }
+  .fdr-menu-panel { width: 100%; }
+  .fdr-menu-bg-img { display: none; }
 }
 
-/* ── Fix WP admin-bar extra space ── */
-html body.admin-bar {
-  margin-top: 0 !important;
-}
-#acf-field-group-fields { display: none; }
+/* Justera #app padding för ny header-höjd */
+#app { padding-top: 64px !important; }
 
-/* ── Fix WP admin-bar padding-bottom på #app ── */
+/* ── FDR Footer ── */
+.fdr-footer {
+  background: #1a1a1a;
+  color: rgba(255,255,255,0.6);
+  font-family: var(--font-body);
+}
+.fdr-footer-inner {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+.fdr-footer-logo {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+  margin-bottom: 32px;
+}
+.fdr-footer-adress p,
+.fdr-footer-adress a {
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  display: block;
+}
+.fdr-footer-adress a:hover { color: #fff; }
+.fdr-footer-social {
+  display: flex;
+  gap: 20px;
+  margin-top: 24px;
+}
+.fdr-footer-social a {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(255,255,255,0.4);
+  transition: color 0.2s;
+}
+.fdr-footer-social a:hover { color: #fff; }
+.fdr-footer-col h4 {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 20px;
+}
+.fdr-footer-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fdr-footer-nav ul li {
+  margin-bottom: 12px;
+}
+.fdr-footer-nav ul li a {
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
+}
+.fdr-footer-nav ul li a:hover { color: #fff; }
+.fdr-footer-kontakt a {
+  display: block;
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.fdr-footer-kontakt a:hover { color: #fff; }
+.fdr-footer-bottom {
+  border-top: 0.5px solid rgba(255,255,255,0.08);
+  max-width: 100%;
+  padding: 20px 40px;
+  text-align: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.06em;
+}
+@media (max-width: 768px) {
+  .fdr-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 48px 24px;
+  }
+  .fdr-footer-bottom { padding: 20px 24px; }
+}
+
+/* FDR Footer override */
+.fdr-footer,
+footer.fdr-footer {
+  background: #1a1a1a !important;
+  color: rgba(255,255,255,0.6) !important;
+}
+
+/* ── FDR Objektkort ── */
+.fdr-objekt-kort {
+  display: block;
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: transform 0.3s ease;
+}
+.fdr-objekt-kort:hover { transform: translateY(-3px); }
+.fdr-objekt-bild {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-warm);
+  margin-bottom: 16px;
+}
+.fdr-objekt-bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s ease;
+}
+.fdr-objekt-kort:hover .fdr-objekt-bild img { transform: scale(1.04); }
+.fdr-objekt-bild-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-warm);
+}
+.fdr-objekt-status {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  color: #fff;
+}
+.fdr-status--tillsalu { background: var(--accent); }
+.fdr-status--kommande { background: #4a6741; }
+.fdr-status--budgivning { background: #8b6914; }
+.fdr-status--sald { background: #2c2420; }
+.fdr-objekt-info { padding: 0 4px; }
+.fdr-objekt-adress {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-dark);
+  letter-spacing: 0.02em;
+  margin-bottom: 4px;
+}
+.fdr-objekt-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 12px;
+  color: var(--text-mid);
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+.fdr-objekt-pris {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-top: 6px;
+}
+
+/* ── FDR Om oss ── */
+.fdr-om-hero {
+  height: 70vh;
+  min-height: 480px;
+  position: relative;
+  overflow: hidden;
+}
+.fdr-om-hero-bild {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.1s ease;
+}
+.fdr-om-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+}
+.fdr-om-hero-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 60px 80px;
+  justify-content: center;
+  text-align: center;
+}
+.fdr-om-hero-inner h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+}
+.fdr-om-intro {
+  background: var(--bg-light);
+  padding: 100px 80px;
+}
+.fdr-om-intro-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.fdr-om-intro-text p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+.fdr-team-sektion {
+  background: var(--bg-light);
+  padding: 0 80px 100px;
+}
+.fdr-team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.fdr-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 40px;
+}
+.fdr-team-bild {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--bg-warm);
+  margin-bottom: 20px;
+}
+.fdr-team-bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(15%);
+  transition: filter 0.3s, transform 0.4s;
+}
+.fdr-team-kort:hover .fdr-team-bild img {
+  filter: grayscale(0);
+  transform: scale(1.03);
+}
+.fdr-team-bild-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 60px;
+  font-weight: 300;
+  color: var(--text-light);
+}
+.fdr-team-separator {
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+  margin-bottom: 14px;
+}
+.fdr-team-namn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin: 0 0 4px;
+}
+.fdr-team-titel {
+  font-size: 12px;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+.fdr-team-kontakt {
+  display: block;
+  font-size: 13px;
+  color: var(--text-mid);
+  text-decoration: none;
+  margin-bottom: 3px;
+  transition: color 0.2s;
+}
+.fdr-team-kontakt:hover { color: var(--text-dark); }
+@media (max-width: 900px) {
+  .fdr-team-grid { grid-template-columns: repeat(2, 1fr); }
+  .fdr-om-intro, .fdr-team-sektion { padding-left: 40px; padding-right: 40px; }
+  .fdr-om-hero-inner { padding: 40px; }
+}
+@media (max-width: 600px) {
+  .fdr-team-grid { grid-template-columns: 1fr; }
+  .fdr-om-intro, .fdr-team-sektion { padding-left: 24px; padding-right: 24px; }
+}
+
+/* ── FDR Om oss ── */
+.fdr-om-hero {
+  height: 70vh;
+  min-height: 480px;
+  position: relative;
+  overflow: hidden;
+}
+.fdr-om-hero-bild {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.1s ease;
+}
+.fdr-om-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+}
+.fdr-om-hero-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 60px 80px;
+  justify-content: center;
+  text-align: center;
+}
+.fdr-om-hero-inner h1 {
+  font-family: var(--font-heading);
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 300;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+  text-transform: uppercase;
+}
+.fdr-om-intro {
+  background: var(--bg-light);
+  padding: 100px 80px;
+}
+.fdr-om-intro-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+.fdr-om-intro-text p {
+  font-size: 16px;
+  line-height: 1.85;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+.fdr-team-sektion {
+  background: var(--bg-light);
+  padding: 0 80px 100px;
+}
+.fdr-team-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.fdr-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px 40px;
+}
+.fdr-team-bild {
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--bg-warm);
+  margin-bottom: 20px;
+}
+.fdr-team-bild img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  filter: grayscale(15%);
+  transition: filter 0.3s, transform 0.4s;
+}
+.fdr-team-kort:hover .fdr-team-bild img {
+  filter: grayscale(0);
+  transform: scale(1.03);
+}
+.fdr-team-bild-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 60px;
+  font-weight: 300;
+  color: var(--text-light);
+}
+.fdr-team-separator {
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+  margin-bottom: 14px;
+}
+.fdr-team-namn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin: 0 0 4px;
+}
+.fdr-team-titel {
+  font-size: 12px;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+  margin: 0 0 12px;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+.fdr-team-kontakt {
+  display: block;
+  font-size: 13px;
+  color: var(--text-mid);
+  text-decoration: none;
+  margin-bottom: 3px;
+  transition: color 0.2s;
+}
+.fdr-team-kontakt:hover { color: var(--text-dark); }
+@media (max-width: 900px) {
+  .fdr-team-grid { grid-template-columns: repeat(2, 1fr); }
+  .fdr-om-intro, .fdr-team-sektion { padding-left: 40px; padding-right: 40px; }
+  .fdr-om-hero-inner { padding: 40px; }
+}
+@media (max-width: 600px) {
+  .fdr-team-grid { grid-template-columns: 1fr; }
+  .fdr-om-intro, .fdr-team-sektion { padding-left: 24px; padding-right: 24px; }
+}
+
+/* ── FDR Kontakt ── */
+.fdr-kontakt-sektion {
+  background: var(--bg-light);
+  padding: 100px 80px;
+}
+.fdr-kontakt-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 120px;
+  align-items: start;
+}
+.fdr-kontakt-info h2 {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 300;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+}
+.fdr-kontakt-info > p {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin-bottom: 48px;
+}
+.fdr-kontakt-detaljer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.fdr-kontakt-rad {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.fdr-kontakt-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.fdr-kontakt-rad a,
+.fdr-kontakt-rad span {
+  font-size: 14px;
+  color: var(--text-dark);
+  text-decoration: none;
+  line-height: 1.6;
+}
+.fdr-kontakt-rad a:hover { color: var(--accent); }
+.fdr-kontakt-spekulant p {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+.fdr-kontakt-form h3 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--text-dark);
+  margin-bottom: 32px;
+}
+.fdr-formulär {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.fdr-form-rad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.fdr-form-grupp {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.fdr-form-grupp label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-light);
+}
+.fdr-formulär input,
+.fdr-formulär textarea {
+  background: #fff;
+  border: 0.5px solid var(--bg-warm);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px 16px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+.fdr-formulär input:focus,
+.fdr-formulär textarea:focus {
+  border-color: var(--text-dark);
+}
+.fdr-formulär textarea { resize: vertical; }
+.fdr-form-success {
+  background: #f0f7f0;
+  border: 0.5px solid #a5d6a7;
+  color: #2e7d32;
+  font-size: 13px;
+  padding: 14px 16px;
+  margin-bottom: 20px;
+}
+.fdr-kontakt-team {
+  background: var(--bg-warm);
+  padding: 80px 80px;
+}
+.fdr-modal-inner {
+  background: var(--bg-light);
+  max-width: 480px;
+  width: 90%;
+  padding: 48px;
+  position: relative;
+}
+.fdr-modal-inner h2 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.fdr-modal-inner p {
+  font-size: 14px;
+  color: var(--text-mid);
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+.fdr-modal-inner .fdr-form-grupp {
+  margin-bottom: 16px;
+}
+.fdr-modal-inner input,
+.fdr-modal-inner textarea {
+  background: var(--bg-warm);
+  border: 0.5px solid var(--bg-dark);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  box-sizing: border-box;
+}
+.fdr-modal-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-mid);
+  line-height: 1;
+}
+@media (max-width: 900px) {
+  .fdr-kontakt-inner { grid-template-columns: 1fr; gap: 60px; }
+  .fdr-kontakt-sektion, .fdr-kontakt-team { padding: 60px 40px; }
+  .fdr-form-rad { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .fdr-kontakt-sektion, .fdr-kontakt-team { padding: 48px 24px; }
+}
+
+/* ── FDR Hero karusell ── */
+.fdr-om-hero { position: relative; overflow: hidden; }
+.fdr-hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.fdr-hero-slide.active { opacity: 1; }
+
+/* FDR Startsida hero karusell */
+.fdr-hero {
+  position: relative;
+  overflow: hidden;
+}
+.fdr-hero .fdr-hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+}
+.fdr-hero .fdr-hero-slide.active { opacity: 1; }
+.fdr-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 1;
+}
+.fdr-hero-inner {
+  position: relative;
+  z-index: 2;
+}
+
+
+/* === Ta bort tom yta under footer === */
+html, body {
+  height: auto !important;
+  min-height: 100% !important;
+}
+
+
+/* === FOOTER beige === */
+.site-footer,
+footer.site-footer,
+.footer-top,
+.footer-bottom {
+  background: var(--bg-light) !important;
+  color: var(--text-mid) !important;
+}
+.site-footer h4,
+.site-footer .footer-logo {
+  color: var(--text-dark) !important;
+}
+.site-footer a {
+  color: var(--text-dark) !important;
+}
+.site-footer a:hover {
+  color: var(--accent) !important;
+}
+
+/* === Ta bort tom yta efter footer === */
 #app {
   padding-bottom: 0 !important;
 }
-
-/* ── Knappfärg — ny komplementblå ── */
-:root {
-  --btn-blue: #5B8FA8;
-  --btn-blue-dark: #4A7A92;
-}
-.btn-primary {
-  background: var(--btn-blue) !important;
-  color: #fff !important;
-  border-color: var(--btn-blue) !important;
-}
-.btn-primary:hover {
-  background: var(--btn-blue-dark) !important;
-  border-color: var(--btn-blue-dark) !important;
-}
-.mosaik-cta {
-  background: var(--btn-blue) !important;
-}
-.mosaik-cta:hover {
-  background: var(--btn-blue-dark) !important;
-}
-.mosaik-cta h3,
-.mosaik-cta .sektion-eyebrow-label,
-.mosaik-cta-arrow {
-  color: #fff !important;
+html, body {
+  height: auto !important;
 }
 
-/* ── Visningstider ── */
-.objekt-visningar,
-.objekt-dokument {
-  background: var(--bg-warm);
-  padding: 24px;
-  margin-top: 16px;
+/* === OBJEKTSIDA SPLIT-LAYOUT === */
+.objekt-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 85vh;
+  position: relative;
 }
-.objekt-visningar h3,
-.objekt-dokument h3 {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--blue-light);
-  margin: 0 0 16px;
+.objekt-split-bild {
+  position: relative;
+  overflow: hidden;
 }
-.visning-rad {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 0.5px solid rgba(255,255,255,0.08);
-  flex-wrap: wrap;
-}
-.visning-rad:last-child { border-bottom: none; }
-.visning-datum {
-  font-family: var(--font-body);
-  font-size: 13px;
-  color: #fff;
-  font-weight: 500;
-  min-width: 140px;
-}
-.visning-tid {
-  font-size: 13px;
-  color: var(--text-mid);
-  flex: 1;
-}
-.visning-anmalan-btn {
-  font-size: 11px !important;
-  padding: 6px 14px !important;
-}
-.dokument-rad {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 0;
-  border-bottom: 0.5px solid rgba(255,255,255,0.08);
-  color: var(--text-mid);
-  text-decoration: none;
-  font-size: 13px;
-  transition: color 0.2s;
-}
-.dokument-rad:last-child { border-bottom: none; }
-.dokument-rad:hover { color: var(--blue-light); }
-
-/* ── Ta bort sticky på mäklarkort ── */
-.objekt-detalj-sidebar {
-  position: static !important;
-}
-.objekt-detalj-kontakt {
-  position: static !important;
-}
-
-/* ── Budgivning ── */
-.objekt-budgivning {
-  background: var(--bg-warm);
-  padding: 24px;
-  margin-top: 16px;
-}
-.objekt-budgivning h3 {
-  font-family: var(--font-heading);
-  font-size: 16px;
-  font-weight: 400;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--blue-light);
-  margin: 0 0 16px;
-}
-.bud-rad {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 0.5px solid rgba(255,255,255,0.08);
-}
-.bud-rad:last-child { border-bottom: none; }
-.bud-belopp {
-  font-family: var(--font-heading);
-  font-size: 18px;
-  color: #fff;
-}
-.bud-tid {
-  font-size: 12px;
-  color: var(--text-mid);
-}
-
-/* ── Sidebar-kort harmonisering ── */
-.objekt-visningar,
-.objekt-dokument,
-.objekt-budgivning {
-  padding: 32px !important;
-  border-radius: 12px !important;
-  background: var(--bg-warm) !important;
-}
-.objekt-visningar h3,
-.objekt-dokument h3,
-.objekt-budgivning h3 {
-  text-align: center !important;
-  margin-bottom: 20px !important;
-}
-.visning-rad {
-  justify-content: center !important;
-  text-align: center !important;
-  flex-direction: column !important;
-  gap: 4px !important;
-  align-items: center !important;
-}
-.visning-anmalan-btn {
+.objekt-split-bild .objekt-hero-slideshow {
+  position: absolute !important;
+  inset: 0 !important;
+  height: 100% !important;
   width: 100% !important;
-  text-align: center !important;
-  margin-top: 8px !important;
-  display: block !important;
 }
-.dokument-rad {
-  padding: 12px 0 !important;
+.objekt-split-info {
+  background: var(--bg-light);
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.bud-rad {
+.objekt-split-omrade {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 20px;
+}
+.objekt-split-adress {
+  font-family: var(--font-heading);
+  font-size: clamp(32px, 3.5vw, 52px);
+  font-weight: 400;
+  color: var(--text-dark);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+.objekt-split-undertitel {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  color: var(--text-mid);
+  margin-bottom: 24px;
+}
+.objekt-split-intro {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-mid);
+  margin-bottom: 40px;
+}
+.objekt-split-fakta {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  border-top: 1px solid var(--bg-warm);
+  padding-top: 32px;
+}
+.objekt-split-fakta-item {
+  display: flex;
+  flex-direction: column;
+}
+.objekt-split-fakta-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+}
+.objekt-split-fakta-värde {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  color: var(--text-dark);
+}
+@media (max-width: 900px) {
+  .objekt-split { grid-template-columns: 1fr; }
+  .objekt-split-bild { min-height: 60vh; }
+  .objekt-split-info { padding: 48px 24px; }
+}
+
+/* === GALLERI VERTIKAL LISTA === */
+.objekt-galleri-grid,
+.objekt-galleri-grid.galleri-grid--alla {
+  display: flex !important;
   flex-direction: column !important;
-  align-items: center !important;
-  gap: 2px !important;
+  gap: 32px !important;
+  grid-template-columns: none !important;
+}
+.objekt-galleri-item {
+  width: 100%;
+}
+.objekt-galleri-item img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* ── Sidebar-kort — enhetlig stil ── */
-.objekt-detalj-kontakt,
-.objekt-visningar,
-.objekt-dokument,
-.objekt-budgivning {
-  background: var(--bg-warm) !important;
-  border-radius: 0 !important;
-  border: 0.5px solid rgba(255,255,255,0.1) !important;
-  padding: 32px !important;
+/* === Galleri vertikal lista === */
+.objekt-galleri-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 24px;
+}
+.objekt-galleri-bild-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* ── Galleri alla bilder — jämnt rutnät ── */
-.galleri-grid--alla {
-  grid-template-columns: repeat(4, 1fr) !important;
-  grid-auto-flow: row !important;
+/* === RELATERADE ARTIKLAR === */
+.journal-relaterade {
+  background: var(--bg-light);
+  padding: 80px 24px;
+  border-top: 1px solid var(--bg-warm);
 }
-.galleri-grid--alla .objekt-galleri-item {
-  grid-column: span 1 !important;
-  grid-row: span 1 !important;
+.journal-relaterade-inner {
+  max-width: 1100px;
+  margin: 0 auto;
 }
-.galleri-grid--alla .objekt-galleri-item img {
-  height: 200px !important;
+.journal-relaterade-rubrik {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 40px;
 }
-
-/* ── Galleri alla — dense fix ── */
-.galleri-grid--alla {
-  grid-auto-flow: dense !important;
+.journal-relaterade-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
 }
-
-/* ── Galleri alla — ta bort gap och overlay ── */
-.galleri-grid--alla {
-  gap: 4px !important;
+.journal-rel-kort {
+  text-decoration: none;
+  color: var(--text-dark);
+  display: block;
 }
-.galleri-grid--alla .galleri-overlay {
-  display: none !important;
+.journal-rel-bild {
+  width: 100%;
+  aspect-ratio: 4/3;
+  background-size: cover;
+  background-position: center;
+  background-color: var(--bg-warm);
+  margin-bottom: 20px;
+}
+.journal-rel-kort:hover .journal-rel-bild {
+  opacity: 0.85;
+  transition: opacity 0.3s;
+}
+.journal-rel-titel {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  margin: 8px 0 6px;
+  color: var(--text-dark);
+}
+@media (max-width: 768px) {
+  .journal-relaterade-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 }

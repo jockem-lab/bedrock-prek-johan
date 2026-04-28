@@ -365,14 +365,8 @@ domReady(async () => {
   }
 
   function calculateAppFooter() {
-    const $app = $('#app');
-    const $footer = $('footer');
-    if ($app.length && $footer.length) {
-      const footerheight = $footer.height();
-      if (footerheight) {
-        $app.css('padding-bottom', footerheight);
-      }
-    }
+    // Inaktiverad — footern flyter inte fixed längre
+    return;
   }
 
   function initMap() {

@@ -105,6 +105,8 @@ $built_year = ($building && !empty($building->constructionYear)) ? $building->co
 $salesTitle = is_string(get_post_meta($post_id, '_fasad_salesTitle', true)) ? get_post_meta($post_id, '_fasad_salesTitle', true) : $full_address;
 $raw_st = get_post_meta($post_id, '_fasad_salesText', true);
 $salesText = is_string($raw_st) ? $raw_st : '';
+$words = explode(' ', wp_strip_all_tags($salesText));
+$salesTextShort = count($words) > 30 ? implode(' ', array_slice($words, 0, 30)) . '…' : $salesText;
 
 // Realtors
 $realtors_raw = fasad_unserialize(get_post_meta($post_id, '_fasad_realtors', true));
@@ -118,79 +120,73 @@ $status_raw = fasad_unserialize(get_post_meta($post_id, '_fasad_status', true));
 $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 @endphp
 
-{{-- Hero-bildspel --}}
-@if(!empty($images))
-  <div class="objekt-hero-slideshow">
-    @foreach($images_hero as $i => $img)
-      <div class="objekt-hero-slide {{ $i === 0 ? 'active' : '' }}" style="background-image:url('{{ $img }}')"></div>
-    @endforeach
-    @if(count($images) > 1)
-      <button class="objekt-hero-prev">&#8592;</button>
-      <button class="objekt-hero-next">&#8594;</button>
-      <div class="objekt-hero-dots">
+{{-- Split-layout: bild vänster, info höger --}}
+<div class="objekt-split">
+  <div class="objekt-split-bild">
+    @if(!empty($images))
+      @if($status)
+        <div class="objekt-status-badge objekt-status--{{ $status }}">{{ strtoupper($status) }}</div>
+      @endif
+      <div class="objekt-hero-slideshow">
         @foreach($images_hero as $i => $img)
-          <span class="objekt-hero-dot {{ $i === 0 ? 'active' : '' }}" data-index="{{ $i }}"></span>
+          <div class="objekt-hero-slide {{ $i === 0 ? 'active' : '' }}" style="background-image:url('{{ $img }}')"></div>
         @endforeach
+        @if(count($images_hero) > 1)
+          <button class="objekt-hero-prev">&#8592;</button>
+          <button class="objekt-hero-next">&#8594;</button>
+          <div class="objekt-hero-dots">
+            @foreach($images_hero as $i => $img)
+              <span class="objekt-hero-dot {{ $i === 0 ? 'active' : '' }}" data-index="{{ $i }}"></span>
+            @endforeach
+          </div>
+        @endif
       </div>
-    @endif
-    @if($status)
-      <div class="objekt-status-badge objekt-status--{{ $status }}">{{ $status_label ?? strtoupper($status) }}</div>
-    @endif
-    @if(count($images) >= 5)
-      <button onclick="document.querySelector('.objekt-galleri').scrollIntoView({behavior:'smooth'})"
-              class="objekt-visa-fler-btn">
-        Visa fler bilder
-      </button>
     @endif
   </div>
-@endif
-
-{{-- Faktarad --}}
-<div class="objekt-detalj-faktarad">
-  <div class="objekt-detalj-faktarad-inner">
-    @if($full_address)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Adress</span>
-        <span class="faktarad-värde">{{ $full_address }}</span>
-      </div>
+  <div class="objekt-split-info">
+    @if($city)
+      <div class="objekt-split-omrade">{{ strtoupper($city) }}@if($commune) · {{ strtoupper($commune) }}@endif</div>
     @endif
-    @if($type)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Typ</span>
-        <span class="faktarad-värde">{{ $type }}</span>
-      </div>
+    <h1 class="objekt-split-adress">{{ $full_address }}</h1>
+    @if($salesTitle && $salesTitle !== $full_address)
+      <p class="objekt-split-undertitel"><em>{{ $salesTitle }}</em></p>
     @endif
-    @if($rooms)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Rum</span>
-        <span class="faktarad-värde">{{ $rooms }}</span>
-      </div>
+    @if($salesTextShort)
+      <p class="objekt-split-intro">{{ $salesTextShort }}</p>
     @endif
-    @if($area)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Boarea</span>
-        <span class="faktarad-värde">{{ $area }}</span>
-      </div>
-    @endif
-    @if($price)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Pris</span>
-        <span class="faktarad-värde">{{ $price }}</span>
-      </div>
-    @endif
-    @if($fee)
-      <div class="faktarad-item">
-        <span class="faktarad-label">Avgift</span>
-        <span class="faktarad-värde">{{ $fee }}</span>
-      </div>
-    @endif
+    <div class="objekt-split-fakta">
+      @if($area)
+        <div class="objekt-split-fakta-item">
+          <span class="objekt-split-fakta-label">Boarea</span>
+          <span class="objekt-split-fakta-värde">{{ $area }}</span>
+        </div>
+      @endif
+      @if($rooms)
+        <div class="objekt-split-fakta-item">
+          <span class="objekt-split-fakta-label">Rum</span>
+          <span class="objekt-split-fakta-värde">{{ $rooms }}</span>
+        </div>
+      @endif
+      @if($floor)
+        <div class="objekt-split-fakta-item">
+          <span class="objekt-split-fakta-label">Våning</span>
+          <span class="objekt-split-fakta-värde">{{ $floor }}</span>
+        </div>
+      @endif
+      @if($price)
+        <div class="objekt-split-fakta-item">
+          <span class="objekt-split-fakta-label">Utgångspris</span>
+          <span class="objekt-split-fakta-värde">{{ $price }}</span>
+        </div>
+      @endif
+    </div>
   </div>
 </div>
 
+{{-- Faktarad --}}
 {{-- Huvudinnehåll --}}
 <div class="objekt-detalj-inner">
   <div class="objekt-detalj-content">
-    <h1>{{ $full_address }}</h1>
     @if($salesTitle && $salesTitle !== $full_address)
       <p class="objekt-detalj-undertitel">{{ $salesTitle }}</p>
     @endif
@@ -367,23 +363,13 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 {{-- Bildgalleri med lightbox --}}
 @if(count($images) > 1)
 <div class="objekt-galleri">
-  <div class="objekt-galleri-grid" id="galleri-grid">
+  <div class="objekt-galleri-lista">
     @foreach($images as $i => $img)
-      <div class="objekt-galleri-item {{ $i % 5 === 0 ? 'objekt-galleri-item--stor' : '' }}{{ $i >= 5 ? ' galleri-dold' : '' }}">
-        <a href="javascript:void(0)" class="galleri-trigger" data-index="{{ $i }}" data-highres="{{ $img }}" data-text="Bild {{ $i + 1 }}">
-          <img src="{{ $img }}" alt="Bild {{ $i + 1 }}" loading="lazy">
-          <div class="galleri-overlay"><span>&#x2B;</span></div>
-        </a>
+      <div class="objekt-galleri-bild-wrap">
+        <img src="{{ $img }}" alt="Bild {{ $i + 1 }}" loading="lazy">
       </div>
     @endforeach
   </div>
-  @if(count($images) > 5)
-    <div style="text-align:center;margin-top:24px;" id="galleri-visa-fler-wrap">
-      <button class="btn-primary" onclick="visaAllaGalleri()">
-        Visa alla {{ count($images) }} bilder
-      </button>
-    </div>
-  @endif
 </div>
 
 {{-- Alla bilder för lightbox --}}

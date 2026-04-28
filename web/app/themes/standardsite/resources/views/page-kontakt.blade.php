@@ -54,7 +54,7 @@
         </div>
 
         <div style="margin-top:32px;padding-top:32px;border-top:0.5px solid rgba(255,255,255,0.08);">
-          <p style="font-family:var(--font-body);font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:16px;">Letar du efter din nästa bostad? Anmäl dig till vårt spekulantregister så hör vi av oss när rätt objekt dyker upp.</p>
+          <p style="font-family:var(--font-body);font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:16px;">Letar du efter din nästa bostad? Anmäl dig till vårt spekulantregister så hör vi av oss när rätt objekt dyker upp.</p>
           <button onclick="document.getElementById('spekulant-modal').style.display='flex'"
                   class="btn-primary" style="cursor:pointer;border:none;">
             Anmäl dig som spekulant
