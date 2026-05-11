@@ -3049,7 +3049,7 @@ a[href*="page"] .btn-primary,
 .objekt-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 85vh;
+  min-height: 0;
   position: relative;
 }
 .objekt-split-bild {
@@ -3150,7 +3150,7 @@ a[href*="page"] .btn-primary,
 .objekt-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 85vh;
+  min-height: 0;
   position: relative;
 }
 .objekt-split-bild {
@@ -4329,7 +4329,7 @@ html, body {
 .objekt-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 85vh;
+  min-height: 0;
   position: relative;
 }
 .objekt-split-bild {
@@ -4489,5 +4489,401 @@ html, body {
   .journal-relaterade-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+}
+
+/* === OBJEKTSIDA — visningsruta + knappar === */
+.objekt-split-lasmer {
+  display: inline;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 14px;
+  margin-left: 6px;
+  font-weight: 500;
+}
+.objekt-split-lasmer:hover {
+  text-decoration: underline;
+}
+
+.objekt-split-visning {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--bg-warm);
+}
+.objekt-split-visning-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 16px;
+}
+.objekt-split-visning-rad {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  color: var(--text-dark);
+  padding: 8px 0;
+}
+.objekt-split-visning-tom {
+  font-size: 15px;
+  color: var(--text-mid);
+  margin: 0;
+}
+
+.objekt-split-knappar {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+.objekt-split-knappar .btn-primary,
+.objekt-split-knappar .btn-secondary {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* === Hero-knappar (planlösning + alla bilder) === */
+.objekt-hero-overlay-knappar {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 5;
+}
+.objekt-hero-knapp {
+  background: rgba(255,255,255,0.95);
+  color: var(--text-dark);
+  border: none;
+  padding: 12px 20px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.objekt-hero-knapp:hover {
+  background: #fff;
+}
+
+/* === Modaler för intresseanmälan + visning === */
+.objekt-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(27,42,74,0.85);
+  z-index: 99999;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.objekt-modal-inner {
+  background: var(--bg-light);
+  max-width: 520px;
+  width: 100%;
+  padding: 48px 40px;
+  position: relative;
+}
+.objekt-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: var(--text-dark);
+}
+.objekt-modal h2 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.objekt-modal p {
+  color: var(--text-mid);
+  margin-bottom: 24px;
+}
+.objekt-modal label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+.objekt-modal input,
+.objekt-modal textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--bg-warm);
+  background: #fff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-dark);
+}
+.objekt-modal textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* === OBJEKTSIDA mäklarkort — som om-oss men i sidebar === */
+.objekt-detalj-kontakt {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+.objekt-maklare-kort {
+  display: block;
+}
+.objekt-maklare-kort .maklare-kort-bild {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  margin-bottom: 24px;
+  border-radius: 0;
+  background: var(--bg-warm);
+}
+.objekt-maklare-kort .maklare-kort-bild img {
+  border-radius: 0 !important;
+}
+.objekt-maklare-kort .maklare-kort-info h3 {
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+.objekt-maklare-kort .maklare-kort-info .maklare-kort-titel {
+  color: var(--text-mid);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.objekt-maklare-kort .maklare-kort-info p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+.objekt-maklare-kort .maklare-kort-info a {
+  color: var(--text-dark);
+  text-decoration: none;
+}
+.objekt-maklare-kort .maklare-kort-info a:hover {
+  color: var(--accent);
+}
+
+/* === OBJEKTSIDA sidebar — ta bort scroll === */
+.objekt-detalj-sidebar {
+  max-height: none !important;
+  overflow-y: visible !important;
+  overflow-x: visible !important;
+}
+
+
+
+/* === OBJEKTSIDA SPLIT - synkad höjd + slideshow === */
+.objekt-split {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  align-items: stretch !important;
+  min-height: 0 !important;
+}
+.objekt-split-bild {
+  position: relative !important;
+  overflow: hidden !important;
+  min-height: 600px !important;
+  height: 100% !important;
+}
+.objekt-split-bild .objekt-hero-slideshow {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+}
+.objekt-split-bild .objekt-hero-slide {
+  position: absolute !important;
+  inset: 0 !important;
+  flex: none !important;
+  display: block !important;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.objekt-split-bild .objekt-hero-slide.active {
+  opacity: 1;
+}
+.objekt-split-bild .objekt-hero-prev,
+.objekt-split-bild .objekt-hero-next,
+.objekt-split-bild .objekt-hero-dots {
+  display: flex !important;
+}
+.objekt-split-info {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  padding: 64px !important;
+  background: var(--bg-light);
+  gap: 24px;
+}
+.objekt-split-knappar {
+  margin-top: auto !important;
+  padding-top: 32px;
+}
+@media (max-width: 768px) {
+  .objekt-split {
+    grid-template-columns: 1fr;
+  }
+  .objekt-split-bild {
+    min-height: 400px;
+  }
+  .objekt-split-knappar {
+    margin-top: 24px !important;
+  }
+}
+
+/* === FORCERA full höjd på info-sidan === */
+.objekt-split {
+  align-items: stretch !important;
+}
+.objekt-split-info {
+  height: 100% !important;
+  min-height: 100% !important;
+  align-self: stretch !important;
+}
+.objekt-split-info > .objekt-split-knappar {
+  margin-top: auto !important;
+}
+
+/* === Synka knapp-höjd med hero-overlay-knappar === */
+.objekt-split-info {
+  padding-bottom: 0 !important;
+}
+.objekt-split-knappar {
+  margin-bottom: 24px !important;
+}
+
+/* === Substatus-badges på till-salu-listan === */
+.objekt-substatus {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: #5B8FA8;
+  color: #fff;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+  padding: 6px 12px;
+  z-index: 3;
+}
+.objekt-substatus--budgivning { background: #5B8FA8; }
+.objekt-substatus--visning    { background: #5B8FA8; }
+.objekt-substatus--nyinkommet { background: #1B2A4A; }
+
+/* === Dölj objekt-kort när inner är hidden === */
+.objekt-kort:has(.objekt-kort-inner.hidden) {
+  display: none !important;
+}
+
+/* === Oscars logotyp === */
+.site-branding .site-name {
+  display: block;
+  text-decoration: none;
+}
+.oscars-logo {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 768px) {
+  .oscars-logo {
+    height: 44px;
+  }
+}
+
+/* === Hover på hero-overlay-knappar === */
+.objekt-hero-knapp:hover {
+  background: #5B8FA8 !important;
+  color: #fff !important;
+}
+
+/* === MOBIL: stacka split-layout snyggt === */
+@media (max-width: 900px) {
+  .objekt-split {
+    display: block !important;
+    grid-template-columns: 1fr !important;
+  }
+  .objekt-split-bild {
+    width: 100% !important;
+    height: 60vh !important;
+    min-height: 320px !important;
+    max-height: 480px !important;
+    position: relative !important;
+  }
+  .objekt-split-info {
+    width: 100% !important;
+    padding: 32px 24px !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .objekt-split-adress {
+    font-size: 28px !important;
+    line-height: 1.15 !important;
+  }
+  .objekt-split-fakta {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px !important;
+  }
+  .objekt-split-fakta-värde {
+    font-size: 18px !important;
+  }
+  .objekt-split-knappar {
+    flex-direction: column;
+    margin-top: 16px !important;
+    margin-bottom: 0 !important;
+  }
+  .objekt-split-knappar .btn-primary,
+  .objekt-split-knappar .btn-secondary {
+    width: 100%;
+  }
+  .objekt-split-visning-rad {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  /* Hero-overlay-knappar mindre på mobil */
+  .objekt-hero-overlay-knappar {
+    bottom: 16px;
+    left: 16px;
+    right: 16px;
+  }
+  .objekt-hero-knapp {
+    padding: 8px 14px;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  /* Header inte täcker innehåll */
+  .objekt-split {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .objekt-split-bild {
+    height: 50vh !important;
+    min-height: 280px !important;
+  }
+  .objekt-split-info {
+    padding: 24px 20px !important;
+  }
+  .objekt-split-fakta-värde {
+    font-size: 16px !important;
   }
 }

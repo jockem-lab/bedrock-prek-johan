@@ -145,13 +145,13 @@
 
 {{-- Spekulant modal --}}
 <div id="spekulant-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,18,35,0.85);align-items:center;justify-content:center;">
-  <div style="background:#1B2A4A;max-width:520px;width:90%;padding:48px;position:relative;border:0.5px solid rgba(255,255,255,0.1);">
+  <div style="background:var(--bg-light);max-width:520px;width:90%;padding:48px;position:relative;border:1px solid var(--bg-warm);">
     <button onclick="document.getElementById('spekulant-modal').style.display='none'"
-            style="position:absolute;top:20px;right:24px;background:none;border:none;color:rgba(255,255,255,0.5);font-size:24px;cursor:pointer;line-height:1;">&times;</button>
+            style="position:absolute;top:20px;right:24px;background:none;border:none;color:var(--text-dark);font-size:28px;cursor:pointer;line-height:1;">&times;</button>
 
     <span class="sektion-eyebrow-label">Spekulantregister</span>
-    <h2 style="font-family:var(--font-heading);font-size:32px;font-weight:300;color:#fff;margin:12px 0 8px;letter-spacing:-0.01em;">Anmäl ditt intresse</h2>
-    <p style="font-family:var(--font-body);font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7;margin-bottom:32px;">Berätta vad du söker så kontaktar vi dig när rätt objekt dyker upp.</p>
+    <h2 style="font-family:var(--font-heading);font-size:32px;font-weight:300;color:var(--text-dark);margin:12px 0 8px;letter-spacing:-0.01em;">Anmäl ditt intresse</h2>
+    <p style="font-family:var(--font-body);font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:32px;">Berätta vad du söker så kontaktar vi dig när rätt objekt dyker upp.</p>
 
     @if(request('spekulant') === 'success')
       <div style="background:rgba(200,169,126,0.15);border:0.5px solid var(--accent);padding:16px;color:var(--accent);font-size:14px;margin-bottom:24px;">
@@ -165,19 +165,19 @@
 
       <div style="display:flex;flex-direction:column;gap:16px;">
         <div>
-          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;">Namn</label>
+          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;">Namn</label>
           <input type="text" name="spekulant_namn" required placeholder="Ditt namn"
-                 style="width:100%;padding:12px 16px;background:#243558;border:0.5px solid rgba(255,255,255,0.1);color:#fff;font-family:var(--font-body);font-size:14px;outline:none;box-sizing:border-box;">
+                 style="width:100%;padding:12px 16px;background:#fff;border:1px solid var(--bg-warm);color:var(--text-dark);font-family:var(--font-body);font-size:14px;outline:none;box-sizing:border-box;">
         </div>
         <div>
-          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;">E-post</label>
+          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;">E-post</label>
           <input type="email" name="spekulant_email" required placeholder="din@email.se"
-                 style="width:100%;padding:12px 16px;background:#243558;border:0.5px solid rgba(255,255,255,0.1);color:#fff;font-family:var(--font-body);font-size:14px;outline:none;box-sizing:border-box;">
+                 style="width:100%;padding:12px 16px;background:#fff;border:1px solid var(--bg-warm);color:var(--text-dark);font-family:var(--font-body);font-size:14px;outline:none;box-sizing:border-box;">
         </div>
         <div>
-          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.45);margin-bottom:8px;">Vad söker du?</label>
+          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;">Vad söker du?</label>
           <textarea name="spekulant_soker" rows="4" placeholder="Beskriv vad du söker — område, storlek, budget..."
-                    style="width:100%;padding:12px 16px;background:#243558;border:0.5px solid rgba(255,255,255,0.1);color:#fff;font-family:var(--font-body);font-size:14px;outline:none;resize:vertical;box-sizing:border-box;"></textarea>
+                    style="width:100%;padding:12px 16px;background:#fff;border:1px solid var(--bg-warm);color:var(--text-dark);font-family:var(--font-body);font-size:14px;outline:none;resize:vertical;box-sizing:border-box;"></textarea>
         </div>
         <button type="submit" class="btn-primary" style="width:100%;padding:14px;text-align:center;cursor:pointer;">
           Skicka intresseanmälan

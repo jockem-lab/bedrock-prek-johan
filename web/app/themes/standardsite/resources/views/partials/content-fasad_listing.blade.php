@@ -55,18 +55,53 @@ if (!is_array($bids)) $bids = [];
 $imgs_raw = get_post_meta($post_id, '_fasad_images', true);
 $imgs = fasad_unserialize($imgs_raw);
 $images = [];
+$plan_images = [];
+$other_images = [];
 if (is_array($imgs)) {
     foreach ($imgs as $img) {
         if (!empty($img->variants) && is_array($img->variants)) {
             foreach ($img->variants as $v) {
                 if (($v->type ?? '') === 'highres' && !empty($v->path)) {
-                    $images[] = rest_url('prek/v1/bildproxy?url=') . urlencode($v->path); break;
+                    $img_url = rest_url('prek/v1/bildproxy?url=') . urlencode($v->path);
+                    // Identifiera planlösning via flera signaler:
+                    // 1. Kategori (id=2 eller alias innehåller "plan")
+                    // 2. Bildens text/namn innehåller plan-relaterade ord
+                    // 3. Filändelse .png (vanligt för planlösningar från ritprogram)
+                    $is_plan = false;
+                    $cat_id = isset($img->category) ? ($img->category->id ?? 0) : 0;
+                    $cat_alias = isset($img->category) ? strtolower($img->category->alias ?? '') : '';
+                    $img_text = strtolower($img->text ?? '');
+                    $path_lower = strtolower($v->path);
+                    $plan_keywords = ['plan', 'ritning', '2d', 'skiss', 'planlösning', 'planritning'];
+
+                    if ($cat_id == 2) {
+                        $is_plan = true;
+                    } elseif (strpos($cat_alias, 'plan') !== false) {
+                        $is_plan = true;
+                    } else {
+                        foreach ($plan_keywords as $kw) {
+                            if (strpos($img_text, $kw) !== false) {
+                                $is_plan = true;
+                                break;
+                            }
+                        }
+                        if (!$is_plan && substr($path_lower, -4) === '.png') {
+                            $is_plan = true;
+                        }
+                    }
+
+                    if ($is_plan) $plan_images[] = $img_url;
+                    else $other_images[] = $img_url;
+                    break;
                 }
             }
         }
     }
 }
-$images_hero = array_slice($images, 0, 5);
+// Hero: bara vanliga bilder (planlösning visas bara i galleri), max 5 i slideshow
+$images_hero = array_slice($other_images, 0, 5);
+// Galleri: planlösning först, sedan resten
+$images = array_merge($plan_images, $other_images);
 
 // Size
 $sz = fasad_unserialize(get_post_meta($post_id, '_fasad_size', true));
@@ -100,6 +135,33 @@ $elevator = ($facts && isset($facts->elevator)) ? ($facts->elevator ? 'Ja' : 'Ne
 // Building
 $building = fasad_unserialize(get_post_meta($post_id, '_fasad_building', true));
 $built_year = ($building && !empty($building->constructionYear)) ? $building->constructionYear : $built;
+
+// Förening (association)
+$assoc_raw = fasad_unserialize(get_post_meta($post_id, '_fasad_association', true));
+$assoc_name = '';
+$assoc_org = '';
+$assoc_text = '';
+if ($assoc_raw) {
+    $assoc_name = $assoc_raw->name ?? '';
+    $assoc_org  = $assoc_raw->organisationNumber ?? '';
+    $assoc_text = $assoc_raw->description ?? '';
+}
+
+// Område (areaDescription)
+$area_desc_raw = get_post_meta($post_id, '_fasad_areaDescription', true);
+$area_desc = is_string($area_desc_raw) ? $area_desc_raw : '';
+
+// Lat/Lng för karta
+$lat = ($loc && !empty($loc->lat)) ? $loc->lat : '';
+$lng = ($loc && !empty($loc->lng)) ? $loc->lng : '';
+
+// Sortera dokument — planlösning först
+$documents_sorted = $documents;
+usort($documents_sorted, function($a, $b) {
+    $a_plan = stripos($a->alias ?? '', 'plan') !== false ? 0 : 1;
+    $b_plan = stripos($b->alias ?? '', 'plan') !== false ? 0 : 1;
+    return $a_plan - $b_plan;
+});
 
 // Sales texts
 $salesTitle = is_string(get_post_meta($post_id, '_fasad_salesTitle', true)) ? get_post_meta($post_id, '_fasad_salesTitle', true) : $full_address;
@@ -140,19 +202,28 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
             @endforeach
           </div>
         @endif
+        <div class="objekt-hero-overlay-knappar">
+          <button onclick="(function(){var imgs=document.querySelectorAll('.objekt-galleri-bild-wrap');var target=imgs.length>1?imgs[1]:imgs[0];if(target)target.scrollIntoView({behavior:'smooth',block:'start'});})()" class="objekt-hero-knapp">
+            Alla bilder
+          </button>
+          @if(!empty($plan_images))
+            <button onclick="document.querySelector('.objekt-galleri').scrollIntoView({behavior:'smooth'}); setTimeout(function(){var first=document.querySelector('.objekt-galleri-bild-wrap img'); if(first) first.click();}, 800);" class="objekt-hero-knapp">
+              Planlösning
+            </button>
+          @endif
+        </div>
       </div>
     @endif
   </div>
   <div class="objekt-split-info">
-    @if($city)
-      <div class="objekt-split-omrade">{{ strtoupper($city) }}@if($commune) · {{ strtoupper($commune) }}@endif</div>
-    @endif
     <h1 class="objekt-split-adress">{{ $full_address }}</h1>
-    @if($salesTitle && $salesTitle !== $full_address)
-      <p class="objekt-split-undertitel"><em>{{ $salesTitle }}</em></p>
-    @endif
     @if($salesTextShort)
-      <p class="objekt-split-intro">{{ $salesTextShort }}</p>
+      <p class="objekt-split-intro">
+        {{ $salesTextShort }}
+        @if($salesText && strlen($salesText) > strlen($salesTextShort))
+          <a href="#beskrivning" class="objekt-split-lasmer" onclick="document.querySelector('.accordion-item .accordion-trigger').click(); document.querySelector('.objekt-detalj-content').scrollIntoView({behavior:'smooth'}); return false;">Läs mer →</a>
+        @endif
+      </p>
     @endif
     <div class="objekt-split-fakta">
       @if($area)
@@ -180,6 +251,45 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
         </div>
       @endif
     </div>
+
+    {{-- Visningsruta --}}
+    <div class="objekt-split-visning">
+      <div class="objekt-split-visning-label">Visning</div>
+      @if(!empty($showings))
+        @foreach($showings as $showing)
+          @php
+            $start = strtotime($showing->startDate);
+            $end   = strtotime($showing->endDate);
+            $dagar = ['Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag'];
+            $manader = ['','januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
+            $datum = $dagar[date('w', $start)] . ' ' . date('j', $start) . ' ' . $manader[(int)date('n', $start)];
+            $tid   = date('H:i', $start) . '–' . date('H:i', $end);
+          @endphp
+          <div class="objekt-split-visning-rad">
+            <span>{{ ucfirst($datum) }}</span>
+            <span>{{ $tid }}</span>
+          </div>
+        @endforeach
+      @else
+        <p class="objekt-split-visning-tom"><a href="#" onclick="document.getElementById('intresse-modal').style.display='flex'; return false;">Kontakta oss för visning →</a></p>
+      @endif
+    </div>
+
+    {{-- Knappar --}}
+    <div class="objekt-split-knappar">
+      <button onclick="document.getElementById('intresse-modal').style.display='flex'" class="btn-primary">
+        Intresseanmälan
+      </button>
+      @if(!empty($showings) && $first_realtor && !empty($first_realtor->email))
+        @php
+          $mail_subject = rawurlencode('Boka visning: ' . $full_address);
+          $mail_body = rawurlencode("Hej!\n\nJag vill boka visning av " . $full_address . ".\n\nMvh,\n");
+        @endphp
+        <a href="mailto:{{ $first_realtor->email }}?subject={{ $mail_subject }}&body={{ $mail_body }}" class="btn-secondary">
+          Boka visning
+        </a>
+      @endif
+    </div>
   </div>
 </div>
 
@@ -187,14 +297,13 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
 {{-- Huvudinnehåll --}}
 <div class="objekt-detalj-inner">
   <div class="objekt-detalj-content">
-    @if($salesTitle && $salesTitle !== $full_address)
-      <p class="objekt-detalj-undertitel">{{ $salesTitle }}</p>
-    @endif
+
 
     <div class="objekt-accordion">
-      {{-- Beskrivning --}}
+
+      {{-- 1. Beskrivning --}}
       @if($salesText)
-        <div class="accordion-item open">
+        <div class="accordion-item open" id="beskrivning">
           <button class="accordion-trigger">Beskrivning <span class="accordion-icon">+</span></button>
           <div class="accordion-content">
             <div class="objekt-detalj-beskrivning">{!! nl2br(e($salesText)) !!}</div>
@@ -202,61 +311,89 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
         </div>
       @endif
 
-      {{-- Fakta --}}
-      <div class="accordion-item open">
+      {{-- 2. Fakta --}}
+      <div class="accordion-item">
         <button class="accordion-trigger">Fakta <span class="accordion-icon">+</span></button>
         <div class="accordion-content">
           <table class="fakta-tabell">
-            @if($commune)<tr><th>Kommun</th><td>{{ $commune }}</td></tr>@endif
-            @if($zip)<tr><th>Postnummer</th><td>{{ $zip }}</td></tr>@endif
             @if($type)<tr><th>Bostadstyp</th><td>{{ $type }}</td></tr>@endif
             @if($rooms)<tr><th>Antal rum</th><td>{{ $rooms }}</td></tr>@endif
             @if($area)<tr><th>Boarea</th><td>{{ $area }}</td></tr>@endif
             @if($floor)<tr><th>Våningsplan</th><td>{{ $floor }}</td></tr>@endif
             @if($elevator)<tr><th>Hiss</th><td>{{ $elevator }}</td></tr>@endif
+            @if($built_year)<tr><th>Byggnadsår</th><td>{{ $built_year }}</td></tr>@endif
+            @if($price)<tr><th>Pris</th><td>{{ $price }}</td></tr>@endif
+            @if($fee)<tr><th>Månadsavgift</th><td>{{ $fee }}</td></tr>@endif
+            @if($zip)<tr><th>Postnummer</th><td>{{ $zip }}</td></tr>@endif
+            @if($commune)<tr><th>Kommun</th><td>{{ $commune }}</td></tr>@endif
           </table>
         </div>
       </div>
 
-      {{-- Byggnad --}}
-      @if($built_year)
+      {{-- 3. Förening --}}
+      @if($assoc_name || $assoc_text)
         <div class="accordion-item">
-          <button class="accordion-trigger">Byggnad <span class="accordion-icon">+</span></button>
+          <button class="accordion-trigger">Förening <span class="accordion-icon">+</span></button>
           <div class="accordion-content">
             <table class="fakta-tabell">
-              <tr><th>Byggnadsår</th><td>{{ $built_year }}</td></tr>
+              @if($assoc_name)<tr><th>Namn</th><td>{{ $assoc_name }}</td></tr>@endif
+              @if($assoc_org)<tr><th>Org.nr</th><td>{{ $assoc_org }}</td></tr>@endif
             </table>
+            @if($assoc_text)
+              <div class="objekt-detalj-beskrivning" style="margin-top:16px;">{!! nl2br(e($assoc_text)) !!}</div>
+            @endif
           </div>
         </div>
       @endif
 
-      {{-- Kostnader --}}
-      @if($price || $fee)
+      {{-- 4. Område --}}
+      @if($area_desc)
         <div class="accordion-item">
-          <button class="accordion-trigger">Kostnader <span class="accordion-icon">+</span></button>
+          <button class="accordion-trigger">Område <span class="accordion-icon">+</span></button>
           <div class="accordion-content">
-            <table class="fakta-tabell">
-              @if($price)<tr><th>Pris</th><td>{{ $price }}</td></tr>@endif
-              @if($fee)<tr><th>Månadsavgift</th><td>{{ $fee }}</td></tr>@endif
-            </table>
+            <div class="objekt-detalj-beskrivning">{!! nl2br(e($area_desc)) !!}</div>
           </div>
         </div>
       @endif
 
-      {{-- Dokument --}}
-      @if(!empty($documents))
-      <div class="accordion-item">
-        <button class="accordion-trigger">Dokument <span class="accordion-icon">+</span></button>
-        <div class="accordion-content">
-          @foreach($documents as $doc)
-            <a href="{{ $doc->href }}" target="_blank" class="dokument-rad">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-              {{ $doc->alias }}
-            </a>
-          @endforeach
+      {{-- 5. Dokument --}}
+      @if(!empty($documents_sorted))
+        <div class="accordion-item">
+          <button class="accordion-trigger">Dokument <span class="accordion-icon">+</span></button>
+          <div class="accordion-content">
+            @foreach($documents_sorted as $doc)
+              <a href="{{ $doc->href }}" target="_blank" class="dokument-rad">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                {{ $doc->alias }}
+              </a>
+            @endforeach
+          </div>
         </div>
-      </div>
       @endif
+
+      {{-- 6. Karta --}}
+      @if($lat && $lng)
+        <div class="accordion-item">
+          <button class="accordion-trigger">Karta <span class="accordion-icon">+</span></button>
+          <div class="accordion-content">
+            <iframe
+              src="https://www.openstreetmap.org/export/embed.html?bbox={{ $lng - 0.005 }},{{ $lat - 0.003 }},{{ $lng + 0.005 }},{{ $lat + 0.003 }}&layer=mapnik&marker={{ $lat }},{{ $lng }}"
+              style="width:100%;height:400px;border:none;"
+              loading="lazy"></iframe>
+          </div>
+        </div>
+      @endif
+
+      {{-- 7. Bilder --}}
+      @if(!empty($images))
+        <div class="accordion-item">
+          <button class="accordion-trigger">Bilder <span class="accordion-icon">+</span></button>
+          <div class="accordion-content">
+            <p><a href="#galleri" onclick="document.querySelector('.objekt-galleri').scrollIntoView({behavior:'smooth'}); return false;" class="objekt-bilder-lank">Visa alla {{ count($images) }} bilder ↓</a></p>
+          </div>
+        </div>
+      @endif
+
     </div>
 
   </div>
@@ -268,39 +405,35 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
         @php
           $maklare_bild = '';
           if (!empty($first_realtor->image)) {
-              if (is_string($first_realtor->image)) {
-                  $maklare_bild = $first_realtor->image;
-              } elseif (!empty($first_realtor->image->path)) {
-                  $maklare_bild = $first_realtor->image->path;
-              }
+              if (is_string($first_realtor->image)) $maklare_bild = $first_realtor->image;
+              elseif (!empty($first_realtor->image->path)) $maklare_bild = $first_realtor->image->path;
           }
+          $tel = $first_realtor->cellphone ?? '';
+          $tel_display = preg_replace('/^46/', '0', $tel);
+          $tel_display = preg_replace('/^(\d{3})(\d{3})(\d{2})(\d{2})$/', '$1-$2 $3 $4', $tel_display);
+          $tel_href = '+' . ltrim($tel, '+');
         @endphp
-        @if($maklare_bild)
-          <img src="{{ $maklare_bild }}" alt="{{ $first_realtor->firstname ?? '' }}" class="maklare-bild">
-        @else
-          <div class="maklare-bild-placeholder"></div>
-        @endif
-        <h3>{{ ($first_realtor->firstname ?? '') . ' ' . ($first_realtor->lastname ?? '') }}</h3>
-        @if(!empty($first_realtor->title))
-          <p class="maklare-titel">{{ $first_realtor->title }}</p>
-        @endif
-        @if(!empty($first_realtor->cellphone))
-          @php
-            $tel = $first_realtor->cellphone ?? '';
-            $tel_display = preg_replace('/^46/', '0', $tel);
-            $tel_display = preg_replace('/^(\d{3})(\d{3})(\d{2})(\d{2})$/', '$1-$2 $3 $4', $tel_display);
-            $tel_href = '+' . ltrim($tel, '+');
-          @endphp
-          <p><a href="tel:{{ $tel_href }}">{{ $tel_display }}</a></p>
-        @endif
-        @if(!empty($first_realtor->email))
-          <p><a href="mailto:{{ $first_realtor->email }}">{{ $first_realtor->email }}</a></p>
-        @endif
-        <a href="{{ home_url('/kontakt') }}" class="btn-primary">Kontakta mäklaren</a>
-      @else
-        <h3>Intresserad?</h3>
-        <p>Kontakta oss om {{ $full_address }}.</p>
-        <a href="{{ home_url('/kontakt') }}" class="btn-primary">Kontakta oss</a>
+        <div class="maklare-kort objekt-maklare-kort">
+          <div class="maklare-kort-bild">
+            @if($maklare_bild)
+              <img src="{{ $maklare_bild }}" alt="{{ ($first_realtor->firstname ?? '') . ' ' . ($first_realtor->lastname ?? '') }}" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+            @else
+              <div style="width:100%;height:100%;background:var(--bg-warm);"></div>
+            @endif
+          </div>
+          <div class="maklare-kort-info">
+            <h3>{{ ($first_realtor->firstname ?? '') . ' ' . ($first_realtor->lastname ?? '') }}</h3>
+            @if(!empty($first_realtor->title))
+              <p class="maklare-kort-titel">{{ $first_realtor->title }}</p>
+            @endif
+            @if($tel)
+              <p><a href="tel:{{ $tel_href }}">{{ $tel_display }}</a></p>
+            @endif
+            @if(!empty($first_realtor->email))
+              <p><a href="mailto:{{ $first_realtor->email }}">{{ $first_realtor->email }}</a></p>
+            @endif
+          </div>
+        </div>
       @endif
     </div>
     {{-- Budgivning --}}
@@ -319,44 +452,6 @@ $status = ($status_raw && !empty($status_raw->alias)) ? $status_raw->alias : '';
       @endforeach
     </div>
     @endif
-
-    {{-- Visningstider --}}
-    @if(!empty($showings))
-    <div class="objekt-visningar">
-      <h3>Visningstider</h3>
-      @foreach($showings as $showing)
-        @php
-          $start = strtotime($showing->startDate);
-          $end   = strtotime($showing->endDate);
-          $dagar = ['Söndag','Måndag','Tisdag','Onsdag','Torsdag','Fredag','Lördag'];
-          $manader = ['','Januari','Februari','Mars','April','Maj','Juni','Juli','Augusti','September','Oktober','November','December'];
-          $datum = $dagar[date('w', $start)] . ' ' . date('j', $start) . ' ' . $manader[(int)date('n', $start)];
-          $tid   = date('H:i', $start) . ' – ' . date('H:i', $end);
-        @endphp
-        <div class="visning-rad">
-          <div class="visning-datum">{{ ucfirst($datum) }}</div>
-          <div class="visning-tid">{{ $tid }}</div>
-          @if(!empty($showing->openForRegistration))
-            <a href="#visningsanmalan" class="btn-primary visning-anmalan-btn">Anmäl intresse</a>
-          @endif
-        </div>
-      @endforeach
-    </div>
-    @endif
-
-    {{-- Dokument --}}
-    @if(!empty($documents))
-    <div class="objekt-dokument">
-      <h3>Ladda ner dokument</h3>
-      @foreach($documents as $doc)
-        <a href="{{ $doc->href }}" target="_blank" class="dokument-rad">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          {{ $doc->alias }}
-        </a>
-      @endforeach
-    </div>
-    @endif
-
   </div>
 </div>
 
@@ -402,3 +497,47 @@ function visaAllaGalleri() {
   </div>
 </div>
 @endif
+
+{{-- Intresseanmälan modal --}}
+<div id="intresse-modal" style="display:none;position:fixed;inset:0;z-index:99999;background:rgba(10,18,35,0.85);align-items:center;justify-content:center;">
+  <div style="background:var(--bg-light);max-width:520px;width:90%;padding:48px;position:relative;border:1px solid var(--bg-warm);">
+    <button onclick="document.getElementById('intresse-modal').style.display='none'"
+            style="position:absolute;top:20px;right:24px;background:none;border:none;color:var(--text-dark);font-size:28px;cursor:pointer;line-height:1;">&times;</button>
+
+    <span class="sektion-eyebrow-label">Intresseanmälan</span>
+    <h2 style="font-family:var(--font-heading);font-size:32px;font-weight:300;color:var(--text-dark);margin:12px 0 8px;letter-spacing:-0.01em;">{{ $full_address }}</h2>
+    <p style="font-family:var(--font-body);font-size:14px;color:var(--text-mid);line-height:1.7;margin-bottom:32px;">Lämna dina uppgifter så kontaktar vi dig.</p>
+
+    <form method="POST" action="{{ home_url('/kontakt') }}">
+      @php echo wp_nonce_field('intresse_form', 'intresse_nonce', true, false); @endphp
+      <input type="hidden" name="form_type" value="intresse">
+      <input type="hidden" name="intresse_objekt" value="{{ $full_address }}">
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div>
+          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;">Namn</label>
+          <input type="text" name="intresse_namn" required placeholder="Ditt namn"
+                 style="width:100%;padding:12px 16px;background:#fff;border:1px solid var(--bg-warm);color:var(--text-dark);font-family:var(--font-body);font-size:14px;outline:none;box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;">E-post</label>
+          <input type="email" name="intresse_email" required placeholder="din@email.se"
+                 style="width:100%;padding:12px 16px;background:#fff;border:1px solid var(--bg-warm);color:var(--text-dark);font-family:var(--font-body);font-size:14px;outline:none;box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;">Telefon</label>
+          <input type="tel" name="intresse_tel" placeholder="070-123 45 67"
+                 style="width:100%;padding:12px 16px;background:#fff;border:1px solid var(--bg-warm);color:var(--text-dark);font-family:var(--font-body);font-size:14px;outline:none;box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="display:block;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-mid);margin-bottom:8px;">Meddelande</label>
+          <textarea name="intresse_meddelande" rows="4" placeholder="Berätta gärna lite om dig själv..."
+                    style="width:100%;padding:12px 16px;background:#fff;border:1px solid var(--bg-warm);color:var(--text-dark);font-family:var(--font-body);font-size:14px;outline:none;resize:vertical;box-sizing:border-box;"></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;padding:14px;text-align:center;cursor:pointer;">
+          Skicka intresseanmälan
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

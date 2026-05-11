@@ -468,19 +468,46 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const filterBtns = document.querySelectorAll('.filter-knapp');
     const objekt = document.querySelectorAll('.objekt-kort-inner[data-status]');
-    
+
+    function applyFilter(filter) {
+        objekt.forEach(function(o) {
+            const status = o.dataset.status;
+            const sub = o.dataset.substatus || '';
+            let visa = false;
+            if (filter === 'alla') {
+                visa = status !== 'sald';
+            } else if (filter === 'sald') {
+                visa = status === 'sald';
+            } else if (filter === 'tillsalu') {
+                visa = status === 'tillsalu';
+            } else {
+                // visning, budgivning, nyinkommet — matcha substatus
+                visa = sub === filter;
+            }
+            if (visa) o.classList.remove('hidden');
+            else o.classList.add('hidden');
+        });
+    }
+
+    // Läs filter från URL-parameter, fallback till "alla"
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialFilter = urlParams.get('filter') || 'alla';
+
+    // Aktivera rätt filter-knapp baserat på URL
+    filterBtns.forEach(function(b) {
+        if (b.dataset.filter === initialFilter) {
+            filterBtns.forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+        }
+    });
+
+    applyFilter(initialFilter);
+
     filterBtns.forEach(function(btn) {
         btn.addEventListener('click', function() {
             filterBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-            const filter = this.dataset.filter;
-            objekt.forEach(function(o) {
-                if (filter === 'alla' || o.dataset.status === filter) {
-                    o.classList.remove('hidden');
-                } else {
-                    o.classList.add('hidden');
-                }
-            });
+            applyFilter(this.dataset.filter);
         });
     });
 });

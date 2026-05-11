@@ -88,37 +88,95 @@ function fasad_unserialize_listing($raw) {
 
         $is_sold = get_post_meta($pid, '_fasad_sold', true);
         $is_published = get_post_meta($pid, '_fasad_published', true);
-        $is_brokered = get_post_meta($pid, '_fasad_firstPublishedAsBrokered', true);
+
+        // Hämta visningar
+        $showings_raw = get_post_meta($pid, '_fasad_showings', true);
+        $kort_showings = fasad_unserialize_listing($showings_raw);
+        if (!is_array($kort_showings)) $kort_showings = [];
+        $kort_showings = array_filter($kort_showings, function($s) {
+            return !empty($s->endDate) && strtotime($s->endDate) > time();
+        });
+
+        // Hämta bud (budgivning pågår)
+        $bids_raw = get_post_meta($pid, '_fasad_bids', true);
+        $kort_bids = fasad_unserialize_listing($bids_raw);
+        $has_bids = is_array($kort_bids) && count($kort_bids) > 0;
+
+        // Nyinkommet = publicerad inom senaste 7 dagarna
+        $publish_date = get_post_field('post_date', $pid);
+        $is_new = $publish_date && (time() - strtotime($publish_date)) < (7 * 86400);
+
+        // Bestäm primär status (för main badge)
         if ($is_sold == '1') {
             $status = 'sald';
             $status_label = 'SÅLD';
-        } elseif ($is_published == '1' && $is_brokered) {
-            $status = 'kommande';
-            $status_label = 'KOMMANDE';
         } elseif ($is_published == '1') {
             $status = 'tillsalu';
             $status_label = 'TILL SALU';
         } else {
-            $status = '';
-            $status_label = '';
+            $status = 'tillsalu';
+            $status_label = 'TILL SALU';
+        }
+
+        // Sekundär status (visas som extra badge på till-salu-objekt)
+        $sub_status = '';
+        $sub_label = '';
+        if ($status === 'tillsalu') {
+            if ($has_bids) {
+                $sub_status = 'budgivning';
+                $sub_label = 'BUDGIVNING';
+            } elseif (!empty($kort_showings)) {
+                $sub_status = 'visning';
+                $sub_label = 'VISNING';
+            } elseif ($is_new) {
+                $sub_status = 'nyinkommet';
+                $sub_label = 'NYINKOMMET';
+            }
+        }
+
+        // Storlek + rum för kortinfo — hantera både skalärer och objekt
+        $sz = fasad_unserialize_listing(get_post_meta($pid, '_fasad_size', true));
+        $area = '';
+        $rooms = '';
+        if ($sz) {
+            // Area
+            if (!empty($sz->area)) {
+                if (is_object($sz->area) && !empty($sz->area->primary->amount)) {
+                    $area = $sz->area->primary->amount . ' m²';
+                } elseif (is_scalar($sz->area)) {
+                    $area = $sz->area . ' ' . ($sz->areaInformation ?? 'm²');
+                }
+            }
+            // Rooms
+            if (!empty($sz->rooms)) {
+                if (is_object($sz->rooms) && !empty($sz->rooms->primary->amount)) {
+                    $rooms = $sz->rooms->primary->amount . ' rum';
+                } elseif (is_scalar($sz->rooms)) {
+                    $rooms = $sz->rooms . ' ' . ($sz->roomsInformation ?? 'rum');
+                }
+            }
         }
       @endphp
-      <a href="{{ home_url('/objekt/' . get_post_field('post_name', $pid)) }}" class="objekt-kort-inner" data-status="{{ $status }}">
+      <a href="{{ home_url('/objekt/' . get_post_field('post_name', $pid)) }}" class="objekt-kort-inner" data-status="{{ $status }}" data-substatus="{{ $sub_status }}">
         <div class="objekt-bild">
           @if($img_url)
             <img src="{{ $img_url }}" alt="{{ $address }}">
           @else
             <div class="objekt-bild-placeholder"></div>
           @endif
-          @if($status)
-            <div class="objekt-status objekt-status--{{ $status }}">{{ $status_label }}</div>
+          @if($status === 'sald')
+            <div class="objekt-status objekt-status--sald">{{ $status_label }}</div>
+          @endif
+          @if($sub_status)
+            <div class="objekt-substatus objekt-substatus--{{ $sub_status }}">{{ $sub_label }}</div>
           @endif
           <div class="objekt-overlay">
             <div class="objekt-info">
               <div class="objekt-adress">{{ $address }}@if($city), {{ $city }}@endif</div>
               @if($price)<div class="objekt-pris">{{ $price }}</div>@endif
               <div class="objekt-meta">
-                @if($type)<span>{{ $type }}</span>@endif
+                @if($area)<span>{{ $area }}</span>@endif
+                @if($rooms)<span>{{ $rooms }}</span>@endif
               </div>
             </div>
           </div>
@@ -130,34 +188,4 @@ function fasad_unserialize_listing($raw) {
   </div>
 </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var knappar = document.querySelectorAll('.filter-knapp');
-  var kort    = document.querySelectorAll('#objekt-grid .objekt-kort');
-
-  function filtrera(filter) {
-    kort.forEach(function(k) {
-      var inner  = k.querySelector('.objekt-kort-inner');
-      var status = inner ? inner.getAttribute('data-status') : '';
-      if (filter === 'alla') {
-        k.style.display = status === 'sald' ? 'none' : 'block';
-      } else if (filter === 'sald') {
-        k.style.display = status === 'sald' ? 'block' : 'none';
-      } else {
-        k.style.display = status === filter ? 'block' : 'none';
-      }
-    });
-  }
-
-  filtrera('alla');
-
-  knappar.forEach(function(knapp) {
-    knapp.addEventListener('click', function() {
-      knappar.forEach(function(k) { k.classList.remove('active'); });
-      knapp.classList.add('active');
-      filtrera(knapp.getAttribute('data-filter'));
-    });
-  });
-});
-</script>
 @endsection

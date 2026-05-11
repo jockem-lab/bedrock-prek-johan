@@ -24,11 +24,12 @@ class TillSalu extends PrekComposer
             }, $acf_knappar);
         } else {
             $filter_knappar = [
-                ['text' => 'ALLA',             'filter' => 'alla'],
-                ['text' => 'KOMMANDE',         'filter' => 'kommande'],
-                ['text' => 'TILL SALU',        'filter' => 'tillsalu'],
-                ['text' => 'BUDGIVNING PÅGÅR', 'filter' => 'budgivning'],
-                ['text' => 'SÅLDA',            'filter' => 'sald'],
+                ['text' => 'ALLA',         'filter' => 'alla'],
+                ['text' => 'TILL SALU',    'filter' => 'tillsalu'],
+                ['text' => 'NYINKOMMET',   'filter' => 'nyinkommet'],
+                ['text' => 'VISNING',      'filter' => 'visning'],
+                ['text' => 'BUDGIVNING',   'filter' => 'budgivning'],
+                ['text' => 'SÅLDA',        'filter' => 'sald'],
             ];
         }
 

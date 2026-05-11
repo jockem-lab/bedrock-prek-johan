@@ -7,10 +7,8 @@
     </nav>
 
     <div class="site-branding">
-      <a href="{{ home_url('/') }}" class="site-name" style="display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;">
-        <span style="font-size:9px;letter-spacing:0.2em;color:var(--text-mid);font-family:var(--font-body);font-weight:400;text-transform:uppercase;">Östermalm sedan 2001</span>
-        <span style="font-size:15px;letter-spacing:0.22em;color:var(--text-dark);font-family:var(--font-body);font-weight:500;text-transform:uppercase;">Oscars</span>
-        <span style="font-size:8px;letter-spacing:0.18em;color:var(--text-mid);font-family:var(--font-body);font-weight:400;text-transform:uppercase;">Fastighetsmäkleri</span>
+      <a href="{{ home_url('/') }}" class="site-name">
+        <img src="{{ content_url('uploads/oscars-logotyp.webp') }}" alt="Oscars Fastighetsmäkleri" class="oscars-logo">
       </a>
     </div>
 
@@ -36,19 +34,23 @@
 <div id="dd-panel" style="display:none;position:fixed;top:72px;left:50%;transform:translateX(-50%);width:580px;background:#fff;border:0.5px solid #e8e2da;box-shadow:0 8px 40px rgba(0,0,0,0.10);z-index:9999;">
   <div style="display:grid;grid-template-columns:200px 1fr;">
     <div style="padding:28px 24px;border-right:0.5px solid #e8e2da;">
-      <a href="{{ home_url('/kommande') }}" style="display:block;padding:12px 0;border-bottom:0.5px solid #e8e2da;text-decoration:none;">
-        <span style="display:block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#1c1c1e;">Kommande</span>
-        <span style="display:block;font-size:12px;color:#b8a99a;margin-top:2px;">Objekt på väg ut</span>
-      </a>
-      <a href="{{ home_url('/objekt') }}" style="display:block;padding:12px 0;border-bottom:0.5px solid #e8e2da;text-decoration:none;">
+      <a href="{{ home_url('/objekt?filter=tillsalu') }}" style="display:block;padding:12px 0;border-bottom:0.5px solid #e8e2da;text-decoration:none;">
         <span style="display:block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#1c1c1e;">Till salu</span>
         <span style="display:block;font-size:12px;color:#b8a99a;margin-top:2px;">Alla aktuella objekt</span>
       </a>
-      <a href="{{ home_url('/underhand') }}" style="display:block;padding:12px 0;border-bottom:0.5px solid #e8e2da;text-decoration:none;">
-        <span style="display:block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#1c1c1e;">Underhand</span>
-        <span style="display:block;font-size:12px;color:#b8a99a;margin-top:2px;">Exklusiva objekt</span>
+      <a href="{{ home_url('/objekt?filter=nyinkommet') }}" style="display:block;padding:12px 0;border-bottom:0.5px solid #e8e2da;text-decoration:none;">
+        <span style="display:block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#1c1c1e;">Nyinkommet</span>
+        <span style="display:block;font-size:12px;color:#b8a99a;margin-top:2px;">Senast ute på marknaden</span>
       </a>
-      <a href="{{ home_url('/salda') }}" style="display:block;padding:12px 0;text-decoration:none;">
+      <a href="{{ home_url('/objekt?filter=visning') }}" style="display:block;padding:12px 0;border-bottom:0.5px solid #e8e2da;text-decoration:none;">
+        <span style="display:block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#1c1c1e;">Visning</span>
+        <span style="display:block;font-size:12px;color:#b8a99a;margin-top:2px;">Objekt med kommande visning</span>
+      </a>
+      <a href="{{ home_url('/objekt?filter=budgivning') }}" style="display:block;padding:12px 0;border-bottom:0.5px solid #e8e2da;text-decoration:none;">
+        <span style="display:block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#1c1c1e;">Budgivning</span>
+        <span style="display:block;font-size:12px;color:#b8a99a;margin-top:2px;">Pågående budgivning</span>
+      </a>
+      <a href="{{ home_url('/objekt?filter=sald') }}" style="display:block;padding:12px 0;text-decoration:none;">
         <span style="display:block;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:#1c1c1e;">Sålda</span>
         <span style="display:block;font-size:12px;color:#b8a99a;margin-top:2px;">Tidigare försäljningar</span>
       </a>
